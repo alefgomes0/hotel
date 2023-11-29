@@ -1,6 +1,8 @@
 import DatePicker from "react-datepicker";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import CalendarIcon from "../svg/CalendarIcon.svg"
+import { GuestPicker } from "../GuestPicker/GuestPicker";
 
 export const MainSearchBar = () => {
   const [checkIn, setCheckIn] = useState<null | Date>(null);
@@ -14,7 +16,7 @@ export const MainSearchBar = () => {
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
-        showIcon
+
       />
       <DatePicker
         selected={checkOut}
@@ -23,6 +25,7 @@ export const MainSearchBar = () => {
         placeholderText="Check out"
         name="check-out"
       />
+      <GuestPicker />
     </form>
   );
 };
