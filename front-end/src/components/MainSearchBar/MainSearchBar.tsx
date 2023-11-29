@@ -1,39 +1,28 @@
+import DatePicker from "react-datepicker";
 import { useState } from "react";
-import { DateTime } from "luxon";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const MainSearchBar = () => {
-  const [checkIn, setCheckIn] = useState(DateTime.now().toLocaleString());
-  console.log(checkIn);
+  const [checkIn, setCheckIn] = useState<null | Date>(null);
+  const [checkOut, setcheckOut] = useState<null | Date>(null);
 
   return (
-    <form className="flex gap-4">
-      <div>
-        <label htmlFor="check-inn" className="hidden">
-          Check in
-        </label>
-        <input
-          type="date"
-          id="check-in"
-          name="check-in"
-          value={checkIn}
-          onChange={(e) => setCheckIn(e.target.value)}
-          min={String(DateTime.now().toISODate())}
-        />
-      </div>
-      <div>
-        <label htmlFor="check-out" className="hidden">
-          Check out
-        </label>
-        <input
-          type="date"
-          id="check-out"
-          name="check-out"
-          placeholder="29/11/2023"
-        />
-      </div>
-      <div>1 adulto</div>
-      <div>Voucher</div>
-      <button type="submit">VER PREÇOS</button>
+    <form className="flex">
+      <DatePicker
+        selected={checkIn}
+        onChange={(date) => setCheckIn(date)}
+        minDate={new Date()}
+        placeholderText="Check in"
+        name="check-in"
+        showIcon
+      />
+      <DatePicker
+        selected={checkOut}
+        onChange={(date) => setcheckOut(date)}
+        minDate={new Date()}
+        placeholderText="Check out"
+        name="check-out"
+      />
     </form>
   );
 };
