@@ -26,6 +26,7 @@ export const MainSearchBar = () => {
         name="check-out"
       />
       <GuestPicker />
+      
     </form>
   );
 };
