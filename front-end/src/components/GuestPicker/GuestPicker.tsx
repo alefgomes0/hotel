@@ -3,9 +3,10 @@ import {
   autoUpdate,
   FloatingArrow,
   arrow,
-  offset
+  offset,
 } from "@floating-ui/react";
 import { useState, useRef } from "react";
+import { NumericStepper } from "../NumericStepper.tsx/NumericStepper";
 
 export const GuestPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +34,8 @@ export const GuestPicker = () => {
       1 adulto, 0 crianças, 1 apartamento
       {isOpen && (
         <div ref={refs.setFloating} style={floatingStyles}>
-          <FloatingArrow ref={arrowRef} context={context} />
-          Tooltip
+          <FloatingArrow ref={arrowRef} context={context}/>
+          <NumericStepper />
         </div>
       )}
     </button>
