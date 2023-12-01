@@ -1,10 +1,13 @@
 import { MainSearchBar } from "./components/MainSearchBar/MainSearchBar";
-import { NumericStepper } from "./components/NumericStepper.tsx/NumericStepper";
+import { NumericStepper } from "./components/NumericStepper/NumericStepper";
+import { GuestInfoProvider } from "./context/GuestInfoContext";
 
 const App = () => {
   return (
     <>
-      <MainSearchBar />
+      <GuestInfoProvider>
+        <NumericStepper field="adult"/>
+      </GuestInfoProvider>
     </>
   );
 };

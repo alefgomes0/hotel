@@ -1,12 +1,10 @@
 import DatePicker from "react-datepicker";
-import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import CalendarIcon from "../svg/CalendarIcon.svg"
 import { GuestPicker } from "../GuestPicker/GuestPicker";
+import { useGuestInfo } from "../../hooks/useGuestInfo";
 
 export const MainSearchBar = () => {
-  const [checkIn, setCheckIn] = useState<null | Date>(null);
-  const [checkOut, setcheckOut] = useState<null | Date>(null);
+  const { checkIn, setCheckIn, checkOut, setCheckOut } = useGuestInfo();
 
   return (
     <form className="flex">
@@ -16,17 +14,16 @@ export const MainSearchBar = () => {
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
-
       />
       <DatePicker
         selected={checkOut}
-        onChange={(date) => setcheckOut(date)}
+        onChange={(date) => setCheckOut(date)}
         minDate={new Date()}
         placeholderText="Check out"
         name="check-out"
+        disabled={checkIn === null ? true : false}
       />
       <GuestPicker />
-      
     </form>
   );
 };

@@ -6,7 +6,7 @@ import {
   offset,
 } from "@floating-ui/react";
 import { useState, useRef } from "react";
-import { NumericStepper } from "../NumericStepper.tsx/NumericStepper";
+import { NumericStepper } from "../NumericStepper/NumericStepper";
 
 export const GuestPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +35,7 @@ export const GuestPicker = () => {
       {isOpen && (
         <div ref={refs.setFloating} style={floatingStyles}>
           <FloatingArrow ref={arrowRef} context={context}/>
-          <NumericStepper />
+          <NumericStepper field="adult"/>
         </div>
       )}
     </button>
