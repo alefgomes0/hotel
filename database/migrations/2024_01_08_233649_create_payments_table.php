@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bookings_id');
-            $table->string('method');
+            $table->unsignedBigInteger('bookings_id');
+            $table->foreign('bookings_id')->references('id')->on('bookings');
+            $table->string('method', 64);
             $table->float('amount');
-            $table->date('payment_date');
+            $table->date('payment_day');
             $table->timestamps();
         });
     }

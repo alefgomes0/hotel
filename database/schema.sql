@@ -1,5 +1,5 @@
-CREATE TABLE "rooms" (
-  "id": INT,
+CREATE TABLE 'hotel' (
+  "id": PRIMARY KEY,
   type: VARCHAR(32) NOT NULL,
   "num_of_adultst": INT NOT NULL,
   "num_of_children": INT NOT NULL,
