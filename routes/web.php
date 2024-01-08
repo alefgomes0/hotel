@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/api/{checkin}/{checkOut}/{searchInfo}', function (string $checkin, string $checkout, string $searchInfo ) {
+    $searchInfoObject = json_decode($searchInfo);
+    return response($searchInfoObject);
 });

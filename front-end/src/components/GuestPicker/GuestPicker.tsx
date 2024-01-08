@@ -7,6 +7,7 @@ import {
 } from "@floating-ui/react";
 import { useState, useRef } from "react";
 import { NumericStepper } from "../NumericStepper/NumericStepper";
+import { useGuestInfo } from "../../hooks/useGuestInfo";
 
 export const GuestPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,19 +26,42 @@ export const GuestPicker = () => {
     ],
   });
 
+  const { searchInfo } = useGuestInfo();
+
   return (
-    <button
+    <div
       ref={refs.setReference}
       onClick={() => setIsOpen(!isOpen)}
-      type="button"
+      className="cursor-pointer"
+      role="picker"
     >
-      1 adulto, 0 crianças, 1 apartamento
+      {searchInfo.numOfApartment}{" "}
+      {searchInfo.numOfApartment === 1 ? "apartamento" : "apartamentos"},{" "}
+      {searchInfo.numOfAdult}{" "}
+      {searchInfo.numOfAdult === 1 ? "adulto" : "adultos"},{" "}
+      {searchInfo.numOfChildren}{" "}
+      {searchInfo.numOfChildren === 1 ? "criança" : "crianças"}
       {isOpen && (
-        <div ref={refs.setFloating} style={floatingStyles}>
-          <FloatingArrow ref={arrowRef} context={context}/>
-          <NumericStepper field="adult"/>
+        <div
+          ref={refs.setFloating}
+          style={floatingStyles}
+          className="flex flex-col gap-6 bg-[#fafafa] w-[275px] px-8 py-3"
+        >
+          <FloatingArrow ref={arrowRef} context={context} />
+          <div className="flex justify-between">
+            <p>Quarto(s)</p>
+            <NumericStepper field="apartment" />
+          </div>{" "}
+          <div className="flex justify-between">
+            <p>Adulto(s)</p>
+            <NumericStepper field="adult" />
+          </div>
+          <div className="flex justify-between">
+            <p>Criança(s)</p>
+            <NumericStepper field="children" />
+          </div>
         </div>
       )}
-    </button>
+    </div>
   );
 };

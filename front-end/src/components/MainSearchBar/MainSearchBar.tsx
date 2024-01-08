@@ -1,16 +1,45 @@
+import addDays from "date-fns/addDays";
+import axios from "../../api/axios";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { GuestPicker } from "../GuestPicker/GuestPicker";
+import lightFormat from "date-fns/lightFormat";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
+import { useQuery } from "@tanstack/react-query";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 
 export const MainSearchBar = () => {
-  const { checkIn, setCheckIn, checkOut, setCheckOut } = useGuestInfo();
+  const { checkIn, setCheckIn, checkOut, setCheckOut, searchInfo } =
+    useGuestInfo();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const fetchAvailableRooms = async () =>
+    await axios.get(
+      `/api/${lightFormat(checkIn as Date, "dd-MM-yyyy")}/${lightFormat(
+        checkOut as Date,
+        "dd-MM-yyyy"
+      )}/${JSON.stringify(searchInfo)}}}`
+    );
+
+  const { data, error, isError, isPending } = useQuery({
+    queryKey: ["reserva"],
+    queryFn: fetchAvailableRooms,
+    enabled: isSubmitted,
+  });
+
+  const handleOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  };
+
+  console.log(data)
 
   return (
-    <form className="flex">
+    <form className="flex gap-4 items-center" onSubmit={handleOnSubmit}>
       <DatePicker
         selected={checkIn}
         onChange={(date) => setCheckIn(date)}
+        dateFormat="dd-MM-yyyy"
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
@@ -18,12 +47,14 @@ export const MainSearchBar = () => {
       <DatePicker
         selected={checkOut}
         onChange={(date) => setCheckOut(date)}
-        minDate={new Date()}
+        dateFormat="dd-MM-yyyy"
+        minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"
-        disabled={checkIn === null ? true : false}
       />
       <GuestPicker />
+      <input type="text" placeholder="Voucher/Cupom" />
+      <button type="submit">SEARCH</button>
     </form>
   );
 };

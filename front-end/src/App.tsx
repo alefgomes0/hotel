@@ -1,14 +1,18 @@
 import { MainSearchBar } from "./components/MainSearchBar/MainSearchBar";
-import { NumericStepper } from "./components/NumericStepper/NumericStepper";
 import { GuestInfoProvider } from "./context/GuestInfoContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const App = () => {
+  const queryClient = new QueryClient();
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GuestInfoProvider>
-        <NumericStepper field="adult"/>
+        <MainSearchBar />
       </GuestInfoProvider>
-    </>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 };
 
