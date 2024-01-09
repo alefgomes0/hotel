@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('address', 255);
             $table->string('phone', 64);
             $table->string('email', 64)->unique();
-            $table->time('check_in');
-            $table->time('check_out');
+            $table->timeTz('check_in', $precision = 0);
+            $table->timeTz('check_out', $precision = 0);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('room_type_id');
             $table->foreign('room_type_id')->references('id')->on('room_type');
 
-            $table->string('status', 64);
+            $table->enum('status', ['Operational', 'Maintenance']);
             $table->timestamps();
         });
     }
