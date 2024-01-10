@@ -5,10 +5,10 @@ type GuestInfoProviderProps = {
   children: React.ReactNode;
 };
 
-type SearchInfoProps = {
-  numOfApartment: number;
-  numOfAdult: number;
-  numOfChildren: number;
+type numOfGuestsProps = {
+  apartment: number;
+  adult: number;
+  children: number;
 };
 
 type GuestInfoContextValues = {
@@ -16,8 +16,8 @@ type GuestInfoContextValues = {
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
   checkOut: null | Date;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
-  searchInfo: SearchInfoProps;
-  setSearchInfo: React.Dispatch<React.SetStateAction<SearchInfoProps>>;
+  numOfGuests: numOfGuestsProps;
+  setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps>>;
   getFieldValue: (field: SearchFieldValues) => number;
   increaseQuantity: (
     field: SearchFieldValues,
@@ -34,16 +34,16 @@ export const GuestInfoContext = createContext({} as GuestInfoContextValues);
 export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const [checkIn, setCheckIn] = useState<null | Date>(null);
   const [checkOut, setCheckOut] = useState<null | Date>(null);
-  const [searchInfo, setSearchInfo] = useState<SearchInfoProps>({
-    numOfApartment: 1,
-    numOfAdult: 1,
-    numOfChildren: 0,
+  const [numOfGuests, setNumOfGuests] = useState<numOfGuestsProps>({
+    apartment: 1,
+    adult: 1,
+    children: 0,
   });
 
   const getFieldValue = (field: "apartment" | "adult" | "children") => {
-    if (field === "apartment") return searchInfo.numOfApartment;
-    else if (field === "adult") return searchInfo.numOfAdult;
-    else return searchInfo.numOfChildren;
+    if (field === "apartment") return numOfGuests.apartment;
+    else if (field === "adult") return numOfGuests.adult;
+    else return numOfGuests.children;
   };
 
   const increaseQuantity = (
@@ -54,22 +54,22 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     event.preventDefault();
 
     if (field === "apartment") {
-      if (searchInfo.numOfApartment >= 5) return;
-      setSearchInfo((prevState) => ({
+      if (numOfGuests.apartment >= 5) return;
+      setNumOfGuests((prevState) => ({
         ...prevState,
-        numOfApartment: prevState.numOfApartment + 1,
+        apartment: prevState.apartment + 1,
       }));
     } else if (field === "adult") {
-      if (searchInfo.numOfAdult > searchInfo.numOfApartment * 2) return;
-      setSearchInfo((prevState) => ({
+      if (numOfGuests.adult > numOfGuests.apartment * 2) return;
+      setNumOfGuests((prevState) => ({
         ...prevState,
-        numOfAdult: prevState.numOfAdult + 1,
+        adult: prevState.adult + 1,
       }));
     } else {
-      if (searchInfo.numOfChildren > searchInfo.numOfAdult) return;
-      setSearchInfo((prevState) => ({
+      if (numOfGuests.children > numOfGuests.adult) return;
+      setNumOfGuests((prevState) => ({
         ...prevState,
-        numOfChildren: prevState.numOfChildren + 1,
+        children: prevState.children + 1,
       }));
     }
   };
@@ -82,22 +82,22 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     event.preventDefault();
 
     if (field === "apartment") {
-      if (searchInfo.numOfApartment <= 1) return;
-      setSearchInfo((prevState) => ({
+      if (numOfGuests.apartment <= 1) return;
+      setNumOfGuests((prevState) => ({
         ...prevState,
-        numOfApartment: prevState.numOfApartment - 1,
+        apartment: prevState.apartment - 1,
       }));
     } else if (field === "adult") {
-      if (searchInfo.numOfAdult <= 1) return;
-      setSearchInfo((prevState) => ({
+      if (numOfGuests.adult <= 1) return;
+      setNumOfGuests((prevState) => ({
         ...prevState,
-        numOfAdult: prevState.numOfAdult - 1,
+        adult: prevState.adult - 1,
       }));
     } else {
-      if (searchInfo.numOfChildren === 0) return;
-      setSearchInfo((prevState) => ({
+      if (numOfGuests.children === 0) return;
+      setNumOfGuests((prevState) => ({
         ...prevState,
-        numOfChildren: prevState.numOfChildren - 1,
+        children: prevState.children - 1,
       }));
     }
   };
@@ -109,8 +109,8 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setCheckIn,
         checkOut,
         setCheckOut,
-        searchInfo,
-        setSearchInfo,
+        numOfGuests,
+        setNumOfGuests,
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,

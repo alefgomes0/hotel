@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bookings_id');
-            $table->foreign('bookings_id')->references('id')->on('bookings');
+            $table->unsignedBigInteger('booking_id');
+            $table->foreign('booking_id')->references('id')->on('bookings');
             $table->string('method', 64);
             $table->float('amount');
             $table->date('payment_day');

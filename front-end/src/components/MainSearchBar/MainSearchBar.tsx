@@ -9,17 +9,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 
 export const MainSearchBar = () => {
-  const { checkIn, setCheckIn, checkOut, setCheckOut, searchInfo } =
+  const { checkIn, setCheckIn, checkOut, setCheckOut, numOfGuests } =
     useGuestInfo();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const fetchAvailableRooms = async () =>
-    await axios.get(
-      `/api/${lightFormat(checkIn as Date, "dd-MM-yyyy")}/${lightFormat(
-        checkOut as Date,
-        "dd-MM-yyyy"
-      )}/${JSON.stringify(searchInfo)}}}`
-    );
+  const fetchAvailableRooms = async () => {
+    const searchedInfo = JSON.stringify({
+      checkIn: lightFormat(checkIn as Date, "yyyy-MM-dd"),
+      checkOut: lightFormat(checkOut as Date, "yyyy-MM-dd"),
+    });
+
+    return await axios.get(`/rooms/1`);
+  };
 
   const { data, error, isError, isPending } = useQuery({
     queryKey: ["reserva"],
@@ -32,14 +33,14 @@ export const MainSearchBar = () => {
     setIsSubmitted(true);
   };
 
-  console.log(data)
+  console.log(data);
 
   return (
     <form className="flex gap-4 items-center" onSubmit={handleOnSubmit}>
       <DatePicker
         selected={checkIn}
         onChange={(date) => setCheckIn(date)}
-        dateFormat="dd-MM-yyyy"
+        dateFormat="yyyy-MM-dd"
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
@@ -47,7 +48,7 @@ export const MainSearchBar = () => {
       <DatePicker
         selected={checkOut}
         onChange={(date) => setCheckOut(date)}
-        dateFormat="dd-MM-yyyy"
+        dateFormat="yyyy-MM-dd"
         minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"

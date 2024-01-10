@@ -26,7 +26,7 @@ export const GuestPicker = () => {
     ],
   });
 
-  const { searchInfo } = useGuestInfo();
+  const { numOfGuests } = useGuestInfo();
 
   return (
     <div
@@ -35,12 +35,12 @@ export const GuestPicker = () => {
       className="cursor-pointer"
       role="picker"
     >
-      {searchInfo.numOfApartment}{" "}
-      {searchInfo.numOfApartment === 1 ? "apartamento" : "apartamentos"},{" "}
-      {searchInfo.numOfAdult}{" "}
-      {searchInfo.numOfAdult === 1 ? "adulto" : "adultos"},{" "}
-      {searchInfo.numOfChildren}{" "}
-      {searchInfo.numOfChildren === 1 ? "criança" : "crianças"}
+      {numOfGuests.apartment}{" "}
+      {numOfGuests.apartment === 1 ? "apartamento" : "apartamentos"},{" "}
+      {numOfGuests.adult}{" "}
+      {numOfGuests.adult === 1 ? "adulto" : "adultos"},{" "}
+      {numOfGuests.children}{" "}
+      {numOfGuests.children === 1 ? "criança" : "crianças"}
       {isOpen && (
         <div
           ref={refs.setFloating}

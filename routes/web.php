@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\Room;
 
 
 /*
@@ -19,7 +21,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api/{checkin}/{checkOut}/{searchInfo}', function (string $checkin, string $checkout, string $searchInfo ) {
-    $searchInfoObject = json_decode($searchInfo);
-    return response($searchInfoObject);
+Route::get('/rooms/{pica}', function (Response $response, string $pica) {
+    $rooms = DB::table('bookings')
+        ->rightJoin('rooms', 'bookings.room_id', '=', 'rooms.id' )
+        ->rightJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
+        ->select('rooms.id', 'room_type.description')
+        ->whereNotBetween('bookings.check_in', ['2024-01-15,', '2024-01-18'] )
+        ->get();
+    
+
+    
+    $teste = DB::table('rooms')
+        ->select('rooms.id')
+        ->get();
+
+    return response()->json([
+        'quarto' => $rooms
+    ]);
 });

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('first_name', 64);
             $table->string('last_name', 64);
             $table->string('email', 64)->unique();
-            $table->string('address', 255);
+            $table->string('password', 512);
+            $table->string('address', 256);
             $table->string('phone', 64);
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ class RoomFactory extends Factory
     {
         return [
             'hotel_id' => 1,
-            'room_type_id' => 1,
+            'room_type_id' => 3,
             'status' => 'Operational',
         ];
     }
