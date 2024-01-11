@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('booking_id');
             $table->foreign('booking_id')->references('id')->on('bookings');
             $table->string('method', 64);
-            $table->float('amount');
-            $table->date('payment_day');
+            $table->float('amount', 8, 2);
+            $table->datetime('payment_day');
             $table->timestamps();
         });
     }

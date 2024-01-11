@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('room_type', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['Standard', 'Prime', 'Deluxe']);
-            $table->float('price_per_day');
+            $table->float('price_per_day', 5, 2);
             $table->text('description');
             $table->smallInteger('occupants');
             $table->timestamps();

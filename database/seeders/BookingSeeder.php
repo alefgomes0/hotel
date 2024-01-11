@@ -15,11 +15,11 @@ class BookingSeeder extends Seeder
     public function run(): void
     {
         DB::table('bookings')->insert([
-            'guest_id' => 1,
-            'room_id' => 1,
-            'check_in' => '2024-01-12',
-            'check_out' => '2024-01-20',
-            'total_price' => 1.200,
+            'guest_id' => 2,
+            'room_id' => 13,
+            'check_in' => '2024-01-15 14:00:00',
+            'check_out' => '2024-01-17 12:00:00',
+            'total_price' => 500.00,
         ]);
     }
 }

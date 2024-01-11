@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreign('guest_id')->references('id')->on('guests');
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms');
-            $table->date('check_in');
-            $table->date('check_out');
-            $table->float('total_price');
+            $table->datetime('check_in');
+            $table->datetime('check_out');
+            $table->float('total_price', 8, 2);
             $table->timestamps();
         });
     }

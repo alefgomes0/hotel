@@ -19,7 +19,7 @@ export const MainSearchBar = () => {
       checkOut: lightFormat(checkOut as Date, "yyyy-MM-dd"),
     });
 
-    return await axios.get(`/rooms/1`);
+    return await axios.get(`/rooms`);
   };
 
   const { data, error, isError, isPending } = useQuery({
@@ -40,7 +40,7 @@ export const MainSearchBar = () => {
       <DatePicker
         selected={checkIn}
         onChange={(date) => setCheckIn(date)}
-        dateFormat="yyyy-MM-dd"
+        dateFormat="dd-MM-yyyy"
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
@@ -48,7 +48,7 @@ export const MainSearchBar = () => {
       <DatePicker
         selected={checkOut}
         onChange={(date) => setCheckOut(date)}
-        dateFormat="yyyy-MM-dd"
+        dateFormat="dd-MM-yyyy"
         minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"

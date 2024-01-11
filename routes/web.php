@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 use App\Models\Room;
+use Illuminate\Database\Query\Builder;
+
+use Carbon\Carbon;
 
 
 /*
@@ -21,21 +24,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/rooms/{pica}', function (Response $response, string $pica) {
-    $rooms = DB::table('bookings')
-        ->rightJoin('rooms', 'bookings.room_id', '=', 'rooms.id' )
-        ->rightJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
-        ->select('rooms.id', 'room_type.description')
-        ->whereNotBetween('bookings.check_in', ['2024-01-15,', '2024-01-18'] )
-        ->get();
-    
+Route::get('/rooms', function (Response $response) {
+    $bookedRooms = DB::table('bookings')
+        ->select('bookings.room_id')
+        ->orWhereBetween('bookings.check_in', ['2024-01-01 14:00:00', '2024-01-05 12:00:00'])
+        ->orWhereBetween('bookings.check_out', ['2024-01-01 14:00:00', '2024-01-25 12:00:00'])
+        ->pluck('room_id')
+        ->toArray();
 
-    
-    $teste = DB::table('rooms')
-        ->select('rooms.id')
+    $availableRooms = DB::table('rooms')
+        ->select()
+        ->whereNotIn('rooms.id', $bookedRooms)
         ->get();
+
+
+/*     $checkIn = new Carbon($bookedRooms[0]->check_in);
+    $checkOut = new Carbon($bookedRooms[0]->check_out); 
+    $diff = $checkOut->diffInDays($checkIn); */
+
 
     return response()->json([
-        'quarto' => $rooms
+        'quarto' => $availableRooms
     ]);
 });
