@@ -15,11 +15,12 @@ export const MainSearchBar = () => {
 
   const fetchAvailableRooms = async () => {
     const searchedInfo = JSON.stringify({
-      checkIn: lightFormat(checkIn as Date, "yyyy-MM-dd"),
-      checkOut: lightFormat(checkOut as Date, "yyyy-MM-dd"),
+      checkIn: `${lightFormat(checkIn as Date, "yyyy-MM-dd")} 14:00:00`,
+      checkOut: `${lightFormat(checkOut as Date, "yyyy-MM-dd")} 11:00:00`,
+      numOfGuests
     });
 
-    return await axios.get(`/rooms`);
+    return await axios.get(`/rooms/${searchedInfo}`);
   };
 
   const { data, error, isError, isPending } = useQuery({
