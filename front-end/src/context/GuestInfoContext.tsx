@@ -66,7 +66,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         adult: prevState.adult + 1,
       }));
     } else {
-      if (numOfGuests.children > numOfGuests.adult) return;
+      if (numOfGuests.children >= numOfGuests.apartment) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
         children: prevState.children + 1,
