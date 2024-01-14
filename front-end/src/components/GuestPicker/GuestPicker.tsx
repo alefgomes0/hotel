@@ -13,7 +13,7 @@ export const GuestPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
   const arrowRef = useRef(null);
   const ARROW_HEIGHT = 7;
-  const GAP = 2;
+  const GAP = 10;
   const { refs, floatingStyles, context } = useFloating({
     whileElementsMounted: autoUpdate,
     open: isOpen,
@@ -32,22 +32,25 @@ export const GuestPicker = () => {
     <div
       ref={refs.setReference}
       onClick={() => setIsOpen(!isOpen)}
-      className="cursor-pointer"
+      className="cursor-pointer text-gray-600"
       role="picker"
     >
       {numOfGuests.apartment}{" "}
       {numOfGuests.apartment === 1 ? "apartamento" : "apartamentos"},{" "}
-      {numOfGuests.adult}{" "}
-      {numOfGuests.adult === 1 ? "adulto" : "adultos"},{" "}
+      {numOfGuests.adult} {numOfGuests.adult === 1 ? "adulto" : "adultos"},{" "}
       {numOfGuests.children}{" "}
       {numOfGuests.children === 1 ? "criança" : "crianças"}
       {isOpen && (
         <div
           ref={refs.setFloating}
           style={floatingStyles}
-          className="flex flex-col gap-6 bg-[#fafafa] w-[275px] px-8 py-3"
+          className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] px-8 py-3 bg-gray-50 rounded-sm"
         >
-          <FloatingArrow ref={arrowRef} context={context} />
+          <FloatingArrow
+            ref={arrowRef}
+            context={context}
+            className="fill-gray-500 [&>path:first-of-type]:stroke-gray-500 [&>path:last-of-type]:stroke-gray-500"
+          />
           <div className="flex justify-between">
             <p>Quarto(s)</p>
             <NumericStepper field="apartment" />
@@ -56,9 +59,14 @@ export const GuestPicker = () => {
             <p>Adulto(s)</p>
             <NumericStepper field="adult" />
           </div>
-          <div className="flex justify-between">
-            <p>Criança(s)</p>
-            <NumericStepper field="children" />
+          <div>
+            <div className="flex justify-between">
+              <p>Criança(s)</p>
+              <NumericStepper field="children" />
+            </div>
+            <p className="text-xs pt-[5px] opacity-60">
+              São consideradas crianças individuos com até 12 anos.
+            </p>
           </div>
         </div>
       )}
