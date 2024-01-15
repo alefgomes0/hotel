@@ -7,6 +7,7 @@ import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useQuery } from "@tanstack/react-query";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+import { SearchButton } from "../Buttons/SearchButton";
 
 export const MainSearchBar = () => {
   const { checkIn, setCheckIn, checkOut, setCheckOut, numOfGuests } =
@@ -37,7 +38,7 @@ export const MainSearchBar = () => {
   console.log(data);
 
   return (
-    <form className="flex gap-4 items-center" onSubmit={handleOnSubmit}>
+    <form className="absolute bottom-[15%] left-0 flex items-center h-10 ml-8 rounded-sm" onSubmit={handleOnSubmit}>
       <DatePicker
         selected={checkIn}
         onChange={(date) => setCheckIn(date)}
@@ -45,6 +46,7 @@ export const MainSearchBar = () => {
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
+        className="h-10 border-r-2 border-green-400 outline-0 placeholder:pl-4 rounded-sm"
       />
       <DatePicker
         selected={checkOut}
@@ -53,10 +55,11 @@ export const MainSearchBar = () => {
         minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"
+        className="h-10 border-r-2 border-green-400 outline-0 placeholder:pl-4"
       />
       <GuestPicker />
-      <input type="text" placeholder="Voucher/Cupom" />
-      <button type="submit">SEARCH</button>
+      <input type="text" placeholder="Voucher/Cupom" className="h-10 outline-0 placeholder:text-xs"/>
+      <SearchButton />
     </form>
   );
 };

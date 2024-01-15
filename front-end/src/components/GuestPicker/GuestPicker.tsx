@@ -32,14 +32,17 @@ export const GuestPicker = () => {
     <div
       ref={refs.setReference}
       onClick={() => setIsOpen(!isOpen)}
-      className="cursor-pointer text-gray-600"
+      className="flex items-center cursor-pointer text-gray-600 bg-white text-xs w-64 h-full pl-4 border-r-2 border-green-400"
       role="picker"
     >
-      {numOfGuests.apartment}{" "}
-      {numOfGuests.apartment === 1 ? "apartamento" : "apartamentos"},{" "}
-      {numOfGuests.adult} {numOfGuests.adult === 1 ? "adulto" : "adultos"},{" "}
-      {numOfGuests.children}{" "}
-      {numOfGuests.children === 1 ? "criança" : "crianças"}
+      <p>
+        {" "}
+        {numOfGuests.apartment}{" "}
+        {numOfGuests.apartment === 1 ? "apartamento" : "apartamentos"},{" "}
+        {numOfGuests.adult} {numOfGuests.adult === 1 ? "adulto" : "adultos"},{" "}
+        {numOfGuests.children}{" "}
+        {numOfGuests.children === 1 ? "criança" : "crianças"}
+      </p>
       {isOpen && (
         <div
           ref={refs.setFloating}
