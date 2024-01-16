@@ -5,7 +5,7 @@ import { GuestPicker } from "../GuestPicker/GuestPicker";
 import lightFormat from "date-fns/lightFormat";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { SearchButton } from "../Buttons/SearchButton";
@@ -34,7 +34,7 @@ export const MainSearchBar = () => {
       numOfGuests,
     });
 
-    return await axios.get(`/rooms/${searchedInfo}`);
+    return await axios.get(`/availability/checkin=2024-01-16%2014:00:00&checkout=2024-01-18%2011:00:00&rooms=1&adults=1&children=0`);
   };
 
   const { data, error, isError, isPending } = useQuery({
@@ -46,7 +46,7 @@ export const MainSearchBar = () => {
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
-    /*     navigate(
+/*     navigate(
       `/availability?checkin=${formattedCheckIn()}&checkout=${formattedCheckOut()}&rooms=${
         numOfGuests.apartment
       }&adults=${numOfGuests.adult}&children=${numOfGuests.children}`
@@ -67,6 +67,7 @@ export const MainSearchBar = () => {
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
+        title="Check-in"
         className="h-10 border-r-2 border-gray-200 pl-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
       />
       <DatePicker
@@ -76,6 +77,7 @@ export const MainSearchBar = () => {
         minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"
+        title="Check-out"
         className="h-10 border-r-2 border-gray-200 pl-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%]"
       />
       <GuestPicker />
@@ -83,6 +85,7 @@ export const MainSearchBar = () => {
         type="text"
         placeholder="Voucher/Cupom"
         className="w-32 h-10 outline-0 pl-4 placeholder:text-sm placeholder:text-gray-600 placeholder:opacity-[65%]"
+        title="Voucher"
       />
       <SearchButton isDisabled={!checkIn || !checkOut} />
     </form>

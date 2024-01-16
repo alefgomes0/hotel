@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 use App\Models\Room;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AvailabilityController;
+
 
 
 /*
@@ -23,3 +25,5 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
+
+Route::get('/availability/{searchParams}', [AvailabilityController::class, 'show']);

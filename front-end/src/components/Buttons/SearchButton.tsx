@@ -4,8 +4,8 @@ type SearchButtonProps = {
 
 export const SearchButton = ({ isDisabled }: SearchButtonProps) => {
   return (
-    <button type="submit" className="w-min h-min px-12 py-2 text-gray-100 bg-teal-800 hover:bg-teal-700 rounded-sm disabled:bg-gray-400 transition-colors" disabled={isDisabled}>
-      SEARCH
+    <button type="submit" className="w-36 h-min py-2 text-gray-50 bg-gray-700 hover:bg-gray-600 rounded-sm disabled:text-white disabled:bg-gray-400 transition-colors" disabled={isDisabled}>
+      CHECK RATES
     </button>
   )
 }
