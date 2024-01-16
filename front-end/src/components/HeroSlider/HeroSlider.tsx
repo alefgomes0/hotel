@@ -48,7 +48,7 @@ export const HeroSlider = () => {
   ).matches;
 
   return (
-    <section className="relative" aria-label="Image Carousel">
+    <section className="relative" aria-label="image carousel">
       <a
         href="#after-image-slider-controls"
         className="absolute w-[1px] h-[1px] p-0 margin-[-1px] overflow-hidden border-0 focus:top-0 focus:left-0 focus:border-[1px] focus:bg-white focus:p-0 focus:w-auto focus:h=auto focus:m-0 focus:text-black focus:z-[100]"
@@ -89,8 +89,8 @@ export const HeroSlider = () => {
       >
         <LPCarouselArrow />
       </button>
-      <div className="absolute bottom-[10%] left-0 pl-8">
-        <p className="text-4xl text-white pb-8 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
+      <div className="absolute bottom-[10%] left-0 pl-10">
+        <p className="text-4xl text-white pb-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
           Explore a world of possibilities
         </p>
         <MainSearchBar />

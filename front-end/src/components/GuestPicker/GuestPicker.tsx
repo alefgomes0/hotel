@@ -1,40 +1,35 @@
 import {
-  useFloating,
   autoUpdate,
-  FloatingArrow,
-  arrow,
+  useDismiss,
+  useFloating,
+  useInteractions,
   offset,
 } from "@floating-ui/react";
-import { useState, useRef } from "react";
 import { NumericStepper } from "../NumericStepper/NumericStepper";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
+import { useState } from "react";
 
 export const GuestPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const arrowRef = useRef(null);
-  const ARROW_HEIGHT = 7;
-  const GAP = 10;
+  const GAP = 15;
   const { refs, floatingStyles, context } = useFloating({
     placement: "top",
     whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
-    middleware: [
-      offset(ARROW_HEIGHT + GAP),
-      arrow({
-        element: arrowRef,
-      }),
-    ],
+    middleware: [offset(GAP)],
   });
-
+  const dismiss = useDismiss(context);
+  const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
   const { numOfGuests } = useGuestInfo();
 
   return (
     <div
       ref={refs.setReference}
+      {...getReferenceProps()}
       onClick={() => setIsOpen(!isOpen)}
       className="flex items-center cursor-pointer text-gray-600 bg-white text-sm w-64 h-full text-gray-600 pl-4 border-r-2 border-gray-200"
-      role="picker"
+      aria-label="pick number of guests"
     >
       <p className="opacity-[65%]">
         {" "}
@@ -48,12 +43,9 @@ export const GuestPicker = () => {
         <div
           ref={refs.setFloating}
           style={floatingStyles}
+          {...getFloatingProps()}
           className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] px-8 py-3 bg-gray-50 rounded-sm"
         >
-          <FloatingArrow
-            ref={arrowRef}
-            context={context}
-          />
           <div className="flex justify-between">
             <p>Quarto(s)</p>
             <NumericStepper field="apartment" />
