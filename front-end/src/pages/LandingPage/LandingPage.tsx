@@ -1,10 +1,10 @@
-import { Hero } from "../../components/Hero/Hero";
-import { MainSearchBar } from "../../components/MainSearchBar/MainSearchBar";
+import { HeroSlider } from "../../components/HeroSlider/HeroSlider";
+
 
 export const LandingPage = () => {
   return (
     <main>
-      <Hero children={<MainSearchBar />} />
+      <HeroSlider />
     </main>
   );
 };

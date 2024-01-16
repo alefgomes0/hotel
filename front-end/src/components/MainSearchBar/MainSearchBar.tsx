@@ -18,7 +18,7 @@ export const MainSearchBar = () => {
     const searchedInfo = JSON.stringify({
       checkIn: `${lightFormat(checkIn as Date, "yyyy-MM-dd")} 14:00:00`,
       checkOut: `${lightFormat(checkOut as Date, "yyyy-MM-dd")} 11:00:00`,
-      numOfGuests
+      numOfGuests,
     });
 
     return await axios.get(`/rooms/${searchedInfo}`);
@@ -38,7 +38,10 @@ export const MainSearchBar = () => {
   console.log(data);
 
   return (
-    <form className="absolute bottom-[15%] left-0 flex items-center h-10 ml-8 rounded-sm" onSubmit={handleOnSubmit}>
+    <form
+      className="flex items-center h-10 rounded-sm text-gray-600"
+      onSubmit={handleOnSubmit}
+    >
       <DatePicker
         selected={checkIn}
         onChange={(date) => setCheckIn(date)}
@@ -46,7 +49,7 @@ export const MainSearchBar = () => {
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
-        className="h-10 border-r-2 border-green-400 outline-0 placeholder:pl-4 rounded-sm"
+        className="h-10 border-r-2 border-gray-200 outline-0 placeholder:pl-4 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
       />
       <DatePicker
         selected={checkOut}
@@ -55,10 +58,14 @@ export const MainSearchBar = () => {
         minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"
-        className="h-10 border-r-2 border-green-400 outline-0 placeholder:pl-4"
+        className="h-10 border-r-2 border-gray-200 outline-0 placeholder:pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
       />
       <GuestPicker />
-      <input type="text" placeholder="Voucher/Cupom" className="h-10 outline-0 placeholder:text-xs"/>
+      <input
+        type="text"
+        placeholder="Voucher/Cupom"
+        className="w-32 h-10 outline-0 placeholder:text-sm placeholder:pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
+      />
       <SearchButton />
     </form>
   );

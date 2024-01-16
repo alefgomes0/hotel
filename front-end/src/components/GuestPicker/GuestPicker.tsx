@@ -15,6 +15,7 @@ export const GuestPicker = () => {
   const ARROW_HEIGHT = 7;
   const GAP = 10;
   const { refs, floatingStyles, context } = useFloating({
+    placement: "top",
     whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
@@ -32,10 +33,10 @@ export const GuestPicker = () => {
     <div
       ref={refs.setReference}
       onClick={() => setIsOpen(!isOpen)}
-      className="flex items-center cursor-pointer text-gray-600 bg-white text-xs w-64 h-full pl-4 border-r-2 border-green-400"
+      className="flex items-center cursor-pointer text-gray-600 bg-white text-sm w-64 h-full text-gray-600 pl-4 border-r-2 border-gray-200"
       role="picker"
     >
-      <p>
+      <p className="opacity-[65%]">
         {" "}
         {numOfGuests.apartment}{" "}
         {numOfGuests.apartment === 1 ? "apartamento" : "apartamentos"},{" "}
@@ -52,7 +53,6 @@ export const GuestPicker = () => {
           <FloatingArrow
             ref={arrowRef}
             context={context}
-            className="fill-gray-500 [&>path:first-of-type]:stroke-gray-500 [&>path:last-of-type]:stroke-gray-500"
           />
           <div className="flex justify-between">
             <p>Quarto(s)</p>
