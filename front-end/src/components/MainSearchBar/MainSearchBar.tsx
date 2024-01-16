@@ -3,9 +3,10 @@ import axios from "../../api/axios";
 import DatePicker from "react-datepicker";
 import { GuestPicker } from "../GuestPicker/GuestPicker";
 import lightFormat from "date-fns/lightFormat";
-import { useGuestInfo } from "../../hooks/useGuestInfo";
-import { useQuery } from "@tanstack/react-query";
 import "react-datepicker/dist/react-datepicker.css";
+import { useGuestInfo } from "../../hooks/useGuestInfo";
+import { useNavigate, redirect } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { SearchButton } from "../Buttons/SearchButton";
 
@@ -14,10 +15,22 @@ export const MainSearchBar = () => {
     useGuestInfo();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const formattedCheckIn = () => {
+    if (!checkIn) return;
+    return `${lightFormat(checkIn as Date, "yyyy-MM-dd")} 14:00:00`;
+  };
+
+  const formattedCheckOut = () => {
+    if (!checkOut) return;
+    return `${lightFormat(checkOut as Date, "yyyy-MM-dd")} 11:00:00`;
+  };
+
+  const navigate = useNavigate();
+
   const fetchAvailableRooms = async () => {
     const searchedInfo = JSON.stringify({
-      checkIn: `${lightFormat(checkIn as Date, "yyyy-MM-dd")} 14:00:00`,
-      checkOut: `${lightFormat(checkOut as Date, "yyyy-MM-dd")} 11:00:00`,
+      checkIn: formattedCheckIn(),
+      checkOut: formattedCheckOut(),
       numOfGuests,
     });
 
@@ -33,6 +46,11 @@ export const MainSearchBar = () => {
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+    /*     navigate(
+      `/availability?checkin=${formattedCheckIn()}&checkout=${formattedCheckOut()}&rooms=${
+        numOfGuests.apartment
+      }&adults=${numOfGuests.adult}&children=${numOfGuests.children}`
+    ); */
   };
 
   console.log(data);
@@ -49,7 +67,7 @@ export const MainSearchBar = () => {
         minDate={new Date()}
         placeholderText="Check in"
         name="check-in"
-        className="h-10 border-r-2 border-gray-200 outline-0 placeholder:pl-4 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
+        className="h-10 border-r-2 border-gray-200 pl-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
       />
       <DatePicker
         selected={checkOut}
@@ -58,15 +76,15 @@ export const MainSearchBar = () => {
         minDate={addDays(checkIn as Date, 1)}
         placeholderText="Check out"
         name="check-out"
-        className="h-10 border-r-2 border-gray-200 outline-0 placeholder:pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
+        className="h-10 border-r-2 border-gray-200 pl-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%]"
       />
       <GuestPicker />
       <input
         type="text"
         placeholder="Voucher/Cupom"
-        className="w-32 h-10 outline-0 placeholder:text-sm placeholder:pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
+        className="w-32 h-10 outline-0 pl-4 placeholder:text-sm placeholder:text-gray-600 placeholder:opacity-[65%]"
       />
-      <SearchButton />
+      <SearchButton isDisabled={!checkIn || !checkOut} />
     </form>
   );
 };

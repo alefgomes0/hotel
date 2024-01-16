@@ -12,7 +12,7 @@ class RoomController extends Controller
 {
     public function show(string $searchInfo): JsonResponse 
     {
-        $searchInfoObjects = json_decode($searchInfo);
+        $searchInfoObjects = json_decode(strip_tags($searchInfo));
         $checkIn = $searchInfoObjects->checkIn;
         $checkOut = $searchInfoObjects->checkOut;
         $numOfApartments = $searchInfoObjects->numOfGuests->apartment;
