@@ -30,7 +30,9 @@ class RoomController extends Controller
             ->select('rooms.id', 'room_type.type', 'room_type.description', 'room_type.price_per_day', 'room_type.photos')
             ->whereNotIn('rooms.id', $bookedRooms)
             ->where('room_type.occupants', '>=', $numOfOccupants)
+            ->groupBy('room_type.description')
             ->get();
+        
         
         if (sizeof($availableRooms) < $numOfApartments) {
             return response()->json([

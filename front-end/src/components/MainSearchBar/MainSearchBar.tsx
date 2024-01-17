@@ -5,11 +5,15 @@ import { GuestPicker } from "../GuestPicker/GuestPicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { SearchButton } from "../Buttons/SearchButton";
+import subDays from "date-fns/subDays";
 
 export const MainSearchBar = () => {
   const { checkIn, setCheckIn, checkOut, setCheckOut, numOfGuests } =
     useGuestInfo();
+  const [openCalendarOne, setOpenCalendarOne] = useState(false);
+  const [openCalendarTwo, setOpenCalendarTwo] = useState(false);
   const navigate = useNavigate();
 
   const handleOnSubmit = (e: React.FormEvent) => {
@@ -29,62 +33,92 @@ export const MainSearchBar = () => {
       className="flex items-center h-10 rounded-sm text-gray-600"
       onSubmit={handleOnSubmit}
     >
-      <DatePicker
-        showIcon
-        icon={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="#4b5963"
-              d="M472 96h-88V40h-32v56H160V40h-32v56H40a24.028 24.028 0 0 0-24 24v336a24.028 24.028 0 0 0 24 24h432a24.028 24.028 0 0 0 24-24V120a24.028 24.028 0 0 0-24-24Zm-8 352H48V128h80v40h32v-40h192v40h32v-40h80Z"
-            />
-            <path
-              fill="#4b5963"
-              d="M112 224h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32z"
-            />
-          </svg>
-        }
-        selected={checkIn}
-        onChange={(date) => setCheckIn(date)}
-        dateFormat="dd-MM-yyyy"
-        minDate={new Date()}
-        placeholderText="Check in"
-        name="check-in"
-        title="Check-in"
-        className="h-10 border-r-2 border-gray-200 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
-      />
-      <DatePicker
-        showIcon
-        icon={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="#4b5963"
-              d="M472 96h-88V40h-32v56H160V40h-32v56H40a24.028 24.028 0 0 0-24 24v336a24.028 24.028 0 0 0 24 24h432a24.028 24.028 0 0 0 24-24V120a24.028 24.028 0 0 0-24-24Zm-8 352H48V128h80v40h32v-40h192v40h32v-40h80Z"
-            />
-            <path
-              fill="#4b5963"
-              d="M112 224h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32z"
-            />
-          </svg>
-        }
-        selected={checkOut}
-        onChange={(date) => setCheckOut(date)}
-        dateFormat="dd-MM-yyyy"
-        minDate={addDays(checkIn as Date, 1)}
-        placeholderText="Check out"
-        name="check-out"
-        title="Check-out"
-        className="h-10 border-r-2 border-gray-200 px-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%]"
-      />
+      <label className="" htmlFor="check-in" id="check-in">
+        <DatePicker
+          showIcon
+          icon={
+            <span
+              className="flex items-center w-max h-max"
+              onClick={() => setOpenCalendarOne(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="#4b5963"
+                  d="M472 96h-88V40h-32v56H160V40h-32v56H40a24.028 24.028 0 0 0-24 24v336a24.028 24.028 0 0 0 24 24h432a24.028 24.028 0 0 0 24-24V120a24.028 24.028 0 0 0-24-24Zm-8 352H48V128h80v40h32v-40h192v40h32v-40h80Z"
+                />
+                <path
+                  fill="#4b5963"
+                  d="M112 224h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32z"
+                />
+              </svg>
+            </span>
+          }
+          onClickOutside={() => setOpenCalendarOne(false)}
+          selected={checkIn}
+          open={openCalendarOne}
+          onSelect={() => {
+            setOpenCalendarOne(false);
+            if (!checkOut) setOpenCalendarTwo(true);
+          }}
+          shouldCloseOnSelect
+          onChange={(date) => setCheckIn(date)}
+          dateFormat="dd-MM-yyyy"
+          minDate={new Date()}
+          maxDate={subDays(checkOut as Date, 1)}
+          placeholderText="Check in"
+          id="check-in"
+          name="check-in"
+          title="Check-in"
+          className="h-10 border-r-2 border-gray-200 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
+          onInputClick={() => setOpenCalendarOne(true)}
+        />
+      </label>
+      <label htmlFor="check-out" id="check-out">
+        <DatePicker
+          showIcon
+          icon={
+            <span
+              className="flex items-center w-max h-max"
+              onClick={() => setOpenCalendarTwo(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="#4b5963"
+                  d="M472 96h-88V40h-32v56H160V40h-32v56H40a24.028 24.028 0 0 0-24 24v336a24.028 24.028 0 0 0 24 24h432a24.028 24.028 0 0 0 24-24V120a24.028 24.028 0 0 0-24-24Zm-8 352H48V128h80v40h32v-40h192v40h32v-40h80Z"
+                />
+                <path
+                  fill="#4b5963"
+                  d="M112 224h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32zm-256 72h32v32h-32zm88 0h32v32h-32zm80 0h32v32h-32zm88 0h32v32h-32z"
+                />
+              </svg>
+            </span>
+          }
+          id="check-out"
+          selected={checkOut}
+          shouldCloseOnSelect
+          onChange={(date) => setCheckOut(date)}
+          onSelect={() => setOpenCalendarTwo(false)}
+          open={openCalendarTwo}
+          onClickOutside={() => setOpenCalendarTwo(false)}
+          onInputClick={() => setOpenCalendarTwo(true)}
+          dateFormat="dd-MM-yyyy"
+          minDate={addDays(new Date(), 1) || addDays(checkIn as Date, 1)}
+          placeholderText="Check out"
+          name="check-out"
+          title="Check-out"
+          className="h-10 border-r-2 border-gray-200 px-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%]"
+        />
+      </label>
       <GuestPicker />
       <input
         type="text"
