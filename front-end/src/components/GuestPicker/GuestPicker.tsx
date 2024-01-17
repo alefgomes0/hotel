@@ -44,7 +44,7 @@ export const GuestPicker = () => {
           ref={refs.setFloating}
           style={floatingStyles}
           {...getFloatingProps()}
-          className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] px-8 py-3 bg-gray-50 rounded-sm"
+          className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] px-8 py-3 bg-gray-50 rounded-sm font-semibold text-gray-700"
         >
           <div className="flex justify-between">
             <p>Quarto(s)</p>
