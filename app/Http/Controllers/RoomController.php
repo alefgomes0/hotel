@@ -26,7 +26,7 @@ class RoomController extends Controller
             ->toArray();
     
         $availableRooms = DB::table('rooms')
-            ->rightJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
+            ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
             ->select('rooms.id', 'room_type.type', 'room_type.description', 'room_type.price_per_day', 'room_type.photos')
             ->whereNotIn('rooms.id', $bookedRooms)
             ->where('room_type.occupants', '>=', $numOfOccupants)

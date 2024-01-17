@@ -17,7 +17,7 @@ export const NumericStepper = ({ field }: NumericStepperProps) => {
       >
         -
       </button>
-      <h6 className="w-6 text-center text-lg text-semibold text-gray-700">
+      <h6 className="w-6 text-center text-lg text-semibold text-gray-700 opacity-80">
         {getFieldValue(field)}
       </h6>
       <button

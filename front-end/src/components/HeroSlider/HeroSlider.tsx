@@ -90,7 +90,7 @@ export const HeroSlider = () => {
         <LPCarouselArrow />
       </button>
       <div className="absolute bottom-[10%] left-0 pl-10">
-        <p className="text-4xl text-white pb-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
+        <p className="text-5xl text-white pb-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
           Explore a world of possibilities
         </p>
         <MainSearchBar />

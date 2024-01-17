@@ -1,62 +1,28 @@
 import addDays from "date-fns/addDays";
-import axios from "../../api/axios";
 import DatePicker from "react-datepicker";
+import { formattedTime } from "@/utils/formattedTime";
 import { GuestPicker } from "../GuestPicker/GuestPicker";
-import lightFormat from "date-fns/lightFormat";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { SearchButton } from "../Buttons/SearchButton";
-import "../svg/CalendarIcon.svg";
 
 export const MainSearchBar = () => {
   const { checkIn, setCheckIn, checkOut, setCheckOut, numOfGuests } =
     useGuestInfo();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const formattedCheckIn = () => {
-    if (!checkIn) return;
-    return `${lightFormat(checkIn as Date, "yyyy-MM-dd")} 14:00:00`;
-  };
-
-  const formattedCheckOut = () => {
-    if (!checkOut) return;
-    return `${lightFormat(checkOut as Date, "yyyy-MM-dd")} 11:00:00`;
-  };
-
   const navigate = useNavigate();
-
-  const fetchAvailableRooms = async () => {
-    const searchedInfo = JSON.stringify({
-      checkIn: formattedCheckIn(),
-      checkOut: formattedCheckOut(),
-      numOfGuests,
-    });
-
-    return await axios.get(
-      `/availability/checkin=2024-01-16%2014:00:00&checkout=2024-01-18%2011:00:00&rooms=1&adults=1&children=0`
-    );
-  };
-
-  const { data, error, isError, isPending } = useQuery({
-    queryKey: ["reserva"],
-    queryFn: fetchAvailableRooms,
-    enabled: isSubmitted,
-  });
 
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    /*     navigate(
-      `/availability?checkin=${formattedCheckIn()}&checkout=${formattedCheckOut()}&rooms=${
+    navigate(
+      `/availability?checkin=${formattedTime(
+        checkIn as Date,
+        "14:00:00"
+      )}&checkout=${formattedTime(checkOut as Date, "11:00:00")}&rooms=${
         numOfGuests.apartment
       }&adults=${numOfGuests.adult}&children=${numOfGuests.children}`
-    ); */
+    );
   };
-
-  console.log(data);
 
   return (
     <form
