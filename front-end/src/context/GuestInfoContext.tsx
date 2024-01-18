@@ -1,3 +1,4 @@
+import { differenceInDays } from "date-fns";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues"
 
@@ -17,6 +18,7 @@ type GuestInfoContextValues = {
   checkOut: null | Date;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
   numOfGuests: numOfGuestsProps;
+  daysOfStay: number;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps>>;
   getFieldValue: (field: SearchFieldValues) => number;
   increaseQuantity: (
@@ -39,6 +41,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     adult: 1,
     children: 0,
   });
+  const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
 
   const getFieldValue = (field: "apartment" | "adult" | "children") => {
     if (field === "apartment") return numOfGuests.apartment;
@@ -111,6 +114,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setCheckOut,
         numOfGuests,
         setNumOfGuests,
+        daysOfStay,
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,
