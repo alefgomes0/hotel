@@ -18,8 +18,8 @@ class BookingSeeder extends Seeder
         DB::table('bookings')->insert([
             'guest_id' => 1,
             'room_id' => 1,
-            'check_in' => '2024-01-15 14:00:00',
-            'check_out' => '2024-01-17 12:00:00',
+            'check_in' => '2024-01-18 14:00:00',
+            'check_out' => '2024-01-21 11:00:00',
             'total_price' => 500.00,
         ]);
 
@@ -27,7 +27,7 @@ class BookingSeeder extends Seeder
             'guest_id' => 2,
             'room_id' => 13,
             'check_in' => '2024-01-15 14:00:00',
-            'check_out' => '2024-01-17 12:00:00',
+            'check_out' => '2024-01-17 11:00:00',
             'total_price' => 500.00,
         ]);
     }
