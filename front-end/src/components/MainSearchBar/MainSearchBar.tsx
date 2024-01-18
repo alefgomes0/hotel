@@ -75,7 +75,7 @@ export const MainSearchBar = () => {
           name="check-in"
           title="Check-in"
           className="h-10 border-r-2 border-gray-200 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
-          onInputClick={() => setOpenCalendarOne(true)}
+          onInputClick={() => setOpenCalendarOne(!openCalendarOne)}
         />
       </label>
       <label htmlFor="check-out" id="check-out">
@@ -84,7 +84,7 @@ export const MainSearchBar = () => {
           icon={
             <span
               className="flex items-center w-max h-max"
-              onClick={() => setOpenCalendarTwo(true)}
+              onClick={() => setOpenCalendarTwo(!openCalendarTwo)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,12 +107,15 @@ export const MainSearchBar = () => {
           selected={checkOut}
           shouldCloseOnSelect
           onChange={(date) => setCheckOut(date)}
-          onSelect={() => setOpenCalendarTwo(false)}
+          onSelect={() => {
+            setOpenCalendarTwo(false);
+            if (!checkIn) setOpenCalendarOne(true);
+          }}
           open={openCalendarTwo}
           onClickOutside={() => setOpenCalendarTwo(false)}
-          onInputClick={() => setOpenCalendarTwo(true)}
+          onInputClick={() => setOpenCalendarTwo(!openCalendarTwo)}
           dateFormat="dd-MM-yyyy"
-          minDate={addDays(new Date(), 1) || addDays(checkIn as Date, 1)}
+          minDate={addDays(new Date(), 1) && addDays(checkIn as Date, 1)}
           placeholderText="Check out"
           name="check-out"
           title="Check-out"

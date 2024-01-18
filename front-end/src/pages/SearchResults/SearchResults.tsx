@@ -2,6 +2,7 @@ import axios from "@/api/axios";
 import { formattedTime } from "@/utils/formattedTime";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { useQuery } from "@tanstack/react-query";
+import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
 
 export const SearchResults = () => {
   const { checkIn, checkOut, numOfGuests } = useGuestInfo();
@@ -24,8 +25,9 @@ export const SearchResults = () => {
   console.log(data);
 
   return (
-    <main className="h-[calc(100svh-90px)] bg-gray-100">
-      <h1>dosfidosfhdsifhosdhfiods</h1>
+    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] h-[calc(100svh-90px)] gap-x-12 bg-gray-200 px-32 pt-12">
+      <SearchResultsHeader />
+      <div className="row-start-1 row-end-3 col-start-2 col-end-3 h-[450px] border-2 border-black"></div>
     </main>
   );
 };
