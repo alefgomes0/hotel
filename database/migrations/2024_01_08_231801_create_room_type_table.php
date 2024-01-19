@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['Standard', 'Prime', 'Deluxe']);
             $table->float('price_per_day', 5, 2);
-            $table->text('description');
+            $table->text('short_description');
+            $table->text('full_description');
             $table->smallInteger('occupants');
             $table->timestamps();
         });

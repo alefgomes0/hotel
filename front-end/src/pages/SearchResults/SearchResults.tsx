@@ -26,7 +26,6 @@ export const SearchResults = () => {
 
   console.log(data);
 
-  console.log(data);
   return (
     <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-12 bg-gray-200 px-32 pt-12">
       <SearchResultsHeader />
@@ -39,6 +38,8 @@ export const SearchResults = () => {
               <></>
             ) : (
               <>
+                <RoomDisplayer roomData={data?.data.quartos.Standard[0]} />
+                <RoomDisplayer roomData={data?.data.quartos.Prime[0]} />
                 <RoomDisplayer roomData={data?.data.quartos.Deluxe[0]} />
               </>
             )}
