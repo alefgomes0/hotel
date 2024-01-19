@@ -31,6 +31,12 @@ class RoomController extends Controller
             ->whereNotIn('rooms.id', $bookedRooms)
             ->where('room_type.occupants', '>=', $numOfOccupants)
             ->get();
+
+        if (sizeof($availableRooms) == 0) {
+            return response()->json()([
+                'message' => 'Not found'
+            ], 404);
+        }
         
         if (sizeof($availableRooms) < $numOfApartments) {
             return response()->json([

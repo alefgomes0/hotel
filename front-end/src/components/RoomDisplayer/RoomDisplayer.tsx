@@ -33,7 +33,7 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
             <h6 className="w-max font-semibold text-xl cursor-pointer hover:underline underline-offset-[6px]">
               {roomData.type.toUpperCase()} SUITE
             </h6>
-            <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-lg opacity-80">
+            <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-lg opacity-60">
               {roomData.occupants}{" "}
               {roomData.occupants > 1 ? "adultos" : "adulto"}
             </span>

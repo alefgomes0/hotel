@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
 import { RoomDisplayer } from "@/components/RoomDisplayer/RoomDisplayer";
 import { RoomDisplayerSkeleton } from "@/components/Skeletons/RoomDisplayerSkeleton";
+import { YourStay } from "@/components/YourStay/YourStay";
 
 export const SearchResults = () => {
   const { checkIn, checkOut, numOfGuests } = useGuestInfo();
@@ -27,7 +28,7 @@ export const SearchResults = () => {
   console.log(data);
 
   return (
-    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-12 bg-gray-200 px-32 pt-12">
+    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-200 px-32 pt-12">
       <SearchResultsHeader />
       <section className="pt-8">
         {isLoading ? (
@@ -46,7 +47,9 @@ export const SearchResults = () => {
           </>
         )}
       </section>
-      <div className="row-start-1 row-end-3 col-start-2 col-end-3 h-[450px] border-2 border-black"></div>
+      <div className="row-start-1 row-end-3 col-start-2 col-end-3">
+        <YourStay />
+      </div>
     </main>
   );
 };
