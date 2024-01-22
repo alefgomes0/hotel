@@ -20,11 +20,11 @@ export const YourStay = () => {
       </div>
       <div className="flex items-center gap-x-2">
         <p className="text-sm opacity-90">
-          {format(checkIn as Date, "eee,  MMMM dd, yyyy")}
+          {checkIn && format(checkIn as Date, "eee,  MMMM dd, yyyy")}
         </p>
         <YourStayArrow width={18} height={18} />
         <p className="text-sm opacity-90">
-          {format(checkOut as Date, "eee,  MMMM dd, yyyy")}
+          {checkOut && format(checkOut as Date, "eee,  MMMM dd, yyyy")}
         </p>
       </div>
       <p className="text-xs opacity-70 mt-[-10px]">
