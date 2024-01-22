@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
 import React, { createContext, useState } from "react";
-import { SearchFieldValues } from "../types/SearchFieldValues"
+import { SearchFieldValues } from "../types/SearchFieldValues";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
@@ -12,6 +12,12 @@ type numOfGuestsProps = {
   children: number;
 };
 
+type selectedRoomProps = {
+  daysOfStay: number;
+  name: string;
+  pricePerDay: number;
+};
+
 type GuestInfoContextValues = {
   checkIn: null | Date;
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
@@ -19,16 +25,12 @@ type GuestInfoContextValues = {
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
   numOfGuests: numOfGuestsProps;
   daysOfStay: number;
+  selectedRoom: selectedRoomProps;
+  setSelectedRoom: React.Dispatch<React.SetStateAction<selectedRoomProps>>;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps>>;
   getFieldValue: (field: SearchFieldValues) => number;
-  increaseQuantity: (
-    field: SearchFieldValues,
-    event: React.MouseEvent
-  ) => void;
-  decreaseQuantity: (
-    field: SearchFieldValues,
-    event: React.MouseEvent
-  ) => void;
+  increaseQuantity: (field: SearchFieldValues, event: React.MouseEvent) => void;
+  decreaseQuantity: (field: SearchFieldValues, event: React.MouseEvent) => void;
 };
 
 export const GuestInfoContext = createContext({} as GuestInfoContextValues);
@@ -40,6 +42,11 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     apartment: 1,
     adult: 1,
     children: 0,
+  });
+  const [selectedRoom, setSelectedRoom] = useState<selectedRoomProps>({
+    daysOfStay: 0,
+    name: "",
+    pricePerDay: 0,
   });
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
 
@@ -115,6 +122,8 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         numOfGuests,
         setNumOfGuests,
         daysOfStay,
+        selectedRoom,
+        setSelectedRoom,
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,

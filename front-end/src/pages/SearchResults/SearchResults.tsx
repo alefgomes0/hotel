@@ -1,14 +1,24 @@
 import axios from "@/api/axios";
 import { formattedTime } from "@/utils/formattedTime";
-import { useGuestInfo } from "@/hooks/useGuestInfo";
-import { useQuery } from "@tanstack/react-query";
-import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
 import { RoomDisplayer } from "@/components/RoomDisplayer/RoomDisplayer";
 import { RoomDisplayerSkeleton } from "@/components/Skeletons/RoomDisplayerSkeleton";
+import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
+import { useEffect } from "react";
+import { useFillGuestContext } from "@/hooks/useFillGuestContext";
+import { useGuestInfo } from "@/hooks/useGuestInfo";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { YourStay } from "@/components/YourStay/YourStay";
 
 export const SearchResults = () => {
   const { checkIn, checkOut, numOfGuests } = useGuestInfo();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!checkIn || !checkOut) {
+      useFillGuestContext(location.search);
+    }
+  }, [checkIn, checkOut, location.search]);
 
   const fetchAvailableRooms = async () => {
     const searchedInfo = JSON.stringify({
@@ -25,10 +35,8 @@ export const SearchResults = () => {
     queryFn: fetchAvailableRooms,
   });
 
-  console.log(data);
-
   return (
-    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-200 px-32 pt-12">
+    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 main-gray-200 px-32 pt-12">
       <SearchResultsHeader />
       <section className="pt-8">
         {isLoading ? (

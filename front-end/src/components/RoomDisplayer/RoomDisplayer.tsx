@@ -1,8 +1,9 @@
-import { RoomProps } from "@/types/RoomProps";
-import { CoffeeIcon } from "../svg/CoffeeIcon";
-import { ForbiddenIcon } from "../svg/ForbiddenIcon";
 import { BookNow } from "../Buttons/BookNow";
 import { CheckmarkIcon } from "../svg/CheckmarkIcon";
+import { CoffeeIcon } from "../svg/CoffeeIcon";
+import { ForbiddenIcon } from "../svg/ForbiddenIcon";
+import { RoomProps } from "@/types/RoomProps";
+import { useGuestInfo } from "@/hooks/useGuestInfo";
 
 type RoomDisplayerProps = {
   roomData: RoomProps | undefined;
@@ -17,10 +18,12 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
     } else return "std-1.jpg";
   };
 
+  const { daysOfStay, setSelectedRoom } = useGuestInfo();
+
   return (
     <>
       {roomData ? (
-        <div className="grid grid-rows-1 grid-cols-[auto_1fr] border-2 border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700">
+        <div className="grid grid-rows-1 grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]">
           <div>
             <img
               src={`/images/${getPhotoPrefix()}`}
@@ -59,11 +62,20 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
             <div className="self-end">
               <p className="text-gray-500 mb-3">
                 <span className="text-xl font-semibold text-gray-700">
-                  R$ {roomData.price_per_day}
+                  ${roomData.price_per_day}
                 </span>{" "}
-                por noite
+                per night
               </p>
-              <BookNow pricePerDay={Number(roomData.price_per_day)} />
+              <BookNow
+                pricePerDay={Number(roomData.price_per_day)}
+                selectRoom={() =>
+                  setSelectedRoom({
+                    daysOfStay,
+                    name: roomData.type,
+                    pricePerDay: Number(roomData.price_per_day),
+                  })
+                }
+              />
             </div>
           </div>
         </div>
