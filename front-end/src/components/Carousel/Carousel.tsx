@@ -3,9 +3,11 @@ import { LPCarouselArrow } from "../svg/LPCarouselArrow";
 
 type CarouselProps = {
   imagesPath: string[];
+  leftController: React.ReactNode;
+  rightController: React.ReactNode;
 };
 
-export const Carousel = ({ imagesPath }: CarouselProps) => {
+export const Carousel = ({ imagesPath, leftController, rightController }: CarouselProps) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const handleRightClick = () => {
@@ -77,14 +79,14 @@ export const Carousel = ({ imagesPath }: CarouselProps) => {
         onClick={handleLeftClick}
         aria-label="show previous image"
       >
-        <LPCarouselArrow />
+        {leftController}
       </button>
       <button
         className="rotate-180 absolute top-[50%] right-0 translate-y-[-50%] translate-x-[-25%] focus:border-2 focus:border-gray-700"
         onClick={handleRightClick}
         aria-label="show next image"
       >
-        <LPCarouselArrow />
+        {rightController}
       </button>
       <div id="after-image-slider-controls"></div>
     </div>

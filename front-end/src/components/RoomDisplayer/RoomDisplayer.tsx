@@ -85,7 +85,13 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
               />
             </div>
           </div>
-          {showRoomDetails && <RoomDetails roomData={roomData} />}
+          {showRoomDetails && (
+            <RoomDetails
+              closeRoomDetails={() => setShowRoomDetails(false)}
+              roomData={roomData}
+              showRoomDetails={showRoomDetails}
+            />
+          )}
         </div>
       ) : (
         <></>
