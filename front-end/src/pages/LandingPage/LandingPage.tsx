@@ -15,6 +15,7 @@ export const LandingPage = () => {
         imagesPath={imagesURLS}
         leftController={<LPCarouselArrow width={48} height={48} />}
         rightController={<LPCarouselArrow width={48} height={48} />}
+        sizeOptions={{ height: "h-[calc(100svh-90px)]" }}
       />
       <div className="absolute bottom-[10%] left-0 pl-10">
         <p className="text-5xl text-white pb-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">

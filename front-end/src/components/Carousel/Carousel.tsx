@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { LPCarouselArrow } from "../svg/LPCarouselArrow";
 
 type CarouselProps = {
   imagesPath: string[];
   leftController: React.ReactNode;
   rightController: React.ReactNode;
+  sizeOptions?: {
+    width?: string;
+    height?: string;
+  };
 };
 
-export const Carousel = ({ imagesPath, leftController, rightController }: CarouselProps) => {
+export const Carousel = ({
+  imagesPath,
+  leftController,
+  rightController,
+  sizeOptions,
+}: CarouselProps) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const handleRightClick = () => {
@@ -54,8 +62,12 @@ export const Carousel = ({ imagesPath, leftController, rightController }: Carous
       >
         Skip Image Slider Controls
       </a>
-      <div className="w-full max-w-[1920px] h-[calc(100svh-90px)] m-auto overflow-hidden">
-        <div className="flex w-full h-full">
+      <div
+        className={`${sizeOptions?.width ? sizeOptions.width : "w-full"} ${
+          sizeOptions?.height
+        }  m-auto overflow-hidden`}
+      >
+        <div className={`flex w-full h-full`}>
           {imagesPath.map((imgURL, index) => {
             return (
               <img

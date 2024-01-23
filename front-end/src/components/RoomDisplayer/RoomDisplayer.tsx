@@ -33,11 +33,12 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
               src={`/images/${getPhotoPrefix()}`}
               width={320}
               height={192}
-              className="object-cover rounded-sm"
+              className="object-cover rounded-sm cursor-pointer"
+              onClick={() => setShowRoomDetails(true)}
             />
           </div>
           <div className="flex flex-col gap-y-3">
-            <h6 className="w-max font-semibold text-xl cursor-pointer hover:underline underline-offset-[6px]">
+            <h6 className="w-max font-semibold text-xl cursor-pointer hover:underline underline-offset-[6px]" onClick={() => setShowRoomDetails(true)}>
               {roomData.type.toUpperCase()} SUITE
             </h6>
             <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-lg opacity-60">
