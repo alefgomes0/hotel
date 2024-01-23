@@ -61,13 +61,26 @@ export const RoomDetails = ({
         className="w-full h-full fixed top-0 left-0 bg-black opacity-40"
         ref={wrapperRef}
       ></div>
-      <section className="z-[20] fixed top-[20%] left-[50%] translate-x-[-50%]  grid grid-cols-1 w-max bg-gray-100 rounded-sm bg-gray-100">
+      <section className="hide-scrollbar overflow-scroll z-[20] fixed top-[7%] left-[50%] translate-x-[-50%] grid grid-cols-1 w-[600px] max-h-[700px]  text-gray-700 bg-gray-100 rounded-sm ">
         <Carousel
           imagesPath={imagesURL}
-          leftController={<LPCarouselArrow width={24} height={24} />}
-          rightController={<LPCarouselArrow width={24} height={24} />}
-          sizeOptions={{ height: "h-[300px]", width: "w-[450px]" }}
+          leftController={
+            <div className="flex items-center justify-center justify-items-center w-8 h-8 bg-gray-600 rounded-sm">
+              <LPCarouselArrow width={24} height={24} />
+            </div>
+          }
+          rightController={
+            <div className="flex items-center justify-center justify-items-center w-8 h-8 bg-gray-600 rounded-sm">
+              <LPCarouselArrow width={24} height={24} />
+            </div>
+          }
+          sizeOptions={{ height: "h-[400px]", width: "w-[600px]" }}
         />
+        <div className="p-4">
+          <p className="font-semibold text-xl pb-3">{roomData?.type} Suite</p>
+          <p className="text-xs opacity-80 lg:w-[70%] leading-5">{roomData?.full_description}</p>
+        </div>
+
       </section>
     </>
   );

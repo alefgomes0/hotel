@@ -27,7 +27,7 @@ export const SearchResults = () => {
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ["reserva"],
     queryFn: fetchAvailableRooms,
-    enabled: !!checkIn
+    enabled: !!checkIn,
   });
 
   console.log(checkIn, checkOut);

@@ -13,3 +13,12 @@ svg.react-datepicker__calendar-icon {
   margin-right: "15px";
   padding-right: "20px";
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
