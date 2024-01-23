@@ -4,12 +4,16 @@ import { CoffeeIcon } from "../svg/CoffeeIcon";
 import { ForbiddenIcon } from "../svg/ForbiddenIcon";
 import { RoomProps } from "@/types/RoomProps";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
+import { useState } from "react";
+import { RoomDetails } from "../RoomDetails/RoomDetails";
 
 type RoomDisplayerProps = {
   roomData: RoomProps | undefined;
 };
 
 export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
+  const [showRoomDetails, setShowRoomDetails] = useState(false);
+
   const getPhotoPrefix = () => {
     if (roomData?.type.toLowerCase() === "deluxe") {
       return "dlx-1.jpg";
@@ -55,7 +59,10 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
               <ForbiddenIcon width={16} height={16} />
               <p className="text-sm">Não reembolsável</p>
             </span>
-            <p className="text-sm w-max cursor-pointer underline underline-offset-4 pt-1">
+            <p
+              className="text-sm w-max cursor-pointer underline underline-offset-4 pt-1"
+              onClick={() => setShowRoomDetails(true)}
+            >
               Veja detalhes
             </p>
             <div className="h-[1px] bg-gray-400 mt-4"></div>
@@ -78,6 +85,7 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
               />
             </div>
           </div>
+          {showRoomDetails && <RoomDetails roomData={roomData} />}
         </div>
       ) : (
         <></>

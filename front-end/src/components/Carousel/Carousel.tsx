@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { LPCarouselArrow } from "../svg/LPCarouselArrow";
-import { MainSearchBar } from "../MainSearchBar/MainSearchBar";
 
-export const HeroSlider = () => {
+type CarouselProps = {
+  imagesPath: string[];
+};
+
+export const Carousel = ({ imagesPath }: CarouselProps) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const handleRightClick = () => {
-    if (imageIndex === imageURLS.length - 1) {
+    if (imageIndex === imagesPath.length - 1) {
       setImageIndex(0);
     } else {
       setImageIndex((prev) => prev + 1);
@@ -15,7 +18,7 @@ export const HeroSlider = () => {
 
   const handleLeftClick = () => {
     if (imageIndex === 0) {
-      setImageIndex(imageURLS.length - 1);
+      setImageIndex(imagesPath.length - 1);
     } else {
       setImageIndex((prev) => prev - 1);
     }
@@ -37,18 +40,12 @@ export const HeroSlider = () => {
     };
   }, [imageIndex]);
 
-  const imageURLS = [
-    "/images/lp-0.jpg",
-    "/images/lp-1.jpg",
-    "/images/lp-2.jpg",
-  ];
-
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
   return (
-    <section className="relative" aria-label="image carousel">
+    <div className="relative" aria-label="image carousel">
       <a
         href="#after-image-slider-controls"
         className="absolute w-[1px] h-[1px] p-0 margin-[-1px] overflow-hidden border-0 focus:top-0 focus:left-0 focus:border-[1px] focus:bg-white focus:p-0 focus:w-auto focus:h=auto focus:m-0 focus:text-black focus:z-[100]"
@@ -57,7 +54,7 @@ export const HeroSlider = () => {
       </a>
       <div className="w-full max-w-[1920px] h-[calc(100svh-90px)] m-auto overflow-hidden">
         <div className="flex w-full h-full">
-          {imageURLS.map((imgURL, index) => {
+          {imagesPath.map((imgURL, index) => {
             return (
               <img
                 key={imgURL}
@@ -89,13 +86,7 @@ export const HeroSlider = () => {
       >
         <LPCarouselArrow />
       </button>
-      <div className="absolute bottom-[10%] left-0 pl-10">
-        <p className="text-5xl text-white pb-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
-          Explore a world of possibilities
-        </p>
-        <MainSearchBar />
-      </div>
       <div id="after-image-slider-controls"></div>
-    </section>
+    </div>
   );
 };

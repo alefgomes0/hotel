@@ -33,7 +33,7 @@ export const SearchResults = () => {
   console.log(checkIn, checkOut);
 
   return (
-    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 main-gray-200 px-32 pt-12">
+    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
       <SearchResultsHeader />
       <section className="pt-8">
         {isLoading ? (
