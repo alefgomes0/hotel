@@ -70,6 +70,7 @@ export const MainSearchBar = () => {
           dateFormat="dd-MM-yyyy"
           minDate={new Date()}
           maxDate={subDays(checkOut as Date, 1)}
+          openToDate={checkOut ? checkOut : undefined}
           placeholderText="Check in"
           id="check-in"
           name="check-in"
@@ -116,6 +117,7 @@ export const MainSearchBar = () => {
           onInputClick={() => setOpenCalendarTwo(!openCalendarTwo)}
           dateFormat="dd-MM-yyyy"
           minDate={addDays(new Date(), 1) && addDays(checkIn as Date, 1)}
+          openToDate={checkIn ? checkIn : undefined}
           placeholderText="Check out"
           name="check-out"
           title="Check-out"
