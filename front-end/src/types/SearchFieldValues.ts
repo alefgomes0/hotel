@@ -1,1 +1,1 @@
-export type SearchFieldValues = "apartment" | "adult" | "children";
+export type SearchFieldValues = "adult" | "children";

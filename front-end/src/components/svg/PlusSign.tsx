@@ -11,7 +11,7 @@ export const PlusSign = ({ width, height }: IconProps) => {
       <path
         fill="none"
         stroke="#030712"
-        stroke-linecap="round"
+        strokeLinecap="round"
         d="M12 3.5v17m8.5-8.5h-17"
       />
     </svg>

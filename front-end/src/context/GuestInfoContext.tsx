@@ -1,14 +1,10 @@
 import { differenceInDays } from "date-fns";
+import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
-};
-
-type numOfGuestsProps = {
-  adult: number;
-  children: number;
 };
 
 type selectedRoomProps = {
@@ -22,17 +18,25 @@ type GuestInfoContextValues = {
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
   checkOut: null | Date;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
-  numOfGuests: numOfGuestsProps;
+  numOfGuests: numOfGuestsProps[];
   daysOfStay: number;
   partialAmount: number;
   taxesAndFees: number;
   totalAmount: number;
   selectedRoom: selectedRoomProps;
   setSelectedRoom: React.Dispatch<React.SetStateAction<selectedRoomProps>>;
-  setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps>>;
-  getFieldValue: (field: SearchFieldValues) => number;
-  increaseQuantity: (field: SearchFieldValues, event: React.MouseEvent) => void;
-  decreaseQuantity: (field: SearchFieldValues, event: React.MouseEvent) => void;
+  setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
+  getFieldValue: (field: SearchFieldValues, index: number) => number;
+  increaseQuantity: (
+    field: SearchFieldValues,
+    index: number,
+    event: React.MouseEvent
+  ) => void;
+  decreaseQuantity: (
+    field: SearchFieldValues,
+    index: number,
+    event: React.MouseEvent
+  ) => void;
 };
 
 export const GuestInfoContext = createContext({} as GuestInfoContextValues);
@@ -40,10 +44,12 @@ export const GuestInfoContext = createContext({} as GuestInfoContextValues);
 export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const [checkIn, setCheckIn] = useState<null | Date>(null);
   const [checkOut, setCheckOut] = useState<null | Date>(null);
-  const [numOfGuests, setNumOfGuests] = useState<numOfGuestsProps>({
-    adult: 1,
-    children: 0,
-  });
+  const [numOfGuests, setNumOfGuests] = useState<numOfGuestsProps[]>([
+    {
+      adult: 1,
+      children: 0,
+    },
+  ]);
   const [selectedRoom, setSelectedRoom] = useState<selectedRoomProps>({
     daysOfStay: 0,
     name: "",
@@ -55,56 +61,52 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const taxesAndFees = Math.round(partialAmount * 0.043);
   const totalAmount = partialAmount + taxesAndFees;
 
-  const getFieldValue = (field:  "adult" | "children") => {
-     if (field === "adult") return numOfGuests.adult;
-    else return numOfGuests.children;
+  const getFieldValue = (field: "adult" | "children", index: number) => {
+    if (field === "adult") return numOfGuests[index].adult;
+    else return numOfGuests[index].children;
   };
 
   const increaseQuantity = (
-    field:  "adult" | "children",
+    field: "adult" | "children",
+    index: number,
     event: React.MouseEvent
   ) => {
     event.stopPropagation();
     event.preventDefault();
     if (field === "adult") {
-      if (numOfGuests.adult >  2 || numOfGuests.adult < 1) return;
+      if (numOfGuests[index].adult > 2 || numOfGuests[index].adult < 1) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
-        adult: prevState.adult + 1,
+        adult: prevState[index].adult + 1,
       }));
     } else {
-      if (numOfGuests.children > 0) return;
+      if (numOfGuests[index].children > 0) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
-        children: prevState.children + 1,
+        children: prevState[index].children + 1,
       }));
     }
   };
 
   const decreaseQuantity = (
-    field:  "adult" | "children",
+    field: "adult" | "children",
+    index: number,
     event: React.MouseEvent
   ) => {
     event.stopPropagation();
     event.preventDefault();
 
-    if (field === "apartment") {
-      if (numOfGuests.apartment <= 1) return;
+    if (field === "adult") {
+      if (numOfGuests[index].adult <= 1) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
-        apartment: prevState.apartment - 1,
-      }));
-    } else if (field === "adult") {
-      if (numOfGuests.adult <= 1) return;
-      setNumOfGuests((prevState) => ({
-        ...prevState,
-        adult: prevState.adult - 1,
+        adult: prevState[index].adult - 1,
       }));
     } else {
-      if (numOfGuests.children === 0) return;
+      if (numOfGuests[index].children === 0) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
-        children: prevState.children - 1,
+        children: prevState[index].children - 1,
       }));
     }
   };

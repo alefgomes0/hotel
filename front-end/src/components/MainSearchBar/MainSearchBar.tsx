@@ -1,13 +1,13 @@
 import addDays from "date-fns/addDays";
 import DatePicker from "react-datepicker";
 import { formattedTime } from "@/utils/formattedTime";
-import { GuestPicker } from "../GuestPicker/GuestPicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { SearchButton } from "../Buttons/SearchButton";
 import subDays from "date-fns/subDays";
+import { GuestPickerWrapper } from "../GuestPickerWrapper/GuestPickerWrapper";
 
 export const MainSearchBar = () => {
   const { checkIn, setCheckIn, checkOut, setCheckOut, numOfGuests } =
@@ -124,7 +124,7 @@ export const MainSearchBar = () => {
           className="h-10 border-r-2 border-gray-200 px-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%]"
         />
       </label>
-      <GuestPicker />
+      <GuestPickerWrapper />
       <input
         type="text"
         placeholder="Voucher/Cupom"
