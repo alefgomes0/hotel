@@ -14,6 +14,7 @@ type selectedRoomProps = {
 };
 
 type GuestInfoContextValues = {
+  addNewRoom: () => void;
   checkIn: null | Date;
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
   checkOut: null | Date;
@@ -66,6 +67,15 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     else return numOfGuests[index].children;
   };
 
+  const addNewRoom = () => {
+    if (numOfGuests.length > 2) return;
+    setNumOfGuests([...numOfGuests, { adult: 1, children: 0 }]);
+  };
+
+  const deleteRoom = (index) => {
+    //...  
+  }
+
   const increaseQuantity = (
     field: "adult" | "children",
     index: number,
@@ -75,16 +85,22 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     event.preventDefault();
     if (field === "adult") {
       if (numOfGuests[index].adult > 2 || numOfGuests[index].adult < 1) return;
-      setNumOfGuests((prevState) => ({
-        ...prevState,
-        adult: prevState[index].adult + 1,
-      }));
+      setNumOfGuests(() => {
+        return numOfGuests.map((guestData, arrayIndex) => {
+          if (index === arrayIndex) {
+            return { ...guestData, adult: guestData.adult + 1 };
+          } else return guestData;
+        });
+      });
     } else {
       if (numOfGuests[index].children > 0) return;
-      setNumOfGuests((prevState) => ({
-        ...prevState,
-        children: prevState[index].children + 1,
-      }));
+      setNumOfGuests(() => {
+        return numOfGuests.map((guestData, arrayIndex) => {
+          if (index === arrayIndex) {
+            return { ...guestData, children: guestData.children + 1 };
+          } else return guestData;
+        });
+      });
     }
   };
 
@@ -98,22 +114,29 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
 
     if (field === "adult") {
       if (numOfGuests[index].adult <= 1) return;
-      setNumOfGuests((prevState) => ({
-        ...prevState,
-        adult: prevState[index].adult - 1,
-      }));
+      setNumOfGuests(() => {
+        return numOfGuests.map((guestData, arrayIndex) => {
+          if (index === arrayIndex) {
+            return { ...guestData, adult: guestData.adult - 1 };
+          } else return guestData;
+        });
+      });
     } else {
       if (numOfGuests[index].children === 0) return;
-      setNumOfGuests((prevState) => ({
-        ...prevState,
-        children: prevState[index].children - 1,
-      }));
+      setNumOfGuests(() => {
+        return numOfGuests.map((guestData, arrayIndex) => {
+          if (index === arrayIndex) {
+            return { ...guestData, children: guestData.children - 1 };
+          } else return guestData;
+        });
+      });
     }
   };
 
   return (
     <GuestInfoContext.Provider
       value={{
+        addNewRoom,
         checkIn,
         setCheckIn,
         checkOut,

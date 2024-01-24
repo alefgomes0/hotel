@@ -23,7 +23,7 @@ export const GuestPickerWrapper = () => {
   });
   const dismiss = useDismiss(context);
   const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
-  const { numOfGuests } = useGuestInfo();
+  const { addNewRoom, numOfGuests } = useGuestInfo();
   const numOfSuites = numOfGuests.length;
 
   const teste = (list: numOfGuestsProps[]) => {
@@ -43,7 +43,7 @@ export const GuestPickerWrapper = () => {
 
   const totalGuests = teste(numOfGuests);
 
-  console.log(typeof numOfGuests)
+  console.log(typeof numOfGuests);
 
   return (
     <div
@@ -67,12 +67,16 @@ export const GuestPickerWrapper = () => {
           className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] min-h-[200px] px-8 py-3 bg-gray-100 rounded-sm font-semibold text-gray-700"
         >
           {numOfGuests.map((_, index) => (
-            <GuestPicker arrayIndex={index} key={index}/>
+            <GuestPicker arrayIndex={index} key={index} />
           ))}
           <p className="text-xs opacity-70 mt-[-15px]">
             Individuals up to 12 years old are considered children.
           </p>
-          <AddAnotherSuite />
+          {numOfGuests.length < 3 ? (
+            <AddAnotherSuite addNewRoom={addNewRoom} />
+          ) : (
+            <p className="text-red-400">You can't add more than 3 suites.</p>
+          )}
         </div>
       )}
     </div>

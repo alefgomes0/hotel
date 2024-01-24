@@ -11,7 +11,9 @@ export const NumericStepper = ({ field, arrayIndex }: NumericStepperProps) => {
   return (
     <div className="flex items-center content-center gap-1">
       <button
-        onClick={(e: React.MouseEvent) => decreaseQuantity(field, arrayIndex,  e)}
+        onClick={(e: React.MouseEvent) =>
+          decreaseQuantity(field, arrayIndex, e)
+        }
         className="flex justify-center text-center w-[24px] h-[24px] font-bold border-[1px] rounded-full border-neutral-500 hover:scale-[1.08] transition-transform"
         title="decrease"
         aria-label="decrease"
@@ -22,7 +24,9 @@ export const NumericStepper = ({ field, arrayIndex }: NumericStepperProps) => {
         {getFieldValue(field, arrayIndex)}
       </h6>
       <button
-        onClick={(e: React.MouseEvent) => increaseQuantity(field, arrayIndex, e)}
+        onClick={(e: React.MouseEvent) =>
+          increaseQuantity(field, arrayIndex, e)
+        }
         className="flex justify-center text-center w-[24px] h-[24px] font-bold border-[1px] rounded-full border-neutral-500 hover:scale-[1.08] transition-transform"
         title="increase"
         aria-label="increase"
