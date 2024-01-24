@@ -8,6 +8,8 @@ import {
 import { NumericStepper } from "../NumericStepper/NumericStepper";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
+import { PlusSign } from "../svg/PlusSign";
+import { AddAnotherSuite } from "../Buttons/AddAnotherSuite";
 
 export const GuestPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,37 +34,32 @@ export const GuestPicker = () => {
       aria-label="pick number of guests"
     >
       <p className="opacity-[65%]">
-        {" "}
-        {numOfGuests.apartment}{" "}
-        {numOfGuests.apartment === 1 ? "apartamento" : "apartamentos"},{" "}
-        {numOfGuests.adult} {numOfGuests.adult === 1 ? "adulto" : "adultos"},{" "}
-        {numOfGuests.children}{" "}
-        {numOfGuests.children === 1 ? "criança" : "crianças"}
+        {numOfGuests.adult} {numOfGuests.adult === 1 ? "adult" : "adults"},{" "}
+        {numOfGuests.children} {numOfGuests.children === 1 ? "child" : "children"}
       </p>
       {isOpen && (
         <div
           ref={refs.setFloating}
           style={floatingStyles}
           {...getFloatingProps()}
-          className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] px-8 py-3 bg-gray-50 rounded-sm font-semibold text-gray-700"
+          className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] min-h-[200px] px-8 py-3 bg-gray-100 rounded-sm font-semibold text-gray-700"
         >
-          <div className="flex justify-between">
-            <p>Quarto(s)</p>
-            <NumericStepper field="apartment" />
-          </div>{" "}
-          <div className="flex justify-between">
-            <p>Adulto(s)</p>
-            <NumericStepper field="adult" />
-          </div>
-          <div>
+          <div className="bg-gray-200 mt-4 px-3 py-1.5">
             <div className="flex justify-between">
-              <p>Criança(s)</p>
-              <NumericStepper field="children" />
+              <p>{numOfGuests.adult === 1 ? "Adult" : "Adults"}</p>
+              <NumericStepper field="adult" />
             </div>
-            <p className="text-xs pt-[5px] opacity-60">
-              São consideradas crianças individuos com até 12 anos.
-            </p>
+            <div>
+              <div className="flex justify-between pt-4">
+                <p>{numOfGuests.children === 1 ? "Child" : "Children"}</p>
+                <NumericStepper field="children" />
+              </div>
+            </div>
           </div>
+          <p className="text-xs opacity-70 mt-[-15px]">
+            Individuals up to 12 years old are considered children.
+          </p>
+          <AddAnotherSuite />
         </div>
       )}
     </div>

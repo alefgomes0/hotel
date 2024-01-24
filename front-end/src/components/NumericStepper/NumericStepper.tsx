@@ -1,7 +1,7 @@
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 
 type NumericStepperProps = {
-  field: "apartment" | "adult" | "children";
+  field: "adult" | "children";
 };
 
 export const NumericStepper = ({ field }: NumericStepperProps) => {

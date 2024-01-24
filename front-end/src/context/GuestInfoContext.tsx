@@ -7,7 +7,6 @@ type GuestInfoProviderProps = {
 };
 
 type numOfGuestsProps = {
-  apartment: number;
   adult: number;
   children: number;
 };
@@ -25,6 +24,9 @@ type GuestInfoContextValues = {
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
   numOfGuests: numOfGuestsProps;
   daysOfStay: number;
+  partialAmount: number;
+  taxesAndFees: number;
+  totalAmount: number;
   selectedRoom: selectedRoomProps;
   setSelectedRoom: React.Dispatch<React.SetStateAction<selectedRoomProps>>;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps>>;
@@ -39,7 +41,6 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const [checkIn, setCheckIn] = useState<null | Date>(null);
   const [checkOut, setCheckOut] = useState<null | Date>(null);
   const [numOfGuests, setNumOfGuests] = useState<numOfGuestsProps>({
-    apartment: 1,
     adult: 1,
     children: 0,
   });
@@ -48,35 +49,31 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     name: "",
     pricePerDay: 0,
   });
-  const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
 
-  const getFieldValue = (field: "apartment" | "adult" | "children") => {
-    if (field === "apartment") return numOfGuests.apartment;
-    else if (field === "adult") return numOfGuests.adult;
+  const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
+  const partialAmount = daysOfStay * selectedRoom.pricePerDay;
+  const taxesAndFees = Math.round(partialAmount * 0.043);
+  const totalAmount = partialAmount + taxesAndFees;
+
+  const getFieldValue = (field:  "adult" | "children") => {
+     if (field === "adult") return numOfGuests.adult;
     else return numOfGuests.children;
   };
 
   const increaseQuantity = (
-    field: "apartment" | "adult" | "children",
+    field:  "adult" | "children",
     event: React.MouseEvent
   ) => {
     event.stopPropagation();
     event.preventDefault();
-
-    if (field === "apartment") {
-      if (numOfGuests.apartment >= 5) return;
-      setNumOfGuests((prevState) => ({
-        ...prevState,
-        apartment: prevState.apartment + 1,
-      }));
-    } else if (field === "adult") {
-      if (numOfGuests.adult > numOfGuests.apartment * 2) return;
+    if (field === "adult") {
+      if (numOfGuests.adult >  2 || numOfGuests.adult < 1) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
         adult: prevState.adult + 1,
       }));
     } else {
-      if (numOfGuests.children >= numOfGuests.apartment) return;
+      if (numOfGuests.children > 0) return;
       setNumOfGuests((prevState) => ({
         ...prevState,
         children: prevState.children + 1,
@@ -85,7 +82,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   };
 
   const decreaseQuantity = (
-    field: "apartment" | "adult" | "children",
+    field:  "adult" | "children",
     event: React.MouseEvent
   ) => {
     event.stopPropagation();
@@ -122,6 +119,9 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         numOfGuests,
         setNumOfGuests,
         daysOfStay,
+        partialAmount,
+        taxesAndFees,
+        totalAmount,
         selectedRoom,
         setSelectedRoom,
         getFieldValue,
