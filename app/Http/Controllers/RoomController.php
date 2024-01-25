@@ -16,9 +16,9 @@ class RoomController extends Controller
         $checkIn = $searchInfoObjects->checkIn;
         $checkOut = $searchInfoObjects->checkOut;
         $numOfRooms = sizeof($searchInfoObjects->numOfGuests);
-        $firstRoomOccup = $searchInfoObjects->numOfGuests[0];
-        $secondRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 2 ? $searchInfoObjects->numOfGuests[1] : -1;
-        $thirdRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 3 ? $searchInfoObjects->numOfGuests[2] : -1;
+        $firstRoomOccup = $searchInfoObjects->numOfGuests[0]->adult;
+        $secondRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 2 ? $searchInfoObjects->numOfGuests[1]->adult : -1;
+        $thirdRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 3 ? $searchInfoObjects->numOfGuests[2]->adult : -1;
     
         $bookedRooms = DB::table('bookings')
             ->select('bookings.room_id')
@@ -27,45 +27,37 @@ class RoomController extends Controller
             ->pluck('room_id')
             ->toArray();
 
-        public function teste(int $numberOfAdults, array $bookedRooms) 
+        function get_available_rooms(int $occupants, array $unavailableRooms)
         {
-            if ($numberOfAdults == -1) return '';
-        
+            if ($occupants == -1) return '';
             return DB::table('rooms')
-                ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
-                ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants')
-                ->whereNotIn('rooms.id', $bookedRooms)
-                ->where('room_type.occupants', '>=', $numberOfAdults)
-                ->get();
-        }
-
-        $a = teste(2, $bookedRooms);
-    
-        $availableRooms = DB::table('rooms')
             ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
             ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants')
-            ->whereNotIn('rooms.id', $bookedRooms)
-            ->where('room_type.occupants', '>=', $firstRoomOccup->adult)
+            ->whereNotIn('rooms.id', $unavailableRooms)
+            ->where('room_type.occupants', '>=', $occupants)
             ->get();
+        }
 
-        if (sizeof($availableRooms) == 0) {
-            return response()->json()([
-                'message' => 'Not found'
+        $firstRoomOpts = get_available_rooms($firstRoomOccup, $bookedRooms);
+        $secondRoomOpts = get_available_rooms($secondRoomOccup, $bookedRooms);
+        $thirdRoomOpts = get_available_rooms($thirdRoomOccup, $bookedRooms);
+
+        if (sizeof($firstRoomOpts) == 0 || $secondRoomOpts != '' && sizeof($secondRoomOpts) == 0 || $thirdRoomOpts != '' && sizeof($thirdRoomOpts) == 0) 
+        {
+            return response()->json([
+                'message' => 'Not enough rooms to meet your requirements'
             ], 404);
         }
-        
-        if (sizeof($availableRooms) < $numOfRooms) {
-            return response()->json([
-                'message' => 'Requirements are not met'
-            ], 204);
-        }
 
-
-        //$groupedRooms = $availableRooms->groupBy('type');
+        $groupedFirstRoom = $firstRoomOpts->groupBy('type');
+        $groupedSecondRoom = $secondRoomOpts == '' ? '' : $secondRoomOpts->groupBy('type');
+        $groupedThirdRoom = $thirdRoomOpts == '' ? '' : $thirdRoomOpts->groupBy('type');
 
         return response()->json([
             'suites' => [
-                '1' => $a
+                '1' => $groupedFirstRoom,
+                '2' => $groupedSecondRoom,
+                '3' => $groupedThirdRoom
             ]
         ], 200);
     }
