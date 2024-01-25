@@ -10,6 +10,7 @@ import { GuestPicker } from "../GuestPicker/GuestPicker";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
+import { WarningIcon } from "../svg/WarningIcon";
 
 export const GuestPickerWrapper = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,8 +44,6 @@ export const GuestPickerWrapper = () => {
 
   const totalGuests = teste(numOfGuests);
 
-  console.log(typeof numOfGuests);
-
   return (
     <div
       ref={refs.setReference}
@@ -75,7 +74,12 @@ export const GuestPickerWrapper = () => {
           {numOfGuests.length < 3 ? (
             <AddAnotherSuite addNewRoom={addNewRoom} />
           ) : (
-            <p className="text-red-400">You can't add more than 3 suites.</p>
+            <div className="flex items-center gap-x-1">
+              <WarningIcon width={18} height={18} />
+              <p className="text-xs opacity-[75%]">
+                You can't add more than 3 suites.
+              </p>
+            </div>
           )}
         </div>
       )}

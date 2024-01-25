@@ -19,8 +19,9 @@ type GuestInfoContextValues = {
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
   checkOut: null | Date;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
-  numOfGuests: numOfGuestsProps[];
   daysOfStay: number;
+  deleteRoom: (index: number) => void;
+  numOfGuests: numOfGuestsProps[];
   partialAmount: number;
   taxesAndFees: number;
   totalAmount: number;
@@ -72,9 +73,11 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     setNumOfGuests([...numOfGuests, { adult: 1, children: 0 }]);
   };
 
-  const deleteRoom = (index) => {
-    //...  
-  }
+  const deleteRoom = (index: number) => {
+    setNumOfGuests((guestInfo) => {
+      return guestInfo.filter((_, arrayIndex) => index !== arrayIndex);
+    });
+  };
 
   const increaseQuantity = (
     field: "adult" | "children",
@@ -141,6 +144,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setCheckIn,
         checkOut,
         setCheckOut,
+        deleteRoom,
         numOfGuests,
         setNumOfGuests,
         daysOfStay,

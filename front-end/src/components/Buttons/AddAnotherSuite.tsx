@@ -6,7 +6,10 @@ type AddAnotherSuite = {
 
 export const AddAnotherSuite = ({ addNewRoom }: AddAnotherSuite) => {
   return (
-    <div className="flex items-center gap-x-2" onClick={addNewRoom}>
+    <div className="flex items-center gap-x-2" onClick={(e: React.MouseEvent) => {
+      e.stopPropagation();
+      addNewRoom();
+    }}>
       <button
         className="flex items-center justify-center w-8 h-8 rounded-full border-[1px] border-gray-400 pl-.5 hover:scale-[1.08] translate-transform"
         type="button"
