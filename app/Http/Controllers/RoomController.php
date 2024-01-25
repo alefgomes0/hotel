@@ -15,8 +15,10 @@ class RoomController extends Controller
         $searchInfoObjects = json_decode(strip_tags($searchInfo));
         $checkIn = $searchInfoObjects->checkIn;
         $checkOut = $searchInfoObjects->checkOut;
-        $numOfApartments = $searchInfoObjects->numOfGuests->apartment;
-        $numOfOccupants = $searchInfoObjects->numOfGuests->adult;
+        $numOfRooms = sizeof($searchInfoObjects->numOfGuests);
+        $firstRoomOccup = $searchInfoObjects->numOfGuests[0];
+        $secondRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 2 ? $searchInfoObjects->numOfGuests[1] : -1;
+        $thirdRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 3 ? $searchInfoObjects->numOfGuests[2] : -1;
     
         $bookedRooms = DB::table('bookings')
             ->select('bookings.room_id')
@@ -24,12 +26,26 @@ class RoomController extends Controller
             ->orWhereBetween('bookings.check_out', [$checkIn, $checkOut])
             ->pluck('room_id')
             ->toArray();
+
+        public function teste(int $numberOfAdults, array $bookedRooms) 
+        {
+            if ($numberOfAdults == -1) return '';
+        
+            return DB::table('rooms')
+                ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
+                ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants')
+                ->whereNotIn('rooms.id', $bookedRooms)
+                ->where('room_type.occupants', '>=', $numberOfAdults)
+                ->get();
+        }
+
+        $a = teste(2, $bookedRooms);
     
         $availableRooms = DB::table('rooms')
             ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
             ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants')
             ->whereNotIn('rooms.id', $bookedRooms)
-            ->where('room_type.occupants', '>=', $numOfOccupants)
+            ->where('room_type.occupants', '>=', $firstRoomOccup->adult)
             ->get();
 
         if (sizeof($availableRooms) == 0) {
@@ -38,16 +54,19 @@ class RoomController extends Controller
             ], 404);
         }
         
-        if (sizeof($availableRooms) < $numOfApartments) {
+        if (sizeof($availableRooms) < $numOfRooms) {
             return response()->json([
                 'message' => 'Requirements are not met'
             ], 204);
         }
 
-        $groupedRooms = $availableRooms->groupBy('type');
+
+        //$groupedRooms = $availableRooms->groupBy('type');
 
         return response()->json([
-            'quartos' => $groupedRooms
+            'suites' => [
+                '1' => $a
+            ]
         ], 200);
     }
 }

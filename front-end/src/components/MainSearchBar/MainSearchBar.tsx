@@ -1,6 +1,6 @@
 import addDays from "date-fns/addDays";
+import { constructURL } from "@/utils/constructURL";
 import DatePicker from "react-datepicker";
-import { formattedTime } from "@/utils/formattedTime";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useNavigate } from "react-router-dom";
@@ -18,15 +18,12 @@ export const MainSearchBar = () => {
 
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(
-      `/availability?checkin=${formattedTime(
-        checkIn as Date,
-        "14:00:00"
-      )}&checkout=${formattedTime(checkOut as Date, "11:00:00")}&rooms=${
-        numOfGuests.apartment
-      }&adults=${numOfGuests.adult}&children=${numOfGuests.children}`
-    );
+    navigate(constructURL(checkIn, checkOut, numOfGuests));
   };
+
+  if (checkIn && checkOut) {
+    console.log(constructURL(checkIn, checkOut, numOfGuests));
+  }
 
   return (
     <form
