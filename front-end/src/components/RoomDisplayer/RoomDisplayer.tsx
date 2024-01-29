@@ -29,11 +29,12 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
 
   const { daysOfStay, setSelectedRoom } = useGuestInfo();
 
-  const extractedSuites: RoomProps[] | [] = [];
-  Object.keys(roomData).map((suiteType) => {
-    const suiteArray = roomData[suiteType];
+  const extractedSuites: RoomProps[] = [];
+  Object.keys(roomData).forEach((suiteType) => {
+    if (roomData === "") return;
+    const suiteArray: RoomProps[] = (roomData as Record<string, any>)[suiteType];
     if (Array.isArray(suiteArray) && suiteArray.length > 0) {
-      extractedSuites.push(suiteArray[0]);
+      extractedSuites.push(suiteArray[0] as RoomProps);
     }
   });
 
