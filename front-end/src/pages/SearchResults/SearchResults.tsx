@@ -27,14 +27,14 @@ export const SearchResults = () => {
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ["reserva"],
     queryFn: fetchAvailableRooms,
-    enabled: !!checkIn,
+    enabled: !!checkIn && !!checkOut,
   });
 
   console.log(data);
 
   return (
     <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
-{/*       <SearchResultsHeader />
+      <SearchResultsHeader />
       <section className="pt-8">
         {isLoading ? (
           <RoomDisplayerSkeleton />
@@ -44,9 +44,9 @@ export const SearchResults = () => {
               <></>
             ) : (
               <>
-                <RoomDisplayer roomData={data?.data.quartos.Standard[0]} />
-                <RoomDisplayer roomData={data?.data.quartos.Prime[0]} />
-                <RoomDisplayer roomData={data?.data.quartos.Deluxe[0]} />
+                <RoomDisplayer roomData={data?.data.suites.firstSuite} />
+                <RoomDisplayer roomData={data?.data.suites.secondSuite} />
+                <RoomDisplayer roomData={data?.data.suites.thirdSuite} />
               </>
             )}
           </>
@@ -54,7 +54,7 @@ export const SearchResults = () => {
       </section>
       <div className="row-start-1 row-end-3 col-start-2 col-end-3">
         <YourStay />
-      </div> */}
+      </div>
     </main>
   );
 };

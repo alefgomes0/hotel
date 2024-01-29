@@ -44,9 +44,7 @@ class RoomController extends Controller
 
         if (sizeof($firstRoomOpts) == 0 || $secondRoomOpts != '' && sizeof($secondRoomOpts) == 0 || $thirdRoomOpts != '' && sizeof($thirdRoomOpts) == 0) 
         {
-            return response()->json([
-                'message' => 'Not enough rooms to meet your requirements'
-            ], 404);
+            return response()->json([], 204);
         }
 
         $groupedFirstRoom = $firstRoomOpts->groupBy('type');
@@ -55,9 +53,9 @@ class RoomController extends Controller
 
         return response()->json([
             'suites' => [
-                '1' => $groupedFirstRoom,
-                '2' => $groupedSecondRoom,
-                '3' => $groupedThirdRoom
+                'firstSuite' => $groupedFirstRoom,
+                'secondSuite' => $groupedSecondRoom,
+                'thirdSuite' => $groupedThirdRoom
             ]
         ], 200);
     }

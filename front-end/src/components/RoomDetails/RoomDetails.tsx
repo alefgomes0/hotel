@@ -35,6 +35,7 @@ export const RoomDetails = ({
 
   const getImagesPath = () => {
     if (!roomData) return [];
+
     if (roomData.type.toLowerCase() === "deluxe") {
       return [
         "/images/dlx-1.jpg",
@@ -67,11 +68,6 @@ export const RoomDetails = ({
         ref={wrapperRef}
       ></div>
       <section className="hide-scrollbar overflow-scroll z-[22] fixed top-[7%] left-[50%] translate-x-[-50%] grid grid-cols-1 w-[600px] max-h-[650px]  text-gray-700 bg-gray-100 rounded-sm ">
-        <div className="z-[50] relative w-full max-h-full bg-red-400">
-          <div className="z-[50] absolute top-[0%] right-[0%] bg-red-400 translate-x-[220%]">
-            <CloseIcon width={32} height={32} />
-          </div>
-        </div>
         <Carousel
           imagesPath={imagesURL}
           leftController={
@@ -88,7 +84,7 @@ export const RoomDetails = ({
         />
         <div className="p-4">
           <p className="font-semibold text-xl pb-3">{roomData?.type} Suite</p>
-          <p className="text-xs opacity-80 lg:w-[70%] leading-5">
+          <p className="text-xs opacity-80 leading-5">
             {roomData?.full_description}
           </p>
         </div>

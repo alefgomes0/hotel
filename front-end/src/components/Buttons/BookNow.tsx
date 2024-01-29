@@ -17,8 +17,7 @@ export const BookNow = ({ pricePerDay, selectRoom }: BookNowProps) => {
     >
       BOOK NOW
       <p className="text-xs opacity-[75%]">
-        {numOfGuests.apartment} {numOfGuests.apartment > 1 ? "suites" : "suite"}{" "}
-        for ${totalAmount}
+        Suite for ${totalAmount}
       </p>
     </button>
   );

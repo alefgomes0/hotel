@@ -25,6 +25,7 @@ type GuestInfoContextValues = {
   partialAmount: number;
   taxesAndFees: number;
   totalAmount: number;
+  numOfSuites: number;
   selectedRoom: selectedRoomProps;
   setSelectedRoom: React.Dispatch<React.SetStateAction<selectedRoomProps>>;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
@@ -59,6 +60,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   });
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
+  const numOfSuites = numOfGuests.length;
   const partialAmount = daysOfStay * selectedRoom.pricePerDay;
   const taxesAndFees = Math.round(partialAmount * 0.043);
   const totalAmount = partialAmount + taxesAndFees;
@@ -149,6 +151,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setNumOfGuests,
         daysOfStay,
         partialAmount,
+        numOfSuites,
         taxesAndFees,
         totalAmount,
         selectedRoom,
