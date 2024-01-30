@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { FoodIcon } from "../svg/FoodIcon";
 import { SignalIcon } from "../svg/SignalIcon";
 import { ServiceIcon } from "../svg/ServiceIcon";
+import { SquaredArrow } from "../svg/SquaredArrow";
 
 type RoomDetailsProps = {
   closeRoomDetails: () => void;
@@ -70,17 +71,10 @@ export const RoomDetails = ({
       <section className="hide-scrollbar overflow-scroll z-[22] fixed top-[7%] left-[50%] translate-x-[-50%] grid grid-cols-1 w-[600px] max-h-[650px]  text-gray-700 bg-gray-100 rounded-sm ">
         <Carousel
           imagesPath={imagesURL}
-          leftController={
-            <div className="flex items-center justify-center justify-items-center w-8 h-8 bg-gray-500 rounded-sm">
-              <LPCarouselArrow width={24} height={24} />
-            </div>
-          }
-          rightController={
-            <div className="flex items-center justify-center justify-items-center w-8 h-8 bg-gray-500 rounded-sm">
-              <LPCarouselArrow width={24} height={24} />
-            </div>
-          }
+          leftController={<SquaredArrow width={24} height={24}/> }
+          rightController={<SquaredArrow width={24} height={24}/> }
           sizeOptions={{ height: "h-[400px]", width: "w-[600px]" }}
+          controllersInside={false}
         />
         <div className="p-4">
           <p className="font-semibold text-xl pb-3">{roomData?.type} Suite</p>

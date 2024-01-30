@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CloseIcon } from "../svg/CloseIcon";
 
 type CarouselProps = {
   imagesPath: string[];
@@ -67,6 +68,9 @@ export const Carousel = ({
           sizeOptions?.height
         }  m-auto overflow-hidden`}
       >
+        <div className="absolute top-0 right-0 bg-red-400 z-[100] ">
+          <CloseIcon width={24} height={24} />
+        </div>
         <div className={`flex w-full h-full`}>
           {imagesPath.map((imgURL, index) => {
             return (
@@ -87,7 +91,7 @@ export const Carousel = ({
         </div>
       </div>
       <button
-        className="absolute top-[50%] left-0 translate-y-[-50%] translate-x-[25%] focus:border-2 focus:border-gray-700"
+        className={`absolute top-[50%] left-0 translate-y-[-50%] translate-x-[25%] focus:border-2 focus:border-gray-700`}
         onClick={handleLeftClick}
         aria-label="show previous image"
       >

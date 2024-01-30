@@ -38,7 +38,7 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
     }
   });
 
-  const handleRoomSelection = (arrayIndex: number) => {
+  const handleRoomDetails = (arrayIndex: number) => {
     setSelectedRoomIndex(arrayIndex);
     setShowRoomDetails(true);
   };
@@ -58,13 +58,13 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
                   width={320}
                   height={192}
                   className="object-cover rounded-sm cursor-pointer"
-                  onClick={() => handleRoomSelection(index)}
+                  onClick={() => handleRoomDetails(index)}
                 />
               </div>
               <div className="flex flex-col gap-y-3">
                 <h6
                   className="w-max font-semibold text-xl cursor-pointer hover:underline underline-offset-[6px]"
-                  onClick={() => handleRoomSelection(index)}
+                  onClick={() => handleRoomDetails(index)}
                 >
                   {room.type.toUpperCase()} SUITE
                 </h6>
@@ -88,7 +88,7 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
                 </span>
                 <p
                   className="text-sm w-max cursor-pointer underline underline-offset-4 pt-1"
-                  onClick={() => handleRoomSelection(index)}
+                  onClick={() => handleRoomDetails(index)}
                 >
                   Veja detalhes
                 </p>

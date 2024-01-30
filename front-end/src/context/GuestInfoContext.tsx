@@ -7,12 +7,6 @@ type GuestInfoProviderProps = {
   children: React.ReactNode;
 };
 
-type selectedRoomProps = {
-  daysOfStay: number;
-  name: string;
-  pricePerDay: number;
-};
-
 type GuestInfoContextValues = {
   addNewRoom: () => void;
   checkIn: null | Date;
@@ -22,12 +16,10 @@ type GuestInfoContextValues = {
   daysOfStay: number;
   deleteRoom: (index: number) => void;
   numOfGuests: numOfGuestsProps[];
-  partialAmount: number;
-  taxesAndFees: number;
-  totalAmount: number;
+  getPartialAmount: (index: number) => number;
+  getTaxesAndFees: (index: number) => number;
+  getTotalAmount: (index: number) => number;
   numOfSuites: number;
-  selectedRoom: selectedRoomProps;
-  setSelectedRoom: React.Dispatch<React.SetStateAction<selectedRoomProps>>;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
   getFieldValue: (field: SearchFieldValues, index: number) => number;
   increaseQuantity: (
@@ -51,19 +43,24 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     {
       adult: 1,
       children: 0,
+      selectedRoom: {
+        name: "",
+        pricePerDay: 0,
+      },
     },
   ]);
-  const [selectedRoom, setSelectedRoom] = useState<selectedRoomProps>({
-    daysOfStay: 0,
-    name: "",
-    pricePerDay: 0,
-  });
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
   const numOfSuites = numOfGuests.length;
-  const partialAmount = daysOfStay * selectedRoom.pricePerDay;
-  const taxesAndFees = Math.round(partialAmount * 0.043);
-  const totalAmount = partialAmount + taxesAndFees;
+  const getPartialAmount = (index: number) => {
+    return daysOfStay * numOfGuests[index].selectedRoom.pricePerDay;
+  };
+  const getTaxesAndFees = (index: number) => {
+    return Math.round(getPartialAmount(index) * 0.043);
+  };
+  const getTotalAmount = (index: number) => {
+    return getPartialAmount(index) + getTaxesAndFees(index);
+  };
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
     if (field === "adult") return numOfGuests[index].adult;
@@ -72,7 +69,17 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
 
   const addNewRoom = () => {
     if (numOfGuests.length > 2) return;
-    setNumOfGuests([...numOfGuests, { adult: 1, children: 0 }]);
+    setNumOfGuests([
+      ...numOfGuests,
+      {
+        adult: 1,
+        children: 0,
+        selectedRoom: {
+          name: "",
+          pricePerDay: 0,
+        },
+      },
+    ]);
   };
 
   const deleteRoom = (index: number) => {
@@ -150,12 +157,10 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         numOfGuests,
         setNumOfGuests,
         daysOfStay,
-        partialAmount,
+        getPartialAmount,
         numOfSuites,
-        taxesAndFees,
-        totalAmount,
-        selectedRoom,
-        setSelectedRoom,
+        getTaxesAndFees,
+        getTotalAmount,
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,
