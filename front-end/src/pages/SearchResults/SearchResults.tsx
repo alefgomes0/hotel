@@ -46,9 +46,9 @@ export const SearchResults = () => {
               <></>
             ) : (
               <>
-                <RoomDisplayer roomData={data?.data.suites.firstSuite} />
-                <RoomDisplayer roomData={data?.data.suites.secondSuite} />
-                <RoomDisplayer roomData={data?.data.suites.thirdSuite} />
+                <RoomDisplayer roomData={data?.data.suites.firstSuite} arrayIndex={0}/>
+                <RoomDisplayer roomData={data?.data.suites.secondSuite} arrayIndex={1}/>
+                <RoomDisplayer roomData={data?.data.suites.thirdSuite} arrayIndex={2}/>
               </>
             )}
           </>

@@ -7,7 +7,7 @@ export const ChooseRoom = () => {
 
   return (
     <article className="relative w-full grid grid-rows-[auto_1fr] grid-cols-3 items-center text-gray-600 mt-6 ">
-      <h6 className="row-start-1 row-end-3 col-start-1 col-end-4 text-xl font-medium mb-6">
+      <h6 className="row-start-1 row-end-3 col-start-1 col-end-4 text-xl font-medium mb-6 opacity-90">
         SELECT YOUR SUITE {currentSuite}
       </h6>
       <div className="flex items-center border-y-[1px] border-gray-300">

@@ -8,6 +8,8 @@ export const SearchButton = ({ isDisabled }: SearchButtonProps) => {
       type="submit"
       className="w-36 h-min py-2 text-gray-50 bg-blue-950 hover:bg-blue-900 rounded-sm disabled:text-white disabled:bg-gray-400 transition-colors"
       disabled={isDisabled}
+      aria-label="check rates"
+      title="Check Rates"
     >
       CHECK RATES
     </button>

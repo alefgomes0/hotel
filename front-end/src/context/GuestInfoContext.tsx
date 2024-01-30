@@ -2,6 +2,7 @@ import { differenceInDays } from "date-fns";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
+import { RoomProps } from "@/types/RoomProps";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
@@ -12,13 +13,14 @@ type GuestInfoContextValues = {
   checkIn: null | Date;
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
   checkOut: null | Date;
+  handleSuiteSelection: (index: number, roomData: RoomProps) => void;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
   daysOfStay: number;
   deleteRoom: (index: number) => void;
   numOfGuests: numOfGuestsProps[];
   getPartialAmount: (index: number) => number;
   getTaxesAndFees: (index: number) => number;
-  getTotalAmount: (index: number) => number;
+  getTotalAmount: () => number;
   numOfSuites: number;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
   getFieldValue: (field: SearchFieldValues, index: number) => number;
@@ -58,8 +60,8 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const getTaxesAndFees = (index: number) => {
     return Math.round(getPartialAmount(index) * 0.043);
   };
-  const getTotalAmount = (index: number) => {
-    return getPartialAmount(index) + getTaxesAndFees(index);
+  const getTotalAmount = () => {
+    return 50;
   };
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
@@ -145,6 +147,22 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     }
   };
 
+  const handleSuiteSelection = (index: number, roomData: RoomProps) => {
+    setNumOfGuests(() => {
+      return numOfGuests.map((guestData, arrayIndex) => {
+        if (index === arrayIndex) {
+          return {
+            ...guestData,
+            selectedRoom: {
+              name: roomData.type,
+              pricePerDay: Number(roomData.price_per_day),
+            },
+          };
+        } else return guestData;
+      });
+    });
+  };
+
   return (
     <GuestInfoContext.Provider
       value={{
@@ -156,6 +174,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         deleteRoom,
         numOfGuests,
         setNumOfGuests,
+        handleSuiteSelection,
         daysOfStay,
         getPartialAmount,
         numOfSuites,

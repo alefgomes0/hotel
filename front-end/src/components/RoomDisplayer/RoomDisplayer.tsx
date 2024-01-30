@@ -9,9 +9,10 @@ import { RoomDetails } from "../RoomDetails/RoomDetails";
 
 type RoomDisplayerProps = {
   roomData: object | "";
+  arrayIndex: number;
 };
 
-export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
+export const RoomDisplayer = ({ roomData, arrayIndex }: RoomDisplayerProps) => {
   const [showRoomDetails, setShowRoomDetails] = useState(false);
   const [selectedRoomIndex, setSelectedRoomIndex] = useState<number | null>(
     null
@@ -27,12 +28,14 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
     } else return "std-1.jpg";
   };
 
-  const { daysOfStay, setSelectedRoom } = useGuestInfo();
+  const { daysOfStay, numOfGuests, handleSuiteSelection } = useGuestInfo();
 
   const extractedSuites: RoomProps[] = [];
   Object.keys(roomData).forEach((suiteType) => {
     if (roomData === "") return;
-    const suiteArray: RoomProps[] = (roomData as Record<string, any>)[suiteType];
+    const suiteArray: RoomProps[] = (roomData as Record<string, any>)[
+      suiteType
+    ];
     if (Array.isArray(suiteArray) && suiteArray.length > 0) {
       extractedSuites.push(suiteArray[0] as RoomProps);
     }
@@ -68,7 +71,7 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
                 >
                   {room.type.toUpperCase()} SUITE
                 </h6>
-                <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-lg opacity-60">
+                <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-sm opacity-60">
                   {room.occupants} {room.occupants > 1 ? "adultos" : "adulto"}
                 </span>
                 <p className="text-sm opacity-90 pt-1">
@@ -102,13 +105,7 @@ export const RoomDisplayer = ({ roomData }: RoomDisplayerProps) => {
                   </p>
                   <BookNow
                     pricePerDay={Number(room.price_per_day)}
-                    selectRoom={() =>
-                      setSelectedRoom({
-                        daysOfStay,
-                        name: room.type,
-                        pricePerDay: Number(room.price_per_day),
-                      })
-                    }
+                    selectRoom={() => handleSuiteSelection(arrayIndex, room)}
                   />
                 </div>
               </div>
