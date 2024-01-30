@@ -8,6 +8,7 @@ import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { YourStay } from "@/components/YourStay/YourStay";
+import { ChooseRoom } from "@/components/ChooseRoom/ChooseRoom";
 
 export const SearchResults = () => {
   const { checkIn, checkOut, numOfGuests } = useGuestInfo();
@@ -35,6 +36,7 @@ export const SearchResults = () => {
   return (
     <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
       <SearchResultsHeader />
+      {numOfGuests.length > 1 && <ChooseRoom />}
       <section className="pt-8">
         {isLoading ? (
           <RoomDisplayerSkeleton />
