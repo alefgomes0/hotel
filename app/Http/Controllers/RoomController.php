@@ -17,8 +17,8 @@ class RoomController extends Controller
         $checkOut = $searchInfoObjects->checkOut;
         $numOfRooms = sizeof($searchInfoObjects->numOfGuests);
         $firstRoomOccup = $searchInfoObjects->numOfGuests[0]->adult;
-        $secondRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 2 ? $searchInfoObjects->numOfGuests[1]->adult : -1;
-        $thirdRoomOccup = sizeof($searchInfoObjects->numOfGuests) == 3 ? $searchInfoObjects->numOfGuests[2]->adult : -1;
+        $secondRoomOccup = sizeof($searchInfoObjects->numOfGuests) > 1 ? $searchInfoObjects->numOfGuests[1]->adult : -1;
+        $thirdRoomOccup = sizeof($searchInfoObjects->numOfGuests) > 2 ? $searchInfoObjects->numOfGuests[2]->adult : -1;
     
         $bookedRooms = DB::table('bookings')
             ->select('bookings.room_id')

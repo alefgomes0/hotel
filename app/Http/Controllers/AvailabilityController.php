@@ -12,77 +12,66 @@ class AvailabilityController extends Controller
     public function show(string $searchParams): JsonResponse
     
     {
-
         $sanitizedParams = strip_tags($searchParams);
-
-        // Define the pattern to capture room details
-        $pattern = '/room=([^&]+)&adults=([^&]+)&children=([^&]+)/';
-
-        // Use preg_match_all to capture all occurrences
-        preg_match_all($pattern, $sanitizedParams, $matches, PREG_SET_ORDER);
-
-        // Initialize arrays to store room details
+        $checkinCheckoutPattern = '/checkin=([^&]+)&checkout=([^&]+)/';
+        preg_match($checkinCheckoutPattern, $sanitizedParams, $checkinCheckoutMatches);
+        $checkIn = urldecode($checkinCheckoutMatches[1]);
+        $checkOut = urldecode($checkinCheckoutMatches[2]);
+        $roomPattern = '/room=([^&]+)&adults=([^&]+)&children=([^&]+)/';
+        preg_match_all($roomPattern, $sanitizedParams, $roomMatches, PREG_SET_ORDER);
         $rooms = [];
         $adults = [];
         $children = [];
-
-        // Loop through the matches and store the values in arrays
-        foreach ($matches as $match) {
+        
+        foreach ($roomMatches as $match) {
             $rooms[] = urldecode($match[1]);
             $adults[] = urldecode($match[2]);
             $children[] = urldecode($match[3]);
         }
 
-        // Now you can access the room details for each room selected
-        // For example, to access details for the first room:
-        $firstRoom = [
-            'room' => $rooms[0],
-            'adults' => $adults[0],
-            'children' => $children[0],
-        ];
+        $numOfRooms = sizeof($rooms);
+        $firstRoomOccup = $adults[0];
+        $secondRoomOccup = $numOfRooms > 1 ? $adults[1] : -1;
+        $thirdRoomOccup = $numOfRooms > 2 ? $adults[2] : -1;
 
-
-
-/*         $sanitizedParams = strip_tags($searchParams);
-        preg_match('/checkin=([^&]+)&checkout=([^&]+)&room=([^&]+)&adults=([^&]+)&children=([^&]+)/', $sanitizedParams, $matches);
-    
-        $checkIn = urldecode($matches[1]);
-        $checkOut = urldecode($matches[2]);
-        $room = urldecode($matches[3]);
-        $adults = urldecode($matches[4]);
-        $children = urldecode($matches[5]);
-
+        
         $bookedRooms = DB::table('bookings')
-        ->select('bookings.room_id')
-        ->orWhereBetween('bookings.check_in', [$checkIn, $checkOut])
-        ->orWhereBetween('bookings.check_out', [$checkIn, $checkOut])
-        ->pluck('room_id')
-        ->toArray();
+            ->select('bookings.room_id')
+            ->orWhereBetween('bookings.check_in', [$checkIn, $checkOut])
+            ->orWhereBetween('bookings.check_out', [$checkIn, $checkOut])
+            ->pluck('room_id')
+            ->toArray();
 
-        $availableRooms = DB::table('rooms')
+        function get_available_rooms(int $occupants, array $unavailableRooms)
+        {
+            if ($occupants == -1) return '';
+            return DB::table('rooms')
             ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
             ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants')
-            ->whereNotIn('rooms.id', $bookedRooms)
-            ->where('room_type.occupants', '>=', $adults)
+            ->whereNotIn('rooms.id', $unavailableRooms)
+            ->where('room_type.occupants', '>=', $occupants)
             ->get();
-        
-        if (sizeof($availableRooms) == 0) {
-            return response()->json()([
-                'message' => 'Not found'
-            ], 404);
-        }
-        
-        if (sizeof($availableRooms) < $rooms) {
-            return response()->json([
-                'message' => 'Requirements are not met'
-            ], 204);
         }
 
-        $groupedRooms = $availableRooms->groupBy('type'); */
+        $firstRoomOpts = get_available_rooms($firstRoomOccup, $bookedRooms);
+        $secondRoomOpts = get_available_rooms($secondRoomOccup, $bookedRooms);
+        $thirdRoomOpts = get_available_rooms($thirdRoomOccup, $bookedRooms);
+
+        if (sizeof($firstRoomOpts) == 0 || $secondRoomOpts != '' && sizeof($secondRoomOpts) == 0 || $thirdRoomOpts != '' && sizeof($thirdRoomOpts) == 0) 
+        {
+            return response()->json([], 204);
+        }
+
+        $groupedFirstRoom = $firstRoomOpts->groupBy('type');
+        $groupedSecondRoom = $secondRoomOpts == '' ? '' : $secondRoomOpts->groupBy('type');
+        $groupedThirdRoom = $thirdRoomOpts == '' ? '' : $thirdRoomOpts->groupBy('type');
 
         return response()->json([
-            'quartos' => $adults[1]
-        ], 200);
-    
+            'suites' => [
+                'firstSuite' => $groupedFirstRoom,
+                'secondSuite' => $groupedSecondRoom,
+                'thirdSuite' => $groupedThirdRoom
+            ]
+        ], 200);  
     }
 }

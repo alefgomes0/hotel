@@ -40,7 +40,7 @@ export const YourStay = () => {
           <>
             {suite.selectedRoom.name && (
               <>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between" key={index}>
                   <div>
                     <p className="font-medium">
                       {suite.selectedRoom.name} Suite
