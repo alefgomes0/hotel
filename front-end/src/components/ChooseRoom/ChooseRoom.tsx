@@ -20,7 +20,7 @@ export const ChooseRoom = () => {
                 {suite.children} {suite.children === 1 ? "child" : "children"}
               </p>
               <div
-                className={`absolute w-24 h-[3px] ${
+                className={`absolute lg:w-32 h-[3px] ${
                   currentSuite === index + 1 ? "bg-gray-900" : ""
                 } rounded-sm`}
               ></div>
