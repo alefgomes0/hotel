@@ -1,30 +1,62 @@
 import { useEffect } from "react";
 import { useGuestInfo } from "./useGuestInfo";
+import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 
 export const useFillGuestContext = (urlParams: string) => {
-  const { checkIn, setCheckIn, checkOut, setCheckOut, setNumOfGuests } = useGuestInfo();
+  const { checkIn, setCheckIn, checkOut, setCheckOut, setNumOfGuests } =
+    useGuestInfo();
 
   useEffect(() => {
     const fillGuestInfo = () => {
       if (checkIn && checkOut) return;
-      const regex =
-        /checkin=([^&]+)%20\d{2}:\d{2}:\d{2}&checkout=([^&]+)%20\d{2}:\d{2}:\d{2}&rooms=([^&]+)&adults=([^&]+)&children=([^&]+)/;
-      const matches = urlParams.match(regex);
-      if (!matches) return;
+      const checkinCheckoutPattern: RegExp = /checkin=([^&]+)&checkout=([^&]+)/;
+      const checkinCheckoutMatches: RegExpExecArray | null =
+        checkinCheckoutPattern.exec(urlParams);
+      if (!checkinCheckoutMatches) return;
+      const paramsCheckIn: string = decodeURIComponent(
+        checkinCheckoutMatches[1]
+      );
+      const paramsCheckOut: string = decodeURIComponent(
+        checkinCheckoutMatches[2]
+      );
 
-      const paramsCheckIn = new Date(`${matches[1]}Z`);
-      const paramsCheckOut = new Date(`${matches[2]}Z`);
-      const apts = Number(matches[3]);
-      const adults = Number(matches[4]);
-      const children = Number(matches[5]);
+      console.log(paramsCheckIn.split(" ")[0], paramsCheckOut.split(" ")[0]);
 
-      setCheckIn(paramsCheckIn);
-      setCheckOut(paramsCheckOut);
-      setNumOfGuests({
-        apartment: apts,
-        adult: adults,
-        children,
-      });
+      const roomPattern: RegExp =
+        /room=([^&]+)&adults=([^&]+)&children=([^&]+)/g;
+
+      let roomMatches: RegExpExecArray | null;
+      const rooms: string[] = [];
+      const adults: string[] = [];
+      const children: string[] = [];
+
+      // Loop through the matches and store the values in arrays
+      while ((roomMatches = roomPattern.exec(urlParams)) !== null) {
+        rooms.push(decodeURIComponent(roomMatches[1]));
+        adults.push(decodeURIComponent(roomMatches[2]));
+        children.push(decodeURIComponent(roomMatches[3]));
+      }
+
+      console.log(rooms, adults, children);
+
+      const guestInfo: numOfGuestsProps[] = [];
+      for (let i = 0; i < rooms.length; i++) {
+        const data: numOfGuestsProps = {
+          adult: Number(adults[i]),
+          children: Number(children[i]),
+          selectedRoom: {
+            name: "",
+            pricePerDay: 0,
+          },
+        };
+        guestInfo.push(data);
+      }
+
+      console.log(guestInfo)
+
+      setCheckIn(new Date(paramsCheckIn.split(" ")[0]));
+      setCheckOut(new Date(paramsCheckOut.split(" ")[0]));
+      setNumOfGuests(guestInfo);
     };
 
     fillGuestInfo();

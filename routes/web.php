@@ -25,5 +25,3 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
-
-Route::get('/availability/{searchParams}', [AvailabilityController::class, 'show']);
