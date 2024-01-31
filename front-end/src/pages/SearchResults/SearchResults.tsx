@@ -45,9 +45,7 @@ export const SearchResults = () => {
           </>
         )}
       </section>
-      <div className="row-start-1 row-end-3 col-start-2 col-end-3">
-        <YourStay />
-      </div>
+      <YourStay />
     </main>
   );
 };
