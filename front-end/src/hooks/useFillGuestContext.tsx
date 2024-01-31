@@ -30,7 +30,6 @@ export const useFillGuestContext = (urlParams: string) => {
       const adults: string[] = [];
       const children: string[] = [];
 
-      // Loop through the matches and store the values in arrays
       while ((roomMatches = roomPattern.exec(urlParams)) !== null) {
         rooms.push(decodeURIComponent(roomMatches[1]));
         adults.push(decodeURIComponent(roomMatches[2]));
@@ -51,8 +50,6 @@ export const useFillGuestContext = (urlParams: string) => {
         };
         guestInfo.push(data);
       }
-
-      console.log(guestInfo)
 
       setCheckIn(new Date(paramsCheckIn.split(" ")[0]));
       setCheckOut(new Date(paramsCheckOut.split(" ")[0]));

@@ -21,10 +21,6 @@ export const MainSearchBar = () => {
     navigate(constructURL(checkIn, checkOut, numOfGuests));
   };
 
-  if (checkIn && checkOut) {
-    console.log(constructURL(checkIn, checkOut, numOfGuests));
-  }
-
   return (
     <form
       className="flex items-center h-10 rounded-sm text-gray-600"

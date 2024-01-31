@@ -1,4 +1,5 @@
 import format from "date-fns/format";
+import React from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayArrow } from "../svg/YourStayArrow";
 
@@ -37,7 +38,7 @@ export const YourStay = () => {
       </div>
       {numOfGuests.map((suite, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             {suite.selectedRoom.name && (
               <>
                 <div className="flex items-center justify-between" key={index}>
@@ -64,7 +65,7 @@ export const YourStay = () => {
                 </div>
               </>
             )}
-          </>
+          </React.Fragment>
         );
       })}
       <div className="h-[1px] bg-gray-400"></div>
