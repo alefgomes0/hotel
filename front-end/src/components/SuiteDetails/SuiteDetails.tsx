@@ -1,9 +1,11 @@
 import { BedIcon } from "../svg/BedIcon";
 import { Carousel } from "../Carousel/Carousel";
-import { getImagesPath } from "@/utils/getImagesPath";
+import { CloseIcon } from "../svg/CloseIcon";
 import { FoodIcon } from "../svg/FoodIcon";
+import { getImagesPath } from "@/utils/getImagesPath";
 import { RoomProps } from "@/types/RoomProps";
 import { useEffect, useRef } from "react";
+import { offset, useFloating } from "@floating-ui/react";
 import { SignalIcon } from "../svg/SignalIcon";
 import { ServiceIcon } from "../svg/ServiceIcon";
 import { SquaredArrow } from "../svg/SquaredArrow";
@@ -20,6 +22,13 @@ export const SuiteDetails = ({
   showSuiteDetails,
 }: SuiteDetailsProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const { refs, floatingStyles } = useFloating({
+    strategy: "fixed",
+    placement: "right-start",
+    middleware: [
+      offset(10)
+    ]
+  });
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -27,10 +36,19 @@ export const SuiteDetails = ({
         closeRoomDetails();
       }
     };
-
     window.addEventListener("click", handleClickOutside);
 
-    return () => window.removeEventListener("click", handleClickOutside);
+    if (showSuiteDetails) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.scrollBehavior = "auto";
+    }
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+      document.body.style.overflow = "auto";
+    };
   }, []);
 
   const imagesURL = getImagesPath(roomData);
@@ -41,12 +59,24 @@ export const SuiteDetails = ({
         className="w-full h-full fixed top-0 left-0 bg-black opacity-40"
         ref={wrapperRef}
       ></div>
-      <section className="hide-scrollbar overflow-scroll z-[22] fixed top-[7%] left-[50%] translate-x-[-50%] grid grid-cols-1 w-[600px] max-h-[650px]  text-gray-700 bg-gray-100 rounded-sm ">
+      <button
+        className="p-.5 z-[25] bg-gray-500 rounded-sm"
+        ref={refs.setFloating}
+        style={floatingStyles}
+        onClick={closeRoomDetails}
+        title="close suite details"
+        aria-label="close suite details"
+      >
+        <CloseIcon width={32} height={32} />
+      </button>
+      <section
+        className="overflow-x-hidden z-[22] fixed top-[7%] left-[50%] translate-x-[-50%] grid grid-cols-1 w-[600px] max-h-[650px]  text-gray-700 bg-gray-100 rounded-sm "
+        ref={refs.setReference}
+      >
         <Carousel
           imagesPath={imagesURL}
           leftController={<SquaredArrow width={24} height={24} />}
           rightController={<SquaredArrow width={24} height={24} />}
-          sizeOptions={{ height: "h-[400px]", width: "w-[600px]" }}
         />
         <div className="p-4">
           <p className="font-semibold text-xl pb-3">{roomData?.type} Suite</p>
