@@ -53,9 +53,9 @@ class RoomController extends Controller
 
         return response()->json([
             'suites' => [
-                'firstSuite' => $groupedFirstRoom,
-                'secondSuite' => $groupedSecondRoom,
-                'thirdSuite' => $groupedThirdRoom
+                '1' => $groupedFirstRoom,
+                '2' => $groupedSecondRoom,
+                '3' => $groupedThirdRoom
             ]
         ], 200);
     }

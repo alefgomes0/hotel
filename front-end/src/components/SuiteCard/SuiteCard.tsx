@@ -82,11 +82,13 @@ export const SuiteCard = ({ suitesTypes, room, index }: SuiteCardProps) => {
           />
         </div>
       </div>
-      <SuiteDetails
-        closeRoomDetails={() => setShowSuiteDetails(false)}
-        roomData={suitesTypes[selectedRoomIndex as number]}
-        showSuiteDetails={showSuiteDetails}
-      />
+      {showSuiteDetails && (
+        <SuiteDetails
+          closeRoomDetails={() => setShowSuiteDetails(false)}
+          roomData={suitesTypes[selectedRoomIndex as number]}
+          showSuiteDetails={showSuiteDetails}
+        />
+      )}
     </div>
   );
 };

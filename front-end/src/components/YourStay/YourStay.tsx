@@ -15,7 +15,7 @@ export const YourStay = () => {
   } = useGuestInfo();
 
   return (
-    <article className="sticky top-[5%] row-start-1 row-end-3 col-start-2 col-end-3 flex flex-col w-[400px] justify-center text-gray-700 border-[1px] border-gray-400 gap-4 px-6 py-3 shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]">
+    <article className="sticky top-[5%] row-start-1 row-end-3 col-start-2 col-end-3 self-start flex flex-col w-[400px] justify-center text-gray-700 border-[1px] border-gray-400 gap-4 px-6 py-3 shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]">
       <h6 className="text-xl font-semibold tracking-wider">Your Stay</h6>
       <div className="grid grid-rows-1 grid-cols-2">
         <div className="flex flex-col">

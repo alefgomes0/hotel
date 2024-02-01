@@ -1,5 +1,4 @@
 import { ChooseRoom } from "@/components/ChooseRoom/ChooseRoom";
-import { RoomDisplayer } from "@/components/RoomDisplayer/RoomDisplayer";
 import { RoomDisplayerSkeleton } from "@/components/Skeletons/RoomDisplayerSkeleton";
 import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
 import { useFetchAvailableRooms } from "../../hooks/useFetchAvailableRooms";
@@ -7,6 +6,7 @@ import { useFillGuestContext } from "@/hooks/useFillGuestContext";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
+import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 
 export const SearchResults = () => {
   const { numOfGuests } = useGuestInfo();
@@ -28,18 +28,14 @@ export const SearchResults = () => {
             ) : (
               <>
                 {numOfGuests.length > 1 && <ChooseRoom />}
-                <RoomDisplayer
-                  roomData={data?.data.suites.firstSuite}
-                  arrayIndex={0}
-                />
-                <RoomDisplayer
-                  roomData={data?.data.suites.secondSuite}
-                  arrayIndex={1}
-                />
-                <RoomDisplayer
-                  roomData={data?.data.suites.thirdSuite}
-                  arrayIndex={2}
-                />
+                {numOfGuests.map((_, index) => {
+                  return (
+                    <SuitesDisplayer
+                      roomData={data?.data.suites[index + 1]}
+                      arrayIndex={0}
+                    />
+                  );
+                })}
               </>
             )}
           </>

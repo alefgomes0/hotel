@@ -1,24 +1,28 @@
 import { extractedSuites } from "@/utils/extractedSuites";
+import React from "react";
 import { SuiteCard } from "../SuiteCard/SuiteCard";
 
-type RoomDisplayerProps = {
+type SuitesDisplayerProps = {
   roomData: object | "";
   arrayIndex: number;
 };
 
-export const RoomDisplayer = ({ roomData, arrayIndex }: RoomDisplayerProps) => {
+export const SuitesDisplayer = ({
+  roomData,
+  arrayIndex,
+}: SuitesDisplayerProps) => {
   const suites = extractedSuites(roomData);
   return (
     <>
       {suites.map((room, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             {room ? (
               <SuiteCard room={room} index={index} suitesTypes={suites} />
             ) : (
               <></>
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </>
