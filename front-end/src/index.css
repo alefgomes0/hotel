@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .react-datepicker__input-container {
   display: flex;
   flex-direction: row-reverse;
@@ -15,10 +14,11 @@ svg.react-datepicker__calendar-icon {
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
