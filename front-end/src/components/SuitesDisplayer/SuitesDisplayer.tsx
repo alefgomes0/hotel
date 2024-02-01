@@ -18,7 +18,7 @@ export const SuitesDisplayer = ({
         return (
           <React.Fragment key={index}>
             {room ? (
-              <SuiteCard room={room} index={index} suitesTypes={suites} />
+              <SuiteCard room={room} index={arrayIndex} suitesTypes={suites} />
             ) : (
               <></>
             )}

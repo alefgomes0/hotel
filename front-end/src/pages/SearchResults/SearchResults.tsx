@@ -9,35 +9,30 @@ import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 
 export const SearchResults = () => {
-  const { numOfGuests } = useGuestInfo();
   const location = useLocation();
   useFillGuestContext(location.search);
-  const { data, isLoading, isError } = useFetchAvailableRooms();
+  const { numOfGuests } = useGuestInfo();
+  const { data, isLoading, isError, isSuccess } = useFetchAvailableRooms();
   console.log(data);
 
   return (
     <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
       <SearchResultsHeader />
       <section className="pt-8">
-        {isLoading ? (
-          <RoomDisplayerSkeleton />
-        ) : (
+        {isLoading && <RoomDisplayerSkeleton />}
+        {isError && <></>}
+        {isSuccess && (
           <>
-            {isError ? (
-              <></>
-            ) : (
-              <>
-                {numOfGuests.length > 1 && <ChooseRoom />}
-                {numOfGuests.map((_, index) => {
-                  return (
-                    <SuitesDisplayer
-                      roomData={data?.data.suites[index + 1]}
-                      arrayIndex={0}
-                    />
-                  );
-                })}
-              </>
-            )}
+            {numOfGuests.length > 1 && <ChooseRoom />}
+            {numOfGuests.map((_, index) => {
+              return (
+                <SuitesDisplayer
+                  roomData={data?.data.suites[index + 1]}
+                  arrayIndex={0}
+                  key={index}
+                />
+              );
+            })}
           </>
         )}
       </section>
