@@ -1,14 +1,11 @@
 import { numOfGuestsProps } from "../types/numOfGuestsProps";
 import { RoomProps } from "../types/RoomProps";
 
-export const filterSuiteById = (
-  suiteArray: RoomProps[],
-  searchedId: number
-) => {
+const filterSuiteById = (suiteArray: RoomProps[], searchedId: number) => {
   return suiteArray.find((suite) => suite.id === searchedId);
 };
 
-export const getGuestInfo = (guestData: numOfGuestsProps[]) => {
+const getGuestInfo = (guestData: numOfGuestsProps[]) => {
   let totalGuests = {
     adult: 0,
     children: 0,
@@ -22,3 +19,5 @@ export const getGuestInfo = (guestData: numOfGuestsProps[]) => {
 
   return totalGuests;
 };
+
+export { filterSuiteById, getGuestInfo };

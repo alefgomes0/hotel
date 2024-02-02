@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ConfirmReservation } from "./pages/ConfirmReservation/ConfirmReservation";
 import { GuestInfoProvider } from "./context/GuestInfoContext";
 import { Header } from "./components/Header/Header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -17,6 +18,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/availability?/*" element={<SearchResults />} />
+            <Route path="/checkout" element={<ConfirmReservation />} />
           </Routes>
         </BrowserRouter>
       </GuestInfoProvider>
