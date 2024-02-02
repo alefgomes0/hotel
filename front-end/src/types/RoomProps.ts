@@ -1,7 +1,7 @@
 export type RoomProps = {
+  id: number;
   short_description: string;
   full_description: string;
-  id: number;
   price_per_day: string;
   type: string;
   occupants: number;

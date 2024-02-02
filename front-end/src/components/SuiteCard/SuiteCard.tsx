@@ -1,29 +1,27 @@
-import { getPhotoPrefix } from "@/utils/getPhotoPrefix";
-import { useState } from "react";
-import { useGuestInfo } from "@/hooks/useGuestInfo";
-import { RoomProps } from "@/types/RoomProps";
 import { BookNow } from "../Buttons/BookNow";
 import { CheckmarkIcon } from "../svg/CheckmarkIcon";
 import { CoffeeIcon } from "../svg/CoffeeIcon";
 import { ForbiddenIcon } from "../svg/ForbiddenIcon";
+import { getPhotoPrefix } from "@/utils/getPhotoPrefix";
+import { useState } from "react";
+import { useGuestInfo } from "@/hooks/useGuestInfo";
+import { RoomProps } from "@/types/RoomProps";
 import { SuiteDetails } from "../SuiteDetails/SuiteDetails";
 
 type SuiteCardProps = {
-  suitesTypes: RoomProps[];
   room: RoomProps;
   index: number;
 };
 
-export const SuiteCard = ({ suitesTypes, room, index }: SuiteCardProps) => {
+export const SuiteCard = ({
+  room,
+  index,
+}: SuiteCardProps) => {
   const [showSuiteDetails, setShowSuiteDetails] = useState(false);
-  const [selectedRoomIndex, setSelectedRoomIndex] = useState<number | null>(
-    null
-  );
   const { handleSuiteSelection } = useGuestInfo();
-  const handleRoomDetails = (arrayIndex: number) => {
-    setSelectedRoomIndex(arrayIndex);
-    setShowSuiteDetails(true);
-  };
+  const handleButtonClick = () => {
+    handleSuiteSelection(index, room)
+  }
 
   return (
     <div
@@ -36,13 +34,13 @@ export const SuiteCard = ({ suitesTypes, room, index }: SuiteCardProps) => {
           width={320}
           height={192}
           className="object-cover rounded-sm cursor-pointer"
-          onClick={() => handleRoomDetails(index)}
+          onClick={() => setShowSuiteDetails(true)}
         />
       </div>
       <div className="flex flex-col gap-y-3">
         <h6
           className="w-max font-semibold text-xl cursor-pointer hover:underline underline-offset-[6px]"
-          onClick={() => handleRoomDetails(index)}
+          onClick={() => setShowSuiteDetails(true)}
         >
           {room.type.toUpperCase()} SUITE
         </h6>
@@ -64,7 +62,7 @@ export const SuiteCard = ({ suitesTypes, room, index }: SuiteCardProps) => {
         </span>
         <p
           className="text-sm w-max cursor-pointer underline underline-offset-4 pt-1"
-          onClick={() => handleRoomDetails(index)}
+          onClick={() => setShowSuiteDetails(true)}
         >
           Veja detalhes
         </p>
@@ -85,7 +83,7 @@ export const SuiteCard = ({ suitesTypes, room, index }: SuiteCardProps) => {
       {showSuiteDetails && (
         <SuiteDetails
           closeRoomDetails={() => setShowSuiteDetails(false)}
-          roomData={suitesTypes[selectedRoomIndex as number]}
+          roomData={room}
           showSuiteDetails={showSuiteDetails}
         />
       )}

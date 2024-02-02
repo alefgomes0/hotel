@@ -17,11 +17,7 @@ export const SuitesDisplayer = ({
       {suites.map((room, index) => {
         return (
           <React.Fragment key={index}>
-            {room ? (
-              <SuiteCard room={room} index={arrayIndex} suitesTypes={suites} />
-            ) : (
-              <></>
-            )}
+            {room ? <SuiteCard room={room} index={arrayIndex} /> : <></>}
           </React.Fragment>
         );
       })}
