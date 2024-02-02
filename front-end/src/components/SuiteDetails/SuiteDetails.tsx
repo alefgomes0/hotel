@@ -26,7 +26,7 @@ export const SuiteDetails = ({
     strategy: "fixed",
     placement: "right-start",
     middleware: [
-      offset(10)
+      offset(20)
     ]
   });
 
@@ -60,14 +60,14 @@ export const SuiteDetails = ({
         ref={wrapperRef}
       ></div>
       <button
-        className="p-.5 z-[25] bg-gray-500 rounded-sm"
+        className="p-.5 z-[25]  rounded-sm"
         ref={refs.setFloating}
         style={floatingStyles}
         onClick={closeRoomDetails}
         title="close suite details"
         aria-label="close suite details"
       >
-        <CloseIcon width={32} height={32} />
+        <CloseIcon width={48} height={48} />
       </button>
       <section
         className="overflow-x-hidden z-[22] fixed top-[7%] left-[50%] translate-x-[-50%] grid grid-cols-1 w-[600px] max-h-[650px]  text-gray-700 bg-gray-100 rounded-sm "

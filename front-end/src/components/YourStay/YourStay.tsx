@@ -40,12 +40,11 @@ export const YourStay = () => {
         return (
           <React.Fragment key={index}>
             {suite.selectedRoom.name && (
-              <>
+              <div className="flex flex-col gap-y-3 border-t-[1px] border-gray-400 pt-3">
+                <p className="font-medium">SUITE {index + 1}</p>
                 <div className="flex items-center justify-between" key={index}>
                   <div>
-                    <p className="font-medium">
-                      {suite.selectedRoom.name} Suite
-                    </p>
+                    <p>{suite.selectedRoom.name} Suite</p>
                     <p className="text-xs opacity-70 mt-[-2px]">
                       {suite.adult} {suite.adult === 1 ? "adult" : "adults"},{" "}
                       {suite.children > 0 && (
@@ -57,21 +56,21 @@ export const YourStay = () => {
                       {daysOfStay} {daysOfStay === 1 ? "night" : "nights"}
                     </p>
                   </div>
-                  <p>${getPartialAmount(index)}</p>
+                  <p className="font-medium">${getPartialAmount(index)}</p>
                 </div>
                 <div className="flex items-center justify-between">
-                  <p className="font-medium">Taxes and Fees</p>
-                  <p>${getTaxesAndFees(index)}</p>
+                  <p className="opacity-90">Taxes and Fees</p>
+                  <p className="font-medium">${getTaxesAndFees(index)}</p>
                 </div>
-              </>
+              </div>
             )}
           </React.Fragment>
         );
       })}
       <div className="h-[1px] bg-gray-400"></div>
-      <div className="flex items-center justify-between text-xl font-medium">
-        <p>Total:</p>
-        <p>${getTotalAmount()}</p>
+      <div className="flex items-center justify-between text-xl">
+        <p className="font-medium">Total:</p>
+        <p className="font-bold">${getTotalAmount()}</p>
       </div>
     </article>
   );

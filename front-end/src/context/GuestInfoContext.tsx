@@ -54,14 +54,21 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
   const numOfSuites = numOfGuests.length;
+  
   const getPartialAmount = (index: number) => {
     return daysOfStay * numOfGuests[index].selectedRoom.pricePerDay;
   };
+
   const getTaxesAndFees = (index: number) => {
     return Math.round(getPartialAmount(index) * 0.043);
   };
+
   const getTotalAmount = () => {
-    return 50;
+    let totalValue = 0;
+    for (let i = 0; i < numOfGuests.length; i++) {
+      totalValue += numOfGuests[i].selectedRoom.pricePerDay * daysOfStay;
+    }
+    return totalValue;
   };
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
