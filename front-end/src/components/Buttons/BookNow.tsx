@@ -6,7 +6,7 @@ type BookNowProps = {
 };
 
 export const BookNow = ({ pricePerDay, selectRoom }: BookNowProps) => {
-  const { daysOfStay, numOfGuests } = useGuestInfo();
+  const { daysOfStay } = useGuestInfo();
   const totalAmount = daysOfStay * pricePerDay;
 
   return (

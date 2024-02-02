@@ -8,18 +8,20 @@ import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useState } from "react";
-import { SuiteIndexProps } from "@/types/SuiteIndexProps";
+import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 
 export const SearchResults = () => {
-  const [suiteIndex, setSuiteIndex] = useState<SuiteIndexProps>({
-    current: 0,
-    selected: [],
-  });
+  const [selectedSuiteIndex, setSelectedSuitedIndex] =
+    useState<SelectedSuiteIndexProps>({
+      current: 0,
+      selected: [],
+    });
   const location = useLocation();
   useFillGuestContext(location.search);
   const { numOfGuests } = useGuestInfo();
   const { data, isLoading, isError, isSuccess } = useFetchAvailableRooms();
   console.log(data);
+    console.log(selectedSuiteIndex)
 
   return (
     <main className="testando grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
@@ -29,14 +31,18 @@ export const SearchResults = () => {
         {isError && <></>}
         {isSuccess && (
           <>
-            {numOfGuests.length > 1 && <ChooseRoom suiteIndex={suiteIndex.current}/>}
+            {numOfGuests.length > 1 && (
+              <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
+            )}
             {numOfGuests.map((_, index) => {
-              if (index === suiteIndex.current) {
+              if (index === selectedSuiteIndex.current) {
                 return (
                   <SuitesDisplayer
                     roomData={data?.data.suites[index + 1]}
                     arrayIndex={index}
                     key={index}
+                    selectedSuiteIndex={selectedSuiteIndex}
+                    setSelectedSuiteIndex={setSelectedSuitedIndex}
                   />
                 );
               }

@@ -2,7 +2,7 @@ import { useGuestInfo } from "@/hooks/useGuestInfo";
 
 type ChooseRoomProps = {
   suiteIndex: number;
-}
+};
 
 export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
   const { numOfGuests } = useGuestInfo();

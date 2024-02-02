@@ -1,20 +1,22 @@
 import { extractedSuites } from "@/utils/extractedSuites";
 import React from "react";
 import { SuiteCard } from "../SuiteCard/SuiteCard";
-import { SuiteIndexProps } from "@/types/SuiteIndexProps";
+import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 
 type SuitesDisplayerProps = {
   roomData: object | "";
   arrayIndex: number;
-  suiteIndex: SuiteIndexProps;
-  setSuiteIndex: React.Dispatch<React.SetStateAction<SuiteIndexProps>>;
+  selectedSuiteIndex: SelectedSuiteIndexProps;
+  setSelectedSuiteIndex: React.Dispatch<
+    React.SetStateAction<SelectedSuiteIndexProps>
+  >;
 };
 
 export const SuitesDisplayer = ({
   roomData,
   arrayIndex,
-  suiteIndex,
-  setSuiteIndex,
+  selectedSuiteIndex,
+  setSelectedSuiteIndex,
 }: SuitesDisplayerProps) => {
   const suites = extractedSuites(roomData);
   return (
@@ -26,9 +28,8 @@ export const SuitesDisplayer = ({
               <SuiteCard
                 room={room}
                 index={arrayIndex}
-                suitesTypes={suites}
-                suiteIndex={suiteIndex}
-                setSuiteIndex={setSuiteIndex}
+                selectedSuiteIndex={selectedSuiteIndex}
+              setSelectedSuiteIndex={setSelectedSuiteIndex}
               />
             ) : (
               <></>
