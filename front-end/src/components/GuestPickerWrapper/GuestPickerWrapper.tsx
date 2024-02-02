@@ -6,10 +6,10 @@ import {
   useInteractions,
   offset,
 } from "@floating-ui/react";
+import { getGuestInfo } from "../../utils/helpers.ts";
 import { GuestPicker } from "../GuestPicker/GuestPicker";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
-import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import { WarningIcon } from "../svg/WarningIcon";
 
 export const GuestPickerWrapper = () => {
@@ -26,23 +26,7 @@ export const GuestPickerWrapper = () => {
   const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
   const { addNewRoom, numOfGuests } = useGuestInfo();
   const numOfSuites = numOfGuests.length;
-
-  const teste = (list: numOfGuestsProps[]) => {
-    let totalGuests = {
-      adult: 0,
-      children: 0,
-    };
-    for (let i = 0; i < list.length; i++) {
-      totalGuests = {
-        adult: totalGuests.adult + list[i].adult,
-        children: totalGuests.children + list[i].children,
-      };
-    }
-
-    return totalGuests;
-  };
-
-  const totalGuests = teste(numOfGuests);
+  const totalGuests = getGuestInfo(numOfGuests);
 
   return (
     <div

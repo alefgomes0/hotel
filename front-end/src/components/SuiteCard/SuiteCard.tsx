@@ -7,21 +7,33 @@ import { useState } from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { RoomProps } from "@/types/RoomProps";
 import { SuiteDetails } from "../SuiteDetails/SuiteDetails";
+import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 
 type SuiteCardProps = {
   room: RoomProps;
   index: number;
+  selectedSuiteIndex: SelectedSuiteIndexProps;
+  setSelectedSuiteIndex: React.Dispatch<
+    React.SetStateAction<SelectedSuiteIndexProps>
+  >;
 };
 
 export const SuiteCard = ({
   room,
   index,
+  selectedSuiteIndex,
+  setSelectedSuiteIndex,
 }: SuiteCardProps) => {
   const [showSuiteDetails, setShowSuiteDetails] = useState(false);
   const { handleSuiteSelection } = useGuestInfo();
+
   const handleButtonClick = () => {
-    handleSuiteSelection(index, room)
-  }
+    handleSuiteSelection(index, room);
+    setSelectedSuiteIndex({
+      current: selectedSuiteIndex.current + 1,
+      selected: selectedSuiteIndex.selected.concat(selectedSuiteIndex.current),
+    });
+  };
 
   return (
     <div
@@ -76,7 +88,7 @@ export const SuiteCard = ({
           </p>
           <BookNow
             pricePerDay={Number(room.price_per_day)}
-            selectRoom={() => handleSuiteSelection(index, room)}
+            selectRoom={handleButtonClick}
           />
         </div>
       </div>

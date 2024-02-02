@@ -11,15 +11,22 @@ export const GuestPicker = ({ arrayIndex }: GuestPickerProps) => {
   const numberOfSuite = arrayIndex + 1;
 
   return (
-    <div className="relative bg-gray-200 px-3 py-1.5">
+    <div
+      className="relative bg-gray-200 px-3 py-1.5"
+      aria-label="guest info for this suite"
+    >
       <p className="text-xs opacity-70 pb-3">SUITE {numberOfSuite}</p>
       <div className="flex justify-between">
-        <p>{numOfGuests[arrayIndex].adult === 1 ? "Adult" : "Adults"}</p>
+        <label aria-label="number of adults">
+          {numOfGuests[arrayIndex].adult === 1 ? "Adult" : "Adults"}
+        </label>
         <NumericStepper field="adult" arrayIndex={arrayIndex} />
       </div>
       <div>
         <div className="flex justify-between pt-4">
-          <p>{numOfGuests[arrayIndex].children === 1 ? "Child" : "Children"}</p>
+          <label className="number of children">
+            {numOfGuests[arrayIndex].children === 1 ? "Child" : "Children"}
+          </label>
           <NumericStepper field="children" arrayIndex={arrayIndex} />
         </div>
       </div>

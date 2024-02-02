@@ -1,9 +1,12 @@
 import { useGuestInfo } from "@/hooks/useGuestInfo";
-import { useState } from "react";
 
-export const ChooseRoom = () => {
+type ChooseRoomProps = {
+  suiteIndex: number;
+};
+
+export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
   const { numOfGuests } = useGuestInfo();
-  const [currentSuite, setCurrentSuite] = useState<number>(1);
+  const currentSuite = suiteIndex + 1;
 
   return (
     <article className="relative w-full grid grid-rows-[auto_1fr] grid-cols-3 items-center text-gray-600 mt-6 mb-6">

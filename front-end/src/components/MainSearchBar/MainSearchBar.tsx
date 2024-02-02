@@ -26,7 +26,14 @@ export const MainSearchBar = () => {
       className="flex items-center h-10 rounded-sm text-gray-600"
       onSubmit={handleOnSubmit}
     >
-      <label className="" htmlFor="check-in" id="check-in">
+      <div className="relative">
+        <label
+          className="absolute top-0 left-0 opacity-0"
+          htmlFor="check-in"
+          aria-label="check-in"
+        >
+          Check-in*
+        </label>
         <DatePicker
           showIcon
           icon={
@@ -71,8 +78,15 @@ export const MainSearchBar = () => {
           className="h-10 border-r-2 border-gray-200 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
           onInputClick={() => setOpenCalendarOne(!openCalendarOne)}
         />
-      </label>
-      <label htmlFor="check-out" id="check-out">
+      </div>
+      <div className="relative">
+        <label
+          className="absolute top-0 left-0 opacity-0"
+          htmlFor="check-out"
+          aria-label="check-out"
+        >
+          Check-out
+        </label>
         <DatePicker
           showIcon
           icon={
@@ -116,14 +130,22 @@ export const MainSearchBar = () => {
           title="Check-out"
           className="h-10 border-r-2 border-gray-200 px-4 outline-0 placeholder:text-gray-600 placeholder:opacity-[65%]"
         />
-      </label>
+      </div>
       <GuestPickerWrapper />
-      <input
-        type="text"
-        placeholder="Voucher/Cupom"
-        className="w-32 h-10 outline-0 pl-4 placeholder:text-sm placeholder:text-gray-600 placeholder:opacity-[65%]"
-        title="Voucher"
-      />
+      <div className="relative">
+        <label
+          className="absolute top-0 left-0 opacity-0"
+          htmlFor="voucher"
+        ></label>
+        <input
+          type="text"
+          placeholder="Voucher/Coupon"
+          className="w-32 h-10 outline-0 pl-4 placeholder:text-sm placeholder:text-gray-600 placeholder:opacity-[65%]"
+          title="Voucher/Coupon"
+          id="voucher"
+          aria-label="voucher/coupon"
+        />
+      </div>
       <SearchButton isDisabled={!checkIn || !checkOut} />
     </form>
   );
