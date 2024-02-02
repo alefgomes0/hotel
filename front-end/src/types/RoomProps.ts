@@ -1,4 +1,5 @@
 export type RoomProps = {
+  _id?: number | string;
   short_description: string;
   full_description: string;
   id: number;

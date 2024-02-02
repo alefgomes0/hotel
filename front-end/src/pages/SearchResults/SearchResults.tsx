@@ -8,9 +8,10 @@ import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useState } from "react";
+import { SuiteIndexProps } from "@/types/SuiteIndexProps";
 
 export const SearchResults = () => {
-  const [suiteIndex, setSuiteIndex] = useState({
+  const [suiteIndex, setSuiteIndex] = useState<SuiteIndexProps>({
     current: 0,
     selected: [],
   });
@@ -28,7 +29,7 @@ export const SearchResults = () => {
         {isError && <></>}
         {isSuccess && (
           <>
-            {numOfGuests.length > 1 && <ChooseRoom />}
+            {numOfGuests.length > 1 && <ChooseRoom suiteIndex={suiteIndex.current}/>}
             {numOfGuests.map((_, index) => {
               if (index === suiteIndex.current) {
                 return (

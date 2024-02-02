@@ -7,11 +7,14 @@ import { CheckmarkIcon } from "../svg/CheckmarkIcon";
 import { CoffeeIcon } from "../svg/CoffeeIcon";
 import { ForbiddenIcon } from "../svg/ForbiddenIcon";
 import { SuiteDetails } from "../SuiteDetails/SuiteDetails";
+import { SuiteIndexProps } from "@/types/SuiteIndexProps"; 
 
 type SuiteCardProps = {
   suitesTypes: RoomProps[];
   room: RoomProps;
   index: number;
+  suiteIndex: SuiteIndexProps
+  setSuiteIndex: React.Dispatch<React.SetStateAction<SuiteIndexProps>>
 };
 
 export const SuiteCard = ({ suitesTypes, room, index }: SuiteCardProps) => {
