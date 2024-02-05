@@ -49,9 +49,9 @@ export const ContactInformation = () => {
           type="text"
           placeholder="John"
           id="firstName"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
             errors.firstName
-              ? "ring-transparent border-2 border-red-400"
+              ? "ring-transparent  border-red-400"
               : "border-transparent ring-gray-700"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
@@ -68,9 +68,9 @@ export const ContactInformation = () => {
           type="text"
           placeholder="Doe"
           id="lastName"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
             errors.lastName
-              ? "ring-transparent border-2 border-red-400"
+              ? "ring-transparent  border-red-400"
               : "border-transparent ring-gray-700"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
@@ -87,9 +87,9 @@ export const ContactInformation = () => {
           type="email"
           placeholder="johndoe@email.com"
           id="email"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
             errors.email
-              ? "ring-transparent border-2 border-red-400"
+              ? "ring-transparent  border-red-400"
               : "border-transparent ring-gray-700"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
@@ -106,9 +106,9 @@ export const ContactInformation = () => {
           type="text"
           placeholder="123, Actual Street"
           id="address"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
             errors.address
-              ? "ring-transparent border-2 border-red-400"
+              ? "ring-transparent  border-red-400"
               : "border-transparent ring-gray-700"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
@@ -125,9 +125,9 @@ export const ContactInformation = () => {
           type="phone"
           placeholder="432213-3213"
           id="phone"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
             errors.phone
-              ? "ring-transparent border-2 border-red-400"
+              ? "ring-transparent  border-red-400"
               : "border-transparent ring-gray-700"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
