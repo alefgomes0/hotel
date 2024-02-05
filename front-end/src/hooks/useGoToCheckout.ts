@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useGuestInfo } from "./useGuestInfo";
 import { useEffect } from "react";
+import { useGuestInfo } from "./useGuestInfo";
+import { useNavigate } from "react-router-dom";
 
 export const useGoToCheckout = (selectedRoomsLenght: number) => {
   const { numOfGuests } = useGuestInfo();
