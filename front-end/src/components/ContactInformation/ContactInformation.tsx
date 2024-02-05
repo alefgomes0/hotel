@@ -17,7 +17,8 @@ export const ContactInformation = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, touchedFields },
+    getFieldState,
   } = useForm<TContactInformationSchema>({
     defaultValues: {
       firstName: "",
@@ -27,6 +28,7 @@ export const ContactInformation = () => {
       phone: undefined,
     },
     resolver: zodResolver(ContactInformationSchema),
+    mode: "onBlur",
   });
 
   const onSubmit = (data: TContactInformationSchema) => {
@@ -47,7 +49,11 @@ export const ContactInformation = () => {
           type="text"
           placeholder="John"
           id="firstName"
-          className="w-[300px] h-10 pl-2 py-6 border-transparent outline-none focus:ring-2 focus:ring-teal-700 rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+            errors.firstName
+              ? "ring-transparent border-2 border-red-400"
+              : "border-transparent ring-gray-700"
+          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs ">
           {errors.firstName?.message}
@@ -62,7 +68,11 @@ export const ContactInformation = () => {
           type="text"
           placeholder="Doe"
           id="lastName"
-          className="w-[300px] h-10 pl-2 py-6 border-transparent outline-none focus:ring-2 focus:ring-teal-700 rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+            errors.lastName
+              ? "ring-transparent border-2 border-red-400"
+              : "border-transparent ring-gray-700"
+          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
           {errors.lastName?.message}
@@ -77,7 +87,11 @@ export const ContactInformation = () => {
           type="email"
           placeholder="johndoe@email.com"
           id="email"
-          className="w-[300px] h-10 pl-2 py-6 border-transparent outline-none focus:ring-2 focus:ring-teal-700 rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+            errors.email
+              ? "ring-transparent border-2 border-red-400"
+              : "border-transparent ring-gray-700"
+          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
           {errors.email?.message}
@@ -92,7 +106,11 @@ export const ContactInformation = () => {
           type="text"
           placeholder="123, Actual Street"
           id="address"
-          className="w-[300px] h-10 pl-2 py-6 border-transparent outline-none focus:ring-2 focus:ring-teal-700 rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+            errors.address
+              ? "ring-transparent border-2 border-red-400"
+              : "border-transparent ring-gray-700"
+          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
           {errors.address?.message}
@@ -107,7 +125,11 @@ export const ContactInformation = () => {
           type="phone"
           placeholder="432213-3213"
           id="phone"
-          className="w-[300px] h-10 pl-2 py-6 border-transparent outline-none focus:ring-2 focus:ring-teal-700 rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100  outline-none focus:ring-2 ${
+            errors.phone
+              ? "ring-transparent border-2 border-red-400"
+              : "border-transparent ring-gray-700"
+          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
           {errors.phone?.message}
