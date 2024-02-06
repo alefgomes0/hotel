@@ -25,3 +25,9 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
+
+Route::get('/stripe_pub', function() {
+    return response()->json([
+        'publishableKey' => env('STRIPE_KEY')
+    ]);
+});
