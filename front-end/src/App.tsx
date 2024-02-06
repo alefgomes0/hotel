@@ -10,6 +10,7 @@ import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { SearchResults } from "./pages/SearchResults/SearchResults";
 import { NoMatch } from "./pages/NoMatch/NoMatch";
 import { fetchPublishKey } from "./api/fetchPublishKey";
+import { PaymentForm } from "./components/PaymentForm/PaymentForm";
 
 const publishableKey = await fetchPublishKey();
 const stripePromise = loadStripe(publishableKey);
@@ -26,7 +27,11 @@ const App = () => {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/availability?" element={<SearchResults />} />
-              <Route path="/checkout" element={<ConfirmReservation />} />
+              <Route
+                path="/checkout/contact"
+                element={<ConfirmReservation />}
+              />
+              <Route path="/checkout/payment" element={<PaymentForm />} />
               <Route path="/*" element={<NoMatch />} />
             </Routes>
           </BrowserRouter>

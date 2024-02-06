@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SendForm } from "../Buttons/SendForm";
@@ -31,8 +32,11 @@ export const ContactInformation = () => {
     mode: "onBlur",
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = (data: TContactInformationSchema) => {
     console.log(data);
+    navigate("/checkout/payment");
   };
 
   return (

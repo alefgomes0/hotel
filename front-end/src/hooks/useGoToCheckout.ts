@@ -7,6 +7,6 @@ export const useGoToCheckout = (selectedRoomsLenght: number) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (numOfGuests.length !== selectedRoomsLenght) return;
-    navigate("/checkout");
+    navigate("/checkout/contact");
   }, [selectedRoomsLenght]);
 };
