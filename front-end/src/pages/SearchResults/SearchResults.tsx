@@ -24,7 +24,7 @@ export const SearchResults = () => {
   useGoToCheckout(selectedSuiteIndex.selected.length);
 
   return (
-    <main className="testando grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12eb">
+    <main className="testando grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
       <SearchResultsHeader />
       <section className="pt-8">
         {isLoading && <RoomDisplayerSkeleton />}
