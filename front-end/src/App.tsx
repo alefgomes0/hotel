@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ConfirmReservation } from "./pages/ConfirmReservation/ConfirmReservation";
 import { Elements } from "@stripe/react-stripe-js";
+import { fetchPublishKey } from "./api/fetchPublishKey";
 import { GuestInfoProvider } from "./context/GuestInfoContext";
 import { Header } from "./components/Header/Header";
+import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { loadStripe } from "@stripe/stripe-js";
+import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { SearchResults } from "./pages/SearchResults/SearchResults";
 import { NoMatch } from "./pages/NoMatch/NoMatch";
-import { fetchPublishKey } from "./api/fetchPublishKey";
-import { PaymentForm } from "./components/PaymentForm/PaymentForm";
 
 const publishableKey = await fetchPublishKey();
 const stripePromise = loadStripe(publishableKey);
@@ -21,7 +21,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <GuestInfoProvider>
-        <Elements stripe={stripePromise}>
+        <Elements stripe={stripePromise} options={{ layout: "tabs" }}>
           <BrowserRouter>
             <Header />
             <Routes>
@@ -31,7 +31,7 @@ const App = () => {
                 path="/checkout/contact"
                 element={<ConfirmReservation />}
               />
-              <Route path="/checkout/payment" element={<PaymentForm />} />
+              <Route path="/checkout/payment" element={<PaymentPage />} />
               <Route path="/*" element={<NoMatch />} />
             </Routes>
           </BrowserRouter>

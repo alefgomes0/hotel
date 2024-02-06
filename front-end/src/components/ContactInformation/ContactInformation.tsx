@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SendForm } from "../Buttons/SendForm";
@@ -33,10 +33,10 @@ export const ContactInformation = () => {
   });
 
   const navigate = useNavigate();
-
+  
   const onSubmit = (data: TContactInformationSchema) => {
     console.log(data);
-    navigate("/checkout/payment");
+    navigate("/checkout/payment")
   };
 
   return (
@@ -53,10 +53,8 @@ export const ContactInformation = () => {
           type="text"
           placeholder="John"
           id="firstName"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
-            errors.firstName
-              ? "ring-transparent  border-red-400"
-              : "border-transparent ring-gray-700"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
+            errors.firstName ? " border-red-400" : "border-transparent"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs ">
@@ -72,10 +70,8 @@ export const ContactInformation = () => {
           type="text"
           placeholder="Doe"
           id="lastName"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
-            errors.lastName
-              ? "ring-transparent  border-red-400"
-              : "border-transparent ring-gray-700"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
+            errors.lastName ? "border-red-400" : "border-transparent"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
@@ -91,10 +87,8 @@ export const ContactInformation = () => {
           type="email"
           placeholder="johndoe@email.com"
           id="email"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
-            errors.email
-              ? "ring-transparent  border-red-400"
-              : "border-transparent ring-gray-700"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
+            errors.email ? "border-red-400" : "border-transparent"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
@@ -110,10 +104,8 @@ export const ContactInformation = () => {
           type="text"
           placeholder="123, Actual Street"
           id="address"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
-            errors.address
-              ? "ring-transparent  border-red-400"
-              : "border-transparent ring-gray-700"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
+            errors.address ? "border-red-400" : "border-transparent"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
@@ -125,14 +117,12 @@ export const ContactInformation = () => {
           Phone
         </label>
         <input
-          {...register("phone")}
+          {...register("phone", { valueAsNumber: true })}
           type="phone"
           placeholder="432213-3213"
           id="phone"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 transition-colors duration-300 outline-none focus:ring-2 ${
-            errors.phone
-              ? "ring-transparent  border-red-400"
-              : "border-transparent ring-gray-700"
+          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
+            errors.phone ? "border-red-400" : "border-transparent"
           } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
         />
         <p className="text-red-500 pt-1.5 text-xs pb-3">
