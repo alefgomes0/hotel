@@ -11,17 +11,25 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SearchResults } from "./pages/SearchResults/SearchResults";
 import { NoMatch } from "./pages/NoMatch/NoMatch";
+import { useGuestInfo } from "./hooks/useGuestInfo";
 
 const publishableKey = await fetchPublishKey();
 const stripePromise = loadStripe(publishableKey);
 
 const App = () => {
   const queryClient = new QueryClient();
+  const { getTotalAmount } = useGuestInfo();
+
+  const options = {
+    mode: 'payment',
+    amount: () => getTotalAmount(),
+    currency: 'usd',
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
       <GuestInfoProvider>
-        <Elements stripe={stripePromise} options={{ layout: "tabs" }}>
+        <Elements stripe={stripePromise} options={options}>
           <BrowserRouter>
             <Header />
             <Routes>

@@ -68,7 +68,6 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     for (let i = 0; i < numOfGuests.length; i++) {
       totalValue += Math.round(getPartialAmount(i) * 0.043);
     }
-
     return totalValue;
   };
 
