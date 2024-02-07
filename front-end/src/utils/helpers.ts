@@ -1,3 +1,4 @@
+import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { numOfGuestsProps } from "../types/numOfGuestsProps";
 import { RoomProps } from "../types/RoomProps";
 
@@ -20,4 +21,5 @@ const getGuestInfo = (guestData: numOfGuestsProps[]) => {
   return totalGuests;
 };
 
-export { filterSuiteById, getGuestInfo };
+
+export {filterSuiteById, getGuestInfo };

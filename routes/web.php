@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Room;
 use App\Http\Controllers\RoomController;
@@ -25,4 +26,13 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
+Route::get('/config', [StripePaymentController::class, 'config']);
 Route::post('/create_intent', [StripePaymentController::class, 'create_intent']);
+
+Route::post('/teste', function(Request $request) {
+    $a = $request->input('teste');
+
+    return response()->json([
+        'adsa' => $a
+    ], 200);
+});

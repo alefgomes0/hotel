@@ -1,4 +1,5 @@
 import {
+  CardElement,
   PaymentElement,
   useElements,
   useStripe,
@@ -9,7 +10,7 @@ export const PaymentForm = () => {
   const elements = useElements();
   const stripe = useStripe();
 
-/*   const handleSubmit = (e: React.FormEvent) => {
+  /*   const handleSubmit = (e: React.FormEvent) => {
     if (!stripe || !elements) return;
     e.preventDefault();
     const cardElement = elements?.getElement(CardElement);
@@ -18,7 +19,7 @@ export const PaymentForm = () => {
   }; */
 
   return (
-    <form  className="grid gap-y-12">
+    <form className="grid gap-y-12">
       <PaymentElement />
       <PayButton />
     </form>

@@ -76,7 +76,9 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     for (let i = 0; i < numOfGuests.length; i++) {
       totalValue += numOfGuests[i].selectedRoom.pricePerDay * daysOfStay;
     }
-    return totalValue + getTotalTaxesAndFees();
+    totalValue += getTotalTaxesAndFees();
+
+    return totalValue ? totalValue : 0;
   };
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
