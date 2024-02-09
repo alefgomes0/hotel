@@ -3,6 +3,7 @@ import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { RoomProps } from "@/types/RoomProps";
+import axios from "@/api/axios";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
@@ -55,7 +56,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
   const numOfSuites = numOfGuests.length;
 
-  const getPartialAmount = (index: number) => {
+  /*   const getPartialAmount = (index: number) => {
     return daysOfStay * numOfGuests[index].selectedRoom.pricePerDay;
   };
 
@@ -69,6 +70,17 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
       totalValue += Math.round(getPartialAmount(i) * 0.043);
     }
     return totalValue;
+  }; */
+
+  const getPartialAmount = async (id: number, daysOfStay: number) => {
+    try {
+      return await axios.post("/calculate_price/partial", {
+        id,
+        daysOfStay,
+      });
+    } catch (err) {
+      return (err as Error).message;
+    }
   };
 
   const getTotalAmount = () => {

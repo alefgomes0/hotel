@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://http://localhost:5173/*',
-        'https://api.stripe.com/*'
+        'https://api.stripe.com/*',
+        '*'
     ];
 }
