@@ -3,8 +3,6 @@ import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { RoomProps } from "@/types/RoomProps";
-import axios from "@/api/axios";
-import { TPartialAmount } from "@/types/PartialAmount";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
