@@ -3,8 +3,7 @@ import React from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayArrow } from "../svg/YourStayArrow";
 import { fetchPartialPrice } from "@/api/fetchPartialPrice";
-
-const partials = await fetchPartialPrice(1, 2)
+import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice";
 
 export const YourStay = () => {
   /*   const {
@@ -17,7 +16,8 @@ export const YourStay = () => {
     getTotalAmount,
   } = useGuestInfo(); */
 
-  console.log(partials)
+  const { data } = useFetchPartialPrice(1, 1);
+  console.log(data);
 
   return (
     <article className="sticky top-[5%] row-start-1 row-end-3 col-start-2 col-end-3 self-start flex flex-col w-[400px] justify-center text-gray-700 border-[1px] border-gray-400 gap-4 px-6 py-3 shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]">
