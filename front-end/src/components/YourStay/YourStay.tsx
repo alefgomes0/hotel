@@ -2,9 +2,12 @@ import format from "date-fns/format";
 import React from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayArrow } from "../svg/YourStayArrow";
+import { fetchPartialPrice } from "@/api/fetchPartialPrice";
+
+const partials = await fetchPartialPrice(1, 2)
 
 export const YourStay = () => {
-  const {
+  /*   const {
     checkIn,
     checkOut,
     daysOfStay,
@@ -12,11 +15,13 @@ export const YourStay = () => {
     getPartialAmount,
     getTaxesAndFees,
     getTotalAmount,
-  } = useGuestInfo();
+  } = useGuestInfo(); */
+
+  console.log(partials)
 
   return (
     <article className="sticky top-[5%] row-start-1 row-end-3 col-start-2 col-end-3 self-start flex flex-col w-[400px] justify-center text-gray-700 border-[1px] border-gray-400 gap-4 px-6 py-3 shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]">
-      <h6 className="text-xl font-semibold tracking-wider">Your Stay</h6>
+      {/*       <h6 className="text-xl font-semibold tracking-wider">Your Stay</h6>
       <div className="grid grid-rows-1 grid-cols-2">
         <div className="flex flex-col">
           <p className="font-medium opacity-90">Check-in</p>
@@ -71,7 +76,7 @@ export const YourStay = () => {
       <div className="flex items-center justify-between text-xl">
         <p className="font-medium">Total:</p>
         <p className="font-bold">${getTotalAmount()}</p>
-      </div>
+      </div> */}
     </article>
   );
 };

@@ -12,7 +12,7 @@ class PriceController extends Controller
     {
         $id = $request->input('id');
         $days_of_stay = $request->input('daysOfStay');
-        $tax_rate = 0.043;
+        $TAX_RATE = 0.043;
 
         $price_per_day = DB::table('room_type')
         ->select('price_per_day')
@@ -20,9 +20,8 @@ class PriceController extends Controller
         ->get();
         
         $partialAmount = $price_per_day[0]->price_per_day * $days_of_stay;
-        $taxes = round($partialAmount * $tax_rate, 2);
-        $partialPlusTaxes = round($partialAmount + $taxes, 2);
-
+        $taxes = round($partialAmount * $TAX_RATE, 2);
+        $partialPlusTaxes = $partialAmount + $taxes;
 
         return response()->json([
             'partialAmount' => $partialAmount,

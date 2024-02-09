@@ -4,6 +4,7 @@ import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { RoomProps } from "@/types/RoomProps";
 import axios from "@/api/axios";
+import { TPartialAmount } from "@/types/PartialAmount";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
@@ -19,9 +20,6 @@ type GuestInfoContextValues = {
   daysOfStay: number;
   deleteRoom: (index: number) => void;
   numOfGuests: numOfGuestsProps[];
-  getPartialAmount: (index: number) => number;
-  getTaxesAndFees: (index: number) => number;
-  getTotalAmount: () => number;
   numOfSuites: number;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
   getFieldValue: (field: SearchFieldValues, index: number) => number;
@@ -37,9 +35,9 @@ type GuestInfoContextValues = {
   ) => void;
 };
 
-export const GuestInfoContext = createContext({} as GuestInfoContextValues);
+const GuestInfoContext = createContext({} as GuestInfoContextValues);
 
-export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
+const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   const [checkIn, setCheckIn] = useState<null | Date>(null);
   const [checkOut, setCheckOut] = useState<null | Date>(null);
   const [numOfGuests, setNumOfGuests] = useState<numOfGuestsProps[]>([
@@ -72,18 +70,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     return totalValue;
   }; */
 
-  const getPartialAmount = async (id: number, daysOfStay: number) => {
-    try {
-      return await axios.post("/calculate_price/partial", {
-        id,
-        daysOfStay,
-      });
-    } catch (err) {
-      return (err as Error).message;
-    }
-  };
-
-  const getTotalAmount = () => {
+  /*   const getTotalAmount = () => {
     let totalValue = 0;
     for (let i = 0; i < numOfGuests.length; i++) {
       totalValue += numOfGuests[i].selectedRoom.pricePerDay * daysOfStay;
@@ -91,7 +78,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     totalValue += getTotalTaxesAndFees();
 
     return totalValue ? totalValue : 0;
-  };
+  }; */
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
     if (field === "adult") return numOfGuests[index].adult;
@@ -205,10 +192,7 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setNumOfGuests,
         handleSuiteSelection,
         daysOfStay,
-        getPartialAmount,
         numOfSuites,
-        getTaxesAndFees,
-        getTotalAmount,
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,
@@ -218,3 +202,5 @@ export const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     </GuestInfoContext.Provider>
   );
 };
+
+export { GuestInfoContext, GuestInfoProvider };
