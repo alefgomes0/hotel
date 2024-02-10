@@ -43,6 +43,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
       adult: 1,
       children: 0,
       selectedRoom: {
+        id: null,
         name: "",
         pricePerDay: 0,
       },
@@ -91,6 +92,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         adult: 1,
         children: 0,
         selectedRoom: {
+          id: null,
           name: "",
           pricePerDay: 0,
         },
@@ -168,6 +170,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
           return {
             ...guestData,
             selectedRoom: {
+              id: roomData.id,
               name: roomData.type,
               pricePerDay: Number(roomData.price_per_day),
             },
