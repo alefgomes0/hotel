@@ -3,7 +3,7 @@ import React from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayArrow } from "../svg/YourStayArrow";
 import { fetchPartialPrice } from "@/api/fetchPartialPrice";
-import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice";
+import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice"; 
 
 export const YourStay = () => {
   /*   const {
@@ -16,7 +16,8 @@ export const YourStay = () => {
     getTotalAmount,
   } = useGuestInfo(); */
 
-  const { data } = useFetchPartialPrice(1, 1);
+  const { data, error, isLoading } = useFetchPartialPrice(3, 1);
+  console.log(error);
   console.log(data);
 
   return (

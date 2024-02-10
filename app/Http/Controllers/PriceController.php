@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class PriceController extends Controller
 {
-    public function get_partial_amount(Request $request): JsonResponse
-    {
-        $id = $request->input('id');
-        $days_of_stay = $request->input('daysOfStay');
+    public function get_partial_amount(string $suiteInfo): JsonResponse
+    {   
+        $suiteInfoObject = json_decode(strip_tags($suiteInfo));
+        $id = $suiteInfoObject->id;
+        $days_of_stay = $suiteInfoObject->daysOfStay;
         $TAX_RATE = 0.043;
 
         $price_per_day = DB::table('room_type')

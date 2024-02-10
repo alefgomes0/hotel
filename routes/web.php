@@ -28,12 +28,4 @@ Route::get('/', function () {
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
 Route::get('/config', [StripePaymentController::class, 'config']);
 Route::post('/create_intent', [StripePaymentController::class, 'create_intent']);
-Route::post('/calculate_price/partial', [PriceController::class, 'get_partial_amount']);
-
-Route::post('/teste', function(Request $request) {
-    $a = $request->input('teste');
-
-    return response()->json([
-        'adsa' => $a
-    ], 200);
-});
+Route::get('/calculate_price/partial/{suiteInfo}', [PriceController::class, 'get_partial_amount']);
