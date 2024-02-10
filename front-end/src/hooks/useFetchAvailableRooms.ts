@@ -7,6 +7,6 @@ export const useFetchAvailableRooms = () => {
   return useQuery({
     queryKey: ["reserva"],
     queryFn: () => fetchAvailableRooms(checkIn, checkOut, numOfGuests),
-    enabled: !!checkIn && !!checkOut && !!numOfGuests
+    enabled: !!checkIn && !!checkOut && !!numOfGuests,
   });
 };

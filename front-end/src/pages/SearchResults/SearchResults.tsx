@@ -21,6 +21,7 @@ export const SearchResults = () => {
   useFillGuestContext(location.search);
   const { numOfGuests } = useGuestInfo();
   const { data, isLoading, isError, isSuccess } = useFetchAvailableRooms();
+  console.log(data)
   useGoToCheckout(selectedSuiteIndex.selected.length);
 
   return (

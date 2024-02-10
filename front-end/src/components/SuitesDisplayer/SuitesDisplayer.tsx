@@ -29,7 +29,7 @@ export const SuitesDisplayer = ({
                 room={room}
                 index={arrayIndex}
                 selectedSuiteIndex={selectedSuiteIndex}
-              setSelectedSuiteIndex={setSelectedSuiteIndex}
+                setSelectedSuiteIndex={setSelectedSuiteIndex}
               />
             ) : (
               <></>
