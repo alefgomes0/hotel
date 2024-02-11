@@ -2,6 +2,7 @@ import { differenceInDays } from "date-fns";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
+import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps"; }
 import { RoomProps } from "@/types/RoomProps";
 
 type GuestInfoProviderProps = {
@@ -15,6 +16,8 @@ type GuestInfoContextValues = {
   checkOut: null | Date;
   handleSuiteSelection: (index: number, roomData: RoomProps) => void;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
+  selectedSuiteIndex: { current: number; selected: number[] };
+  setSelectedSuiteIndex: React.Dispatch<React.SetStateAction<SelectedSuiteIndexProps>>;
   daysOfStay: number;
   deleteRoom: (index: number) => void;
   numOfGuests: numOfGuestsProps[];
@@ -50,34 +53,14 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     },
   ]);
 
+  const [selectedSuiteIndex, setSelectedSuiteIndex] = useState<SelectedSuiteIndexProps>({
+    current: 0,
+    selected: [],
+  });
+
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
+
   const numOfSuites = numOfGuests.length;
-
-  /*   const getPartialAmount = (index: number) => {
-    return daysOfStay * numOfGuests[index].selectedRoom.pricePerDay;
-  };
-
-  const getTaxesAndFees = (index: number) => {
-    return Math.round(getPartialAmount(index) * 0.043);
-  };
-
-  const getTotalTaxesAndFees = () => {
-    let totalValue = 0;
-    for (let i = 0; i < numOfGuests.length; i++) {
-      totalValue += Math.round(getPartialAmount(i) * 0.043);
-    }
-    return totalValue;
-  }; */
-
-  /*   const getTotalAmount = () => {
-    let totalValue = 0;
-    for (let i = 0; i < numOfGuests.length; i++) {
-      totalValue += numOfGuests[i].selectedRoom.pricePerDay * daysOfStay;
-    }
-    totalValue += getTotalTaxesAndFees();
-
-    return totalValue ? totalValue : 0;
-  }; */
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
     if (field === "adult") return numOfGuests[index].adult;
@@ -191,6 +174,8 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         deleteRoom,
         numOfGuests,
         setNumOfGuests,
+        selectedSuiteIndex,
+        setSelectedSuiteIndex,
         handleSuiteSelection,
         daysOfStay,
         numOfSuites,

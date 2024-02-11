@@ -12,20 +12,14 @@ import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 type SuiteCardProps = {
   room: RoomProps;
   index: number;
-  selectedSuiteIndex: SelectedSuiteIndexProps;
-  setSelectedSuiteIndex: React.Dispatch<
-    React.SetStateAction<SelectedSuiteIndexProps>
-  >;
 };
 
 export const SuiteCard = ({
   room,
-  index,
-  selectedSuiteIndex,
-  setSelectedSuiteIndex,
+  index
 }: SuiteCardProps) => {
   const [showSuiteDetails, setShowSuiteDetails] = useState(false);
-  const { handleSuiteSelection } = useGuestInfo();
+  const { handleSuiteSelection, selectedSuiteIndex, setSelectedSuiteIndex } = useGuestInfo();
 
   const handleButtonClick = () => {
     handleSuiteSelection(index, room);

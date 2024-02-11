@@ -12,14 +12,10 @@ import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
 
 export const SearchResults = () => {
-  const [selectedSuiteIndex, setSelectedSuitedIndex] =
-    useState<SelectedSuiteIndexProps>({
-      current: 0,
-      selected: [],
-    });
+
   const location = useLocation();
   useFillGuestContext(location.search);
-  const { numOfGuests } = useGuestInfo();
+  const { numOfGuests, selectedSuiteIndex } = useGuestInfo();
   const { data, isLoading, isError, isSuccess } = useFetchAvailableRooms();
   console.log(data)
   useGoToCheckout(selectedSuiteIndex.selected.length);
@@ -42,8 +38,6 @@ export const SearchResults = () => {
                     roomData={data?.data.suites[index + 1]}
                     arrayIndex={index}
                     key={index}
-                    selectedSuiteIndex={selectedSuiteIndex}
-                    setSelectedSuiteIndex={setSelectedSuitedIndex}
                   />
                 );
               }
@@ -51,7 +45,7 @@ export const SearchResults = () => {
           </>
         )}
       </section>
-      <YourStay />
+      <YourStay selectedSuites={selectedSuiteIndex.selected}/>
     </main>
   );
 };

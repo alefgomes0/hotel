@@ -10,10 +10,13 @@ type YourStaySuitesProps = {
 
 export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
   const { daysOfStay } = useGuestInfo();
-  const { data, error, isLoading } = useFetchPartialPrice(suite.selectedRoom.id)
+  const { data, error, isLoading } = useFetchPartialPrice(
+    suite.selectedRoom.id, index
+  );
 
   return (
     <React.Fragment key={index}>
+      {!suite.selectedRoom.name && <></>}
       {suite.selectedRoom.name && (
         <div className="flex flex-col gap-y-3 border-t-[1px] border-gray-400 pt-3">
           <p className="font-medium">SUITE {index + 1}</p>

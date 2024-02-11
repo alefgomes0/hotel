@@ -34,11 +34,8 @@ class PriceController extends Controller
     public function get_total_amount(string $suites_info)
     {
         
-        $suites_type_object = json_decode($suites_info);
-/*         $suite_types = $suites_type_object->suitesType;
-        $days_of_stay = $suites_type_object->daysOfStay; */
-/*         $suites_type_object = json_decode(strip_tags($suites_info));
-        $suite_types = $suites_type_object->suitesType;
+        $suites_type_object = json_decode(strip_tags($suites_info));
+        $suite_types = $suites_type_object->suiteTypes;
         $days_of_stay = $suites_type_object->daysOfStay;
         $TAX_RATE = 0.043;
         $totalAmount = 0;
@@ -47,13 +44,13 @@ class PriceController extends Controller
             $suite_price = DB::table('room_type')
             ->select('price_per_day')
             ->where('type', '=', $suite_type)
-            ->get();
-
-            $totalAmount += ($suite_price[0]->$suite_price * $days_of_stay) + ($suite_price[0]->$suite_price * $TAX_RATE);
-        } */
+            ->first();
+        
+            $totalAmount += ($suite_price->price_per_day * $days_of_stay) + ($suite_price->price_per_day * $days_of_stay * $TAX_RATE);
+        }
 
         return response()->json([
-            'totalAmount' => $suites_type_object
+            'totalAmount' => $totalAmount
         ], 200);
     }
 }

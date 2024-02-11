@@ -1,13 +1,16 @@
 import { useGuestInfo } from "@/hooks/useGuestInfo";
-import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice";
 import { YourStayHeader } from "../YourStayHeader/YourStayHeader";
 import { YourStaySuites } from "../YourStaySuites/YourStaySuites";
+import { useFetchTotalPrice } from "@/hooks/useFetchTotalPrice";
 
-export const YourStay = () => {
+type YourStayProps = {
+  selectedSuites: number[]
+}
+
+export const YourStay = ({ selectedSuites }: YourStayProps) => {
   const { numOfGuests } = useGuestInfo();
 
-  const { data, error, isLoading } = useFetchPartialPrice(3, 1);
-  console.log(error);
+  const { data, error, isLoading } = useFetchTotalPrice(selectedSuites);
   console.log(data);
 
   return (
@@ -19,7 +22,7 @@ export const YourStay = () => {
       <div className="h-[1px] bg-gray-400"></div>
       <div className="flex items-center justify-between text-xl">
         <p className="font-medium">Total:</p>
-        <p className="font-bold">${}</p>
+        <p className="font-bold">${data?.data.totalAmount}</p>
       </div>
     </article>
   );
