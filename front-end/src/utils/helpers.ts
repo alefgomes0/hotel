@@ -21,5 +21,13 @@ const getGuestInfo = (guestData: numOfGuestsProps[]) => {
   return totalGuests;
 };
 
+const getSuitesType = (guestData: numOfGuestsProps[]) => {
+  const suiteTypes = [];
+  for (let i = 0;  i < guestData.length; i++) {
+    suiteTypes.push(guestData[i].selectedRoom.name)
+  }
+  return suiteTypes;
+}
 
-export {filterSuiteById, getGuestInfo };
+
+export {filterSuiteById, getGuestInfo, getSuitesType };
