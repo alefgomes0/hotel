@@ -54,3 +54,12 @@ class PriceController extends Controller
             'totalAmount' => $totalAmount
         ], 200);
     }
+
+    public function teste(Request $request)
+    {
+        $id = $request->query('id');
+        return response()->json([
+            'id' => $id
+        ], 200);
+    }
+}
