@@ -11,7 +11,8 @@ type YourStaySuitesProps = {
 export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
   const { daysOfStay } = useGuestInfo();
   const { data, error, isLoading } = useFetchPartialPrice(
-    suite.selectedRoom.id, index
+    suite.selectedRoom.id as number,
+    index
   );
 
   return (

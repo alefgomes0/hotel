@@ -17,10 +17,11 @@ class PriceController extends Controller
 
         $price_per_day = DB::table('room_type')
         ->select('price_per_day')
-        ->where('id', '=', $id)
-        ->get();
+        ->join('rooms', 'room_type_id', '=', 'room_type.id')
+        ->where('rooms.id', '=', $id)
+        ->first();
         
-        $partialAmount = $price_per_day[0]->price_per_day * $days_of_stay;
+        $partialAmount = $price_per_day->price_per_day * $days_of_stay;
         $taxes = round($partialAmount * $TAX_RATE, 2);
         $partialPlusTaxes = $partialAmount + $taxes;
 
@@ -51,6 +52,14 @@ class PriceController extends Controller
 
         return response()->json([
             'totalAmount' => $totalAmount
+        ], 200);
+    }
+
+    public function teste(Request $request)
+    {
+        $id = $request->query('id');
+        return response()->json([
+            'id' => $id
         ], 200);
     }
 }

@@ -1,4 +1,3 @@
-import { useGuestInfo } from "@/hooks/useGuestInfo";
 import axios from "./axios";
 import { TPartialAmount } from "@/types/PartialAmount";
 

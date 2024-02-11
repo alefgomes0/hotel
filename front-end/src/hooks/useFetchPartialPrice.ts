@@ -8,6 +8,6 @@ export const useFetchPartialPrice = (id: number, arrayIndex: number) => {
   return useQuery({
     queryKey: ["calculatePartialPrice", id],
     queryFn: () => fetchPartialPrice(id, daysOfStay),
-    enabled: !!numOfGuests[arrayIndex].selectedRoom.name
+    enabled: !!numOfGuests[arrayIndex].selectedRoom.id
   });
 };

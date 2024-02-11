@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { PaymentForm } from "@/components/PaymentForm/PaymentForm";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { fetchPublishKey } from "@/api/fetchPublishKey";
+import { useGuestInfo } from "@/hooks/useGuestInfo";
 
 const publishableKey = await fetchPublishKey();
 const stripe = loadStripe(publishableKey);
@@ -13,6 +14,8 @@ const options = {
 };
 
 export const PaymentPage = () => {
+  const { selectedSuiteIndex } = useGuestInfo();
+
   return (
     <Elements stripe={stripe} options={options}>
       <main className="relative grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 text-gray-700 bg-gray-100 px-32 pt-12">
@@ -22,7 +25,7 @@ export const PaymentPage = () => {
             <PaymentForm />
           </div>
         </section>
-        <YourStay />
+        <YourStay selectedSuites={selectedSuiteIndex.selected}/>
         <div className="w-full h-full absolute top-[0%] left-[0%] bg-[url(/images/bg-pattern.jpg)] z-[10] opacity-[12%] pointer-events-none"></div>
       </main>
     </Elements>

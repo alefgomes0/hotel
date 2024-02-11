@@ -2,7 +2,7 @@ import { differenceInDays } from "date-fns";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
 import { SearchFieldValues } from "../types/SearchFieldValues";
-import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps"; }
+import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 import { RoomProps } from "@/types/RoomProps";
 
 type GuestInfoProviderProps = {

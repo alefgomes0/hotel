@@ -7,8 +7,6 @@ import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
-import { useState } from "react";
-import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
 
 export const SearchResults = () => {
