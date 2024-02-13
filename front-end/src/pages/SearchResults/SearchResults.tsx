@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
+import { YourStaySkeleton } from "@/components/Skeletons/YourStaySkeleton";
 
 export const SearchResults = () => {
   const location = useLocation();
@@ -19,13 +20,14 @@ export const SearchResults = () => {
   useGoToCheckout(selectedSuiteIndex.selected.length);
 
   return (
-    <main className="testando grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
-      <SearchResultsHeader />
-      <section className="pt-8">
+    <main className=" min-h-[calc(100svh-90px)] bg-gray-100 px-32 pt-12">
+      <section className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] gap-6 pt-8">
+        <SearchResultsHeader />
         {isLoading && (
           <>
             {numOfGuests.length > 1 && <ChooseRoomSkeleton />}
             <RoomDisplayerSkeleton />
+            <YourStaySkeleton />
           </>
         )}
         {isError && <></>}
@@ -45,10 +47,10 @@ export const SearchResults = () => {
                 );
               }
             })}
+            <YourStay selectedSuites={selectedSuiteIndex.selected} />
           </>
         )}
       </section>
-      <YourStay selectedSuites={selectedSuiteIndex.selected} />
     </main>
   );
 };
