@@ -1,4 +1,5 @@
 import { ChooseRoom } from "@/components/ChooseRoom/ChooseRoom";
+import { ChooseRoomSkeleton } from "@/components/Skeletons/ChooseRoomSkeleton";
 import { RoomDisplayerSkeleton } from "@/components/Skeletons/RoomDisplayerSkeleton";
 import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
 import { useFetchAvailableRooms } from "../../hooks/useFetchAvailableRooms";
@@ -10,19 +11,23 @@ import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
 
 export const SearchResults = () => {
-
   const location = useLocation();
   useFillGuestContext(location.search);
   const { numOfGuests, selectedSuiteIndex } = useGuestInfo();
   const { data, isLoading, isError, isSuccess } = useFetchAvailableRooms();
-  console.log(data)
+  console.log(data);
   useGoToCheckout(selectedSuiteIndex.selected.length);
 
   return (
     <main className="testando grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 bg-gray-100 px-32 pt-12">
       <SearchResultsHeader />
       <section className="pt-8">
-        {isLoading && <RoomDisplayerSkeleton />}
+        {isLoading && (
+          <>
+            {numOfGuests.length > 1 && <ChooseRoomSkeleton />}
+            <RoomDisplayerSkeleton />
+          </>
+        )}
         {isError && <></>}
         {isSuccess && (
           <>
@@ -43,7 +48,7 @@ export const SearchResults = () => {
           </>
         )}
       </section>
-      <YourStay selectedSuites={selectedSuiteIndex.selected}/>
+      <YourStay selectedSuites={selectedSuiteIndex.selected} />
     </main>
   );
 };

@@ -33,6 +33,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.10.0",
     "@testing-library/react": "^14.1.0",
     "@types/node": "^20.11.2",
     "@types/react": "^18.2.37",
