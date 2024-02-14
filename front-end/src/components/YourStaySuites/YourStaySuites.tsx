@@ -15,10 +15,11 @@ export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
     suite.selectedRoom.id as number,
     index
   );
+  console.log(data)
 
   return (
     <React.Fragment key={index}>
-      {!suite.selectedRoom.name && <></>}
+{/*       {!suite.selectedRoom.name && <></>}
       {isLoading && <YourStaySuiteSkeleton />}
       {isSuccess && suite.selectedRoom.name && (
         <div className="flex flex-col gap-y-3 border-t-[1px] border-gray-400 pt-3">
@@ -44,7 +45,7 @@ export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
             <p className="font-medium">${data?.data.taxes}</p>
           </div>
         </div>
-      )}
+      )} */}
     </React.Fragment>
   );
 };
