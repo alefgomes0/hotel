@@ -30,6 +30,3 @@ Route::get('/config', [StripePaymentController::class, 'config']);
 Route::post('/create_intent', [StripePaymentController::class, 'create_intent']);
 Route::get('/calculate_price/partial/{suites_info}', [PriceController::class, 'get_partial_amount']);
 Route::get('/calculate_price/total/{suites_info}', [PriceController::class, 'get_total_amount']);
-
-Route::get('/calculate_price/teste', [PriceController::class, 'teste']);
-
