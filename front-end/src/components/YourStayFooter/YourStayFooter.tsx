@@ -10,12 +10,10 @@ export const YourStayFooter = () => {
   return (
     <>
       {isLoading && <YourStayFooterSkeleton />}
-      {isSuccess && (
-        <div className="flex items-center justify-between text-xl">
-          <p className="font-medium">Total:</p>
-          <p className="font-bold">${data?.data.totalAmount}</p>
-        </div>
-      )}
+      <div className="flex items-center justify-between text-xl">
+        <p className="font-medium">Total:</p>
+        {isSuccess && <p className="font-bold">${data?.data.totalAmount}</p>}
+      </div>
     </>
   );
 };

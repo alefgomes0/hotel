@@ -4,11 +4,12 @@ import { CloseIcon } from "../svg/CloseIcon";
 import { FoodIcon } from "../svg/FoodIcon";
 import { getImagesPath } from "@/utils/getImagesPath";
 import { RoomProps } from "@/types/RoomProps";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { offset, useFloating } from "@floating-ui/react";
 import { SignalIcon } from "../svg/SignalIcon";
 import { ServiceIcon } from "../svg/ServiceIcon";
 import { SquaredArrow } from "../svg/SquaredArrow";
+import { useHandleClickOutside } from "@/hooks/useHandleClickOutside";
 
 type SuiteDetailsProps = {
   closeRoomDetails: () => void;
@@ -25,32 +26,10 @@ export const SuiteDetails = ({
   const { refs, floatingStyles } = useFloating({
     strategy: "fixed",
     placement: "right-start",
-    middleware: [
-      offset(20)
-    ]
+    middleware: [offset(20)],
   });
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (showSuiteDetails && wrapperRef.current?.contains(e.target as Node)) {
-        closeRoomDetails();
-      }
-    };
-    window.addEventListener("click", handleClickOutside);
-
-    if (showSuiteDetails) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-      document.body.style.scrollBehavior = "auto";
-    }
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-      document.body.style.overflow = "auto";
-    };
-  }, []);
-
+  useHandleClickOutside(showSuiteDetails, closeRoomDetails, wrapperRef);
   const imagesURL = getImagesPath(roomData);
 
   return (

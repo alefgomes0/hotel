@@ -10,6 +10,6 @@ export const useFetchTotalPrice = (selectedSuites: number[]) => {
   return useQuery({
     queryKey: ["calculateTotalPrice"],
     queryFn: () => fetchTotalPrice(suitesType, daysOfStay),
-    enabled: selectedSuites.length > 0
+    enabled: numOfGuests.length === selectedSuites.length,
   });
 };
