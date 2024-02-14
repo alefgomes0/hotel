@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use App\Traits\CalculatePriceTrait;
 
 class PriceController extends Controller
 {
-    use CalculatePriceTrait;
 
     public function getPartialAmount(string $suite_info): JsonResponse
     {   
@@ -37,7 +35,7 @@ class PriceController extends Controller
         , 200);
     }
 
-    public function getTotalAmount(string $suites_info): JsonResponse
+    public function get_total_amount(string $suites_info): JsonResponse
     {
         $suites_type_object = json_decode(strip_tags($suites_info));
         $suite_types = $suites_type_object->suiteTypes;
