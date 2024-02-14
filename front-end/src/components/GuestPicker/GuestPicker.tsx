@@ -30,7 +30,9 @@ export const GuestPicker = ({ arrayIndex }: GuestPickerProps) => {
           <NumericStepper field="children" arrayIndex={arrayIndex} />
         </div>
       </div>
-      <div
+      <button
+        title="delete suite"
+        aria-label="delete suite"
         className="absolute top-0 right-0 translate-x-full hover:scale-[1.07] transtion-transform"
         onClick={(e: React.MouseEvent) => {
           e.stopPropagation();
@@ -38,7 +40,7 @@ export const GuestPicker = ({ arrayIndex }: GuestPickerProps) => {
         }}
       >
         {arrayIndex > 0 && <TrashIcon width={20} height={20} />}
-      </div>
+      </button>
     </div>
   );
 };

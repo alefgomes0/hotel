@@ -1,5 +1,4 @@
 import { ChooseRoom } from "@/components/ChooseRoom/ChooseRoom";
-import { ChooseRoomSkeleton } from "@/components/Skeletons/ChooseRoomSkeleton";
 import { RoomDisplayerSkeleton } from "@/components/Skeletons/RoomDisplayerSkeleton";
 import { SearchResultsHeader } from "@/components/SearchResultsHeader/SearchResultsHeader";
 import { useFetchAvailableRooms } from "../../hooks/useFetchAvailableRooms";
@@ -23,9 +22,11 @@ export const SearchResults = () => {
     <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-32 pt-12">
       <section className=" ">
         <SearchResultsHeader />
+        {numOfGuests.length > 1 && (
+          <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
+        )}
         {isLoading && (
           <>
-            {numOfGuests.length > 1 && <ChooseRoomSkeleton />}
             <RoomDisplayerSkeleton />
             <YourStaySkeleton />
           </>
@@ -33,9 +34,6 @@ export const SearchResults = () => {
         {isError && <></>}
         {isSuccess && (
           <>
-            {numOfGuests.length > 1 && (
-              <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
-            )}
             {numOfGuests.map((_, index) => {
               if (index === selectedSuiteIndex.current) {
                 return (

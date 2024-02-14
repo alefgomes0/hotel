@@ -4,12 +4,12 @@ import { CloseIcon } from "../svg/CloseIcon";
 import { FoodIcon } from "../svg/FoodIcon";
 import { getImagesPath } from "@/utils/getImagesPath";
 import { RoomProps } from "@/types/RoomProps";
+import { useHandleClickOutside } from "@/hooks/useHandleClickOutside";
 import { useRef } from "react";
 import { offset, useFloating } from "@floating-ui/react";
 import { SignalIcon } from "../svg/SignalIcon";
 import { ServiceIcon } from "../svg/ServiceIcon";
 import { SquaredArrow } from "../svg/SquaredArrow";
-import { useHandleClickOutside } from "@/hooks/useHandleClickOutside";
 
 type SuiteDetailsProps = {
   closeRoomDetails: () => void;
