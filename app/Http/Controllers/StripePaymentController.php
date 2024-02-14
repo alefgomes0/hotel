@@ -18,7 +18,7 @@ class StripePaymentController extends Controller
 
     public function create_intent(Request $request)
     {
-/*         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $intent = $stripe->paymentIntents->create(
           [
             'amount' => 1099,
@@ -26,7 +26,7 @@ class StripePaymentController extends Controller
             // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
             'automatic_payment_methods' => ['enabled' => true],
           ]
-        ); */
+        );
         
         return response()->json([
             'client_secret' => $request

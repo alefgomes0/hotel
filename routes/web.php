@@ -27,6 +27,6 @@ Route::get('/', function () {
 
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
 Route::get('/config', [StripePaymentController::class, 'config']);
-Route::post('/create_intent', [StripePaymentController::class, 'create_intent']);
+Route::get('/create_intent/{suites_info}', [StripePaymentController::class, 'create_intent']);
 Route::get('/calculate_price/partial/{suites_info}', [PriceController::class, 'get_partial_amount']);
 Route::get('/calculate_price/total/{suites_info}', [PriceController::class, 'get_total_amount']);
