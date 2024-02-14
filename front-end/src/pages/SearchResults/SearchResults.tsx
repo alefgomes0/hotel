@@ -20,8 +20,8 @@ export const SearchResults = () => {
   useGoToCheckout(selectedSuiteIndex.selected.length);
 
   return (
-    <main className=" min-h-[calc(100svh-90px)] bg-gray-100 px-32 pt-12">
-      <section className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] gap-6 pt-8">
+    <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-32 pt-12">
+      <section className=" ">
         <SearchResultsHeader />
         {isLoading && (
           <>
@@ -47,10 +47,10 @@ export const SearchResults = () => {
                 );
               }
             })}
-            <YourStay selectedSuites={selectedSuiteIndex.selected} />
           </>
         )}
       </section>
+      <YourStay selectedSuites={selectedSuiteIndex.selected} />
     </main>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice";
+import { YourStaySuiteSkeleton } from "../Skeletons/YourStaySuiteSkeleton";
 
 type YourStaySuitesProps = {
   suite: numOfGuestsProps;
@@ -10,7 +11,7 @@ type YourStaySuitesProps = {
 
 export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
   const { daysOfStay } = useGuestInfo();
-  const { data, error, isLoading } = useFetchPartialPrice(
+  const { data, error, isLoading, isSuccess } = useFetchPartialPrice(
     suite.selectedRoom.id as number,
     index
   );
@@ -18,7 +19,8 @@ export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
   return (
     <React.Fragment key={index}>
       {!suite.selectedRoom.name && <></>}
-      {suite.selectedRoom.name && (
+      {isLoading && <YourStaySuiteSkeleton />}
+      {isSuccess && suite.selectedRoom.name && (
         <div className="flex flex-col gap-y-3 border-t-[1px] border-gray-400 pt-3">
           <p className="font-medium">SUITE {index + 1}</p>
           <div className="flex items-center justify-between" key={index}>
