@@ -50,7 +50,7 @@ export const SearchResults = () => {
           </>
         )}
       </section>
-      <YourStay selectedSuites={selectedSuiteIndex.selected} />
+      <YourStay />
     </main>
   );
 };
