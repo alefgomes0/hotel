@@ -5,19 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use App\Http\Traits\CalculatePrice;
 
 class PriceController extends Controller
 {
-
+    use CalculatePrice;
+    
     public function getPartialAmount(string $suite_info): JsonResponse
     {   
-        $price = $this->calculatePartialPrice($suite_info);
-        // $price = $this->teste($suite_info);
-
-
-/*         $suiteInfoArray = json_decode(strip_tags($suite_info));
-        $id = $suiteInfoArray->id;
-        $days_of_stay = $suiteInfoArray->daysOfStay;
+        $suite_infoObject = json_decode(strip_tags($suite_info));
+        $id = $suite_infoObject->id;
+        $days_of_stay = $suite_infoObject->daysOfStay;
         $TAX_RATE = 0.043;
 
         $price_per_day = DB::table('room_type')
@@ -28,14 +26,16 @@ class PriceController extends Controller
         
         $partialAmount = $price_per_day->price_per_day * $days_of_stay;
         $taxes = round($partialAmount * $TAX_RATE, 2);
-        $partialPlusTaxes = $partialAmount + $taxes; */
+        $partialPlusTaxes = $partialAmount + $taxes;
 
-        return response()->json(
-            'price' => $price
-        , 200);
+        return response()->json([
+            'partialAmount' => $partialAmount,
+            'taxes' => $taxes,
+            'partialPlusTaxes' => $partialPlusTaxes
+        ], 200);
     }
 
-    public function get_total_amount(string $suites_info): JsonResponse
+    public function getTotalAmount(string $suites_info)
     {
         $suites_type_object = json_decode(strip_tags($suites_info));
         $suite_types = $suites_type_object->suiteTypes;

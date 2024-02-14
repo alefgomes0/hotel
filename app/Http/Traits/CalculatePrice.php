@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Traits;
+namespace App\Http\Traits;
 use Illuminate\Support\Facades\DB;
 
-trait CalculatePriceTrait
+trait CalculatePrice
 {
-  public function calculatePartialPrice(string $suiteInfo): array
+  public function calculatePartialPrice(string $suiteInfo): Array
   {
 	$suiteInfoArray = json_decode(strip_tags($suiteInfo));
 	$id = $suiteInfoArray->id;
@@ -29,7 +29,7 @@ trait CalculatePriceTrait
 	];
   }
 
-  public function calculateTotalPrice(string $suitesInfo): array
+  public function calculateTotalPrice(string $suitesInfo): Array
   {
 		$suites_type_object = json_decode(strip_tags($suites_info));
 		$suite_types = $suites_type_object->suiteTypes;
