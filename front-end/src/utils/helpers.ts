@@ -1,4 +1,3 @@
-import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { numOfGuestsProps } from "../types/numOfGuestsProps";
 import { RoomProps } from "../types/RoomProps";
 
@@ -21,9 +20,9 @@ const getGuestInfo = (guestData: numOfGuestsProps[]) => {
   return totalGuests;
 };
 
-const getSuitesType = (guestData: numOfGuestsProps[]) => {
+const getSuitesType = (guestData: numOfGuestsProps[], selectedSuiteIndex: number[]) => {
   const suiteTypes = [];
-  for (let i = 0;  i < guestData.length; i++) {
+  for (let i = 0;  i < selectedSuiteIndex.length; i++) {
     suiteTypes.push(guestData[i].selectedRoom.name)
   }
   return suiteTypes;

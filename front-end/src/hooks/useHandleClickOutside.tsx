@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-
 export const useHandleClickOutside = (
   isModalOpen: boolean,
   closeModal: () => void,
@@ -14,6 +13,6 @@ export const useHandleClickOutside = (
     };
     window.addEventListener("click", handleClickOutside);
 
-      return () => window.removeEventListener("click", handleClickOutside); 
+    return () => window.removeEventListener("click", handleClickOutside);
   }, []);
 };

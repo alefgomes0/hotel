@@ -3,13 +3,13 @@ import { getSuitesType } from "@/utils/helpers";
 import { useGuestInfo } from "./useGuestInfo";
 import { useQuery } from "@tanstack/react-query";
 
-export const useFetchTotalPrice = (selectedSuites: number[]) => {
-  const { numOfGuests, daysOfStay } = useGuestInfo();
-  const suitesType = getSuitesType(numOfGuests);
+export const useFetchTotalPrice = () => {
+  const { numOfGuests, daysOfStay, selectedSuiteIndex } = useGuestInfo();
+  const suitesType = getSuitesType(numOfGuests, selectedSuiteIndex.selected);
 
   return useQuery({
-    queryKey: ["calculateTotalPrice"],
+    queryKey: ["calculateTotalPrice", selectedSuiteIndex.selected.length],
     queryFn: () => fetchTotalPrice(suitesType, daysOfStay),
-    enabled: numOfGuests.length === selectedSuites.length,
+    enabled: selectedSuiteIndex.selected.length > 0,
   });
 };

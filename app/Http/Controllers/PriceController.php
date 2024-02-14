@@ -34,7 +34,6 @@ class PriceController extends Controller
 
     public function get_total_amount(string $suites_info)
     {
-        
         $suites_type_object = json_decode(strip_tags($suites_info));
         $suite_types = $suites_type_object->suiteTypes;
         $days_of_stay = $suites_type_object->daysOfStay;
