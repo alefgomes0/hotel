@@ -3,27 +3,15 @@ import { fetchPublishKey } from "@/api/fetchPublishKey";
 import { loadStripe } from "@stripe/stripe-js";
 import { PaymentForm } from "@/components/PaymentForm/PaymentForm";
 import { YourStay } from "@/components/YourStay/YourStay";
-import { fetchClientSecret } from "@/api/fetchClientSecret";
-import { useGuestInfo } from "@/hooks/useGuestInfo";
+import { useFetchClientSecret } from "@/hooks/useFetchClientSecret";
 
 const publishableKey = await fetchPublishKey();
 const stripe = loadStripe(publishableKey);
 
 export const PaymentPage = () => {
-  const { numOfGuests, daysOfStay, selectedSuiteIndex } = useGuestInfo();
-  let teste = "";
-  fetchClientSecret(numOfGuests, daysOfStay, selectedSuiteIndex.selected).then(
-    (res) => {
-      console.log(res);
-      teste = res;
-    }
-  ).catch(err => {
-    teste = err;
-  });
-  console.log(teste);
-
+  const { data, error, isLoading } = useFetchClientSecret();
   const options = {
-    clientSecret: teste,
+    clientSecret: data.client_secret,
   };
 
   return (

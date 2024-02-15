@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
-import { YourStaySkeleton } from "@/components/Skeletons/YourStaySkeleton";
 
 export const SearchResults = () => {
   const location = useLocation();

@@ -19,7 +19,7 @@ class PriceController extends Controller
         , 200]);
     }
 
-    public function getTotalAmount(string $suitesInfo)
+    public function getTotalAmount(string $suitesInfo): JsonResponse
     {
         $suites = $this->calculateTotalPrice($suitesInfo);
         return response()->json([

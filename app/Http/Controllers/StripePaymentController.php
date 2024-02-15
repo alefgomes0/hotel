@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Traits\CalculatePrice;
+use Stripe;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
-use App\Traits\CalculatePrice;
-use Stripe;
 
 class StripePaymentController extends Controller
 {
@@ -22,16 +22,16 @@ class StripePaymentController extends Controller
   public function createIntent(string $suitesInfo): JsonResponse
   {
     $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-    $suites = $this->calculateTotalAmount($suitesInfo);
+    //$suites = $this->calculateTotalPrice($suitesInfo);
 
     $intent = $stripe->paymentIntents->create([
-      'amount' => $suites['totalAmount'],
+      'amount' => 1001,
       'currency' => 'usd',
       'automatic_payment_methods' => ['enabled' => true],
     ]);
     
     return response()->json([
-      'client_secret' => 'fdsfdf'
+      'client_secret' => $intent
     ], 200);
   }
 }
