@@ -1,8 +1,8 @@
+import { ProceedToPayment } from "../Buttons/ProceedToPayment";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SendForm } from "../Buttons/SendForm";
 
 const ContactInformationSchema = z.object({
   firstName: z.string().min(2, "First name must contain at least 2 characters"),
@@ -33,16 +33,16 @@ export const ContactInformation = () => {
   });
 
   const navigate = useNavigate();
-  
+
   const onSubmit = (data: TContactInformationSchema) => {
     console.log(data);
-    navigate("/checkout/payment")
+    navigate("/checkout/payment");
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-2 grid-rows-[1fr_auto] gap-y-6"
+      className="grid grid-cols-2 grid-rows-[1fr_auto] gap-y-1"
     >
       <div className="flex flex-col">
         <label className="pb-1.5" htmlFor="firstName">
@@ -129,8 +129,8 @@ export const ContactInformation = () => {
           {errors.phone?.message}
         </p>
       </div>
-      <div className="row-start-4 row-end-5">
-        <SendForm />
+      <div className="row-start-4 row-end-5 mt-4">
+        <ProceedToPayment isSubmitting={isSubmitting} />
       </div>
     </form>
   );

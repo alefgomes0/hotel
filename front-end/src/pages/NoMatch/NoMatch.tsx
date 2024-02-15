@@ -1,5 +1,5 @@
+import { GoToHomepage } from "@/components/Buttons/GoToHomepage";
 import { NavLink } from "react-router-dom";
-import { SendForm } from "@/components/Buttons/SendForm";
 
 export const NoMatch = () => {
   return (
@@ -16,7 +16,7 @@ export const NoMatch = () => {
         can find the best hotels rates available.
       </p>
       <NavLink to="/">
-        <SendForm text="GO TO HOMEPAGE" />
+        <GoToHomepage />
       </NavLink>
     </main>
   );
