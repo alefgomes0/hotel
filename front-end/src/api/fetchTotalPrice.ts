@@ -8,5 +8,6 @@ export const fetchTotalPrice = async (
     suiteTypes,
     daysOfStay,
   });
+  
   return await axios.get(`/calculate_price/total/${priceData}`);
 };

@@ -18,7 +18,7 @@ export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
           return (
             <div key={index} className="px-4 pt-4 lg:w-48">
               <p className="font-bold text-xs ">SUITE {index + 1}</p>
-              <p className="text-xs font-thin opacity-70 pb-4">
+              <p className="text-xs pb-4">
                 {suite.adult} {suite.adult === 1 ? "adult" : "adults"},{" "}
                 {suite.children} {suite.children === 1 ? "child" : "children"}
               </p>

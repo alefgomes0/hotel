@@ -27,8 +27,9 @@ export const SearchResults = () => {
         )}
         {isLoading && (
           <>
-            <RoomDisplayerSkeleton />
-            <YourStaySkeleton />
+            {["_", "_", "_"].map((_, index) => (
+              <RoomDisplayerSkeleton key={index} />
+            ))}
           </>
         )}
         {isError && <></>}

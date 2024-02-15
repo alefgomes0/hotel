@@ -21,12 +21,8 @@ use App\Http\Controllers\PriceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
 Route::get('/config', [StripePaymentController::class, 'config']);
-Route::post('/create_intent', [StripePaymentController::class, 'create_intent']);
-Route::get('/calculate_price/partial/{suites_info}', [PriceController::class, 'getPartialAmount']);
+Route::get('/create_intent/{suites_info}', [StripePaymentController::class, 'createIntent']);
+Route::get('/calculate_price/partial/{suite_info}', [PriceController::class, 'getPartialAmount']);
 Route::get('/calculate_price/total/{suites_info}', [PriceController::class, 'getTotalAmount']);
