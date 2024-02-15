@@ -1,13 +1,5 @@
 import axios from "./axios";
 
-export const fetchTotalPrice = async (
-  suiteTypes: string[],
-  daysOfStay: number
-) => {
-  const priceData = JSON.stringify({
-    suiteTypes,
-    daysOfStay,
-  });
-  
-  return await axios.get(`/calculate_price/total/${priceData}`);
+export const fetchTotalPrice = async (stayData: string) => {
+  return await axios.get(`/calculate_price/total/${stayData}`);
 };

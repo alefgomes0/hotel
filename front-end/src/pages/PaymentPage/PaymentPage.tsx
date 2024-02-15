@@ -10,6 +10,7 @@ const stripe = loadStripe(publishableKey);
 
 export const PaymentPage = () => {
   const { data, error, isLoading } = useFetchClientSecret();
+  console.log(data)
   const options = {
     clientSecret: data.client_secret,
   };

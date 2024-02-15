@@ -32,12 +32,12 @@ trait CalculatePrice
   public function calculateTotalPrice(string $suitesInfo): Array
   {
 		$suitesTypeArray = json_decode(strip_tags($suitesInfo));
-		$suiteTypes = $suitesTypeArray->suiteTypes;
+		$suitesType = $suitesTypeArray->suitesType;
 		$daysOfStay = $suitesTypeArray->daysOfStay;
 		$TAX_RATE = 0.043;
 		$totalAmount = 0;
 
-		foreach($suiteTypes as $suiteType) {
+		foreach($suitesType as $suiteType) {
 			$suitePrice = DB::table('room_type')
 			->select('price_per_day')
 			->where('type', '=', $suiteType)

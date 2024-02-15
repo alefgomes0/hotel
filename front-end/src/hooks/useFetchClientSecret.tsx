@@ -1,7 +1,7 @@
+import { fetchClientSecret } from "@/api/fetchClientSecret";
 import { getSuitesType } from "@/utils/helpers";
 import { useGuestInfo } from "./useGuestInfo";
 import { useQuery } from "@tanstack/react-query";
-import { fetchClientSecret } from "@/api/fetchClientSecret";
 
 export const useFetchClientSecret = () => {
   const { numOfGuests, daysOfStay, selectedSuiteIndex } = useGuestInfo();
@@ -12,8 +12,7 @@ export const useFetchClientSecret = () => {
   });
 
   return useQuery({
-    queryKey: ["calculateTotalPrice", selectedSuiteIndex.selected.length],
-    queryFn: () =>
-      fetchClientSecret(stayData),
+    queryKey: ["clientSecret"],
+    queryFn: () => fetchClientSecret(stayData),
   });
 };
