@@ -10,11 +10,11 @@ export const GenericErrorDisplayer = ({
   return (
     <div className="flex items-center gap-x-4 h-max text-lg mt-10">
       <div>
-        <WarningIcon width={60} height={60}/>
+        <WarningIcon width={60} height={60} exclamationColor="#ef4444" />
       </div>
       <div>
-        <p className="text-gray-500">Something went wrong...</p>
-        <p className="text-red-400">{error?.message}</p>
+        <p>Something went wrong...</p>
+        <p className="text-red-500">{error?.message}</p>
         <p>Please check your internet connection or try again later</p>
       </div>
     </div>

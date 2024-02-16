@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
+  const [showHiddenNav, setShowHiddeNav] = useState(null)
+  
+
   return (
     <header className="grid grid-cols-1 grid-rows-2 items-center justify-items-center text-gray-50 text-xl bg-gray-700 h-[90px]">
       <div className="flex gap-x-1 pt-2">

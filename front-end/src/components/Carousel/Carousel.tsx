@@ -89,6 +89,7 @@ export const Carousel = ({
       <button
         className={`absolute top-[50%] left-0 translate-y-[-50%] translate-x-[25%] focus:border-2 focus:border-gray-700`}
         onClick={handleLeftClick}
+        title="show previous image"
         aria-label="show previous image"
       >
         {leftController}
@@ -96,6 +97,7 @@ export const Carousel = ({
       <button
         className="rotate-180 absolute top-[50%] right-0 translate-y-[-50%] translate-x-[-25%] focus:border-2 focus:border-gray-700"
         onClick={handleRightClick}
+        title="show next image"
         aria-label="show next image"
       >
         {rightController}
