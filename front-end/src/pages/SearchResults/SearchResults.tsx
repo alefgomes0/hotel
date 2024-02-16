@@ -8,12 +8,14 @@ import { useLocation } from "react-router-dom";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
+import { GenericErrorDisplayer } from "@/components/GenericErrorDisplayer/GenericErrorDisplayer";
 
 export const SearchResults = () => {
   const location = useLocation();
   useFillGuestContext(location.search);
   const { numOfGuests, selectedSuiteIndex } = useGuestInfo();
-  const { data, isLoading, isError, isSuccess } = useFetchAvailableRooms();
+  const { data, error, isError, isLoading, isSuccess } =
+    useFetchAvailableRooms();
   console.log(data);
   useGoToCheckout(selectedSuiteIndex.selected.length);
 
@@ -31,7 +33,11 @@ export const SearchResults = () => {
             ))}
           </>
         )}
-        {isError && <></>}
+        {isError && (
+          <>
+            <GenericErrorDisplayer error={error} />
+          </>
+        )}
         {isSuccess && (
           <>
             {numOfGuests.map((_, index) => {

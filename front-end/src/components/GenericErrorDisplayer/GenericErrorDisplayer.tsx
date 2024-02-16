@@ -1,13 +1,22 @@
-type GenericErrorDisplayerProps = {
-  error: Error | null
-}
+import { WarningIcon } from "../svg/WarningIcon";
 
-export const GenericErrorDisplayer = ({ error }: GenericErrorDisplayerProps) => {
+type GenericErrorDisplayerProps = {
+  error: Error | null;
+};
+
+export const GenericErrorDisplayer = ({
+  error,
+}: GenericErrorDisplayerProps) => {
   return (
-    <div className="flex flex-col gap-x-12 text-red-500 text-lg">
-      <p>Something went wrong...</p>
-      <p>{error?.message}</p>
-      <p>{error?.name}</p>
+    <div className="flex items-center gap-x-4 h-max text-lg mt-10">
+      <div>
+        <WarningIcon width={60} height={60}/>
+      </div>
+      <div>
+        <p className="text-gray-500">Something went wrong...</p>
+        <p className="text-red-400">{error?.message}</p>
+        <p>Please check your internet connection or try again later</p>
+      </div>
     </div>
-  )
-}
+  );
+};
