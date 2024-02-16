@@ -9,10 +9,18 @@ export const Header = () => {
         </h1>
         <p className="text-xs opacity-70">NY</p>
       </div>
-      <nav className="flex items-center justify-center gap-8 text-xs text-gray-200 opacity-90 border-y-2 border-x-0 border-gray-600 w-full h-8 mt-1">
-        <Link to="/fdsf">MSDKFM</Link>
-        <Link to="/dsa">WQEQ</Link>
-        <Link to="/sf">OITUREF</Link>
+      <nav>
+        <ul className="flex items-center justify-center gap-x-16 text-xs text-gray-200 text-semibold opacity-90 border-y-2 border-x-0 border-gray-600 w-full h-8 mt-1">
+          <li>
+            <Link to="/fdsf">GALLERY</Link>
+          </li>
+          <li>
+            <Link to="/dsa">OFFERS</Link>
+          </li>
+          <li>
+            <Link to="/sf">CONTACT US</Link>
+          </li>
+        </ul>
       </nav>
     </header>
   );
