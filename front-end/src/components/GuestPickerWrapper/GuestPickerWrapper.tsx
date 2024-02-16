@@ -1,4 +1,3 @@
-
 import {
   autoUpdate,
   useDismiss,
@@ -10,7 +9,6 @@ import { getGuestInfo } from "../../utils/helpers.ts";
 import { GuestPickerModal } from "../GuestPickerModal/GuestPickerModal.tsx";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
-
 
 export const GuestPickerWrapper = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,9 +41,11 @@ export const GuestPickerWrapper = () => {
         {totalGuests.children === 1 ? "Child" : "Children"}
       </p>
       {isOpen && (
-        <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-          <GuestPickerModal />
-        </div>
+        <GuestPickerModal
+          modalRef={refs.setFloating}
+          modalStyle={floatingStyles}
+          getFloatingProps={getFloatingProps}
+        />
       )}
     </div>
   );
