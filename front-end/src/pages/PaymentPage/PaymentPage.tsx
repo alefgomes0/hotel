@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { PaymentForm } from "@/components/PaymentForm/PaymentForm";
 import { useFetchClientSecret } from "@/hooks/useFetchClientSecret";
 import { YourStay } from "@/components/YourStay/YourStay";
+import { PaymentFormSkeleton } from "@/components/Skeletons/PaymentFormSkeleton";
 
 const publishableKey = await fetchPublishKey();
 const stripe = loadStripe(publishableKey);
@@ -16,7 +17,7 @@ export const PaymentPage = () => {
 
   return (
     <main className="relative grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 text-gray-700 bg-gray-100 px-32 pt-12">
-      
+      {isLoading && <PaymentFormSkeleton />}
       {isSuccess && (
         <Elements stripe={stripe} options={options}>
           <section className="grid z-[20] border-[7px] border-gray-50">
