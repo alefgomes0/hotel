@@ -1,9 +1,9 @@
 import { differenceInDays } from "date-fns";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React, { createContext, useState } from "react";
+import { RoomProps } from "@/types/RoomProps";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
-import { RoomProps } from "@/types/RoomProps";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
@@ -21,7 +21,6 @@ type GuestInfoContextValues = {
   daysOfStay: number;
   deleteRoom: (index: number) => void;
   numOfGuests: numOfGuestsProps[];
-  numOfSuites: number;
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
   getFieldValue: (field: SearchFieldValues, index: number) => number;
   increaseQuantity: (
@@ -59,8 +58,6 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
   });
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
-
-  const numOfSuites = numOfGuests.length;
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
     if (field === "adult") return numOfGuests[index].adult;
@@ -178,7 +175,6 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setSelectedSuiteIndex,
         handleSuiteSelection,
         daysOfStay,
-        numOfSuites,
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,

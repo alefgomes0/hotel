@@ -43,7 +43,7 @@ trait CalculatePrice
 			->where('type', '=', $suiteType)
 			->first();
 		
-			$totalAmount += ($suitePrice->price_per_day * $daysOfStay) + ($suitePrice->price_per_day * $daysOfStay * $TAX_RATE);
+			$totalAmount += round(($suitePrice->price_per_day * $daysOfStay) + ($suitePrice->price_per_day * $daysOfStay * $TAX_RATE), 2);
 		}
 
 		return [
