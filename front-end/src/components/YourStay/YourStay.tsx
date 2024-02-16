@@ -1,8 +1,7 @@
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayHeader } from "../YourStayHeader/YourStayHeader";
 import { YourStaySuites } from "../YourStaySuites/YourStaySuites";
-import { YourStayFooter } from "../YourStayFooter/YourStayFooter";
-
+import { YourStayTotal } from "../YourStayFooter/YourStayTotal";
 
 
 export const YourStay = () => {
@@ -14,7 +13,7 @@ export const YourStay = () => {
         return <YourStaySuites key={index} index={index} suite={suite} />;
       })}
       <div className="h-[1px] bg-gray-400"></div>
-      <YourStayFooter />
+      <YourStayTotal />
     </article>
   );
 };

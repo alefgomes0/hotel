@@ -1,6 +1,6 @@
 import { useFetchTotalPrice } from "@/hooks/useFetchTotalPrice";
 
-export const YourStayFooter = () => {
+export const YourStayTotal = () => {
   const { data, error, isLoading } = useFetchTotalPrice();
   return (
     <>
