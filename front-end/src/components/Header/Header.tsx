@@ -10,7 +10,9 @@ export const Header = () => {
         </h1>
         <p className="text-xs opacity-70">NY</p>
       </div>
-      <Navbar />
+      <div className="w-full flex justify-center border-y-[1px] border-gray-500">
+        <Navbar />
+      </div>
     </header>
   );
 };
