@@ -15,16 +15,21 @@ export const Navbar = () => {
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-gray-700 opacity-90">GALLERY</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[200px] lg:w-[300px] lg:grid-cols-[.75fr_1fr]">
-              <li>foidsjf</li>
+            <ul className="grid gap-3 p-4 w-[200px] lg:w-[300px] lg:grid-cols-[.75fr_1fr] justify-items-center bg-gray-600 text-gray-100 text-sm">
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 1</li>
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 2</li>
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 3</li>
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 4</li>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-gray-700 opacity-90">OFFERS</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[200px] gap-3 p-4 md:w-[300px] md:grid-cols-2 lg:w-[600px] ">
-              <li></li>
+            <ul className="flex items-center justify-center gap-6 p-4 w-[200px] lg:w-[300px] text-sm text-gray-50 bg-gray-600">
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 5</li>
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 6</li>
+              <li className="underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">Link 7</li>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
