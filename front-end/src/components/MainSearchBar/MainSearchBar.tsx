@@ -23,7 +23,7 @@ export const MainSearchBar = () => {
 
   return (
     <form
-      className="flex items-center h-10 rounded-sm text-gray-600"
+      className="flex items-center h-14 items-center rounded-sm text-base text-gray-600"
       onSubmit={handleOnSubmit}
     >
       <div className="relative">
@@ -38,7 +38,7 @@ export const MainSearchBar = () => {
           showIcon
           icon={
             <span
-              className="flex items-center w-max h-max absolute right-[calc(0%+16px)]"
+              className="absolute bottom-0 bottom-0 right-[calc(0%+16px)] translate-y-[-50%]"
               onClick={() => setOpenCalendarOne(true)}
             >
               <svg
@@ -75,7 +75,7 @@ export const MainSearchBar = () => {
           id="check-in"
           name="check-in"
           title="Check-in"
-          className="h-10 border-r-2 border-gray-200 outline-none placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
+          className="flex items-center h-14 border-r-2 border-gray-200 outline-none placeholder:text-lg placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
           onInputClick={() => setOpenCalendarOne(!openCalendarOne)}
         />
       </div>
@@ -91,7 +91,7 @@ export const MainSearchBar = () => {
           showIcon
           icon={
             <span
-              className="flex items-center w-max h-max right-[calc(0%+16px)]"
+              className="absolute bottom-0 right-[calc(0%+16px)] translate-y-[-50%]"
               onClick={() => setOpenCalendarTwo(!openCalendarTwo)}
             >
               <svg
@@ -128,7 +128,7 @@ export const MainSearchBar = () => {
           placeholderText="Check out"
           name="check-out"
           title="Check-out"
-          className="h-10 border-r-2 border-gray-200 px-4 outline-none placeholder:text-gray-600 placeholder:opacity-[65%]"
+          className="h-14 border-r-2 border-gray-200 px-4 outline-none placeholder:text-lg placeholder:text-gray-600 placeholder:opacity-[65%]"
         />
       </div>
       <GuestPickerWrapper />
@@ -140,7 +140,7 @@ export const MainSearchBar = () => {
         <input
           type="text"
           placeholder="Voucher/Coupon"
-          className="w-32 h-10 outline-0 pl-4 placeholder:text-sm placeholder:text-gray-600 placeholder:opacity-[65%]"
+          className="w-40 h-14 outline-none pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
           title="Voucher/Coupon"
           id="voucher"
           aria-label="voucher/coupon"
