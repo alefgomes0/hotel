@@ -34,7 +34,7 @@ export const Navbar = () => {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-            <NavigationMenuLink className="text-sm font-medium bg-gray-700 opacity-90">
+            <NavigationMenuLink className="text-sm font-medium bg-gray-700 opacity-90 underline underline-offset-4 decoration-transparent hover:decoration-gray-100 transition-colors duration-200 cursor-pointer">
               CONTACT US
             </NavigationMenuLink>
         </NavigationMenuItem>
