@@ -13,5 +13,5 @@ export const fetchAvailableRooms = async (
     numOfGuests: guestData,
   });
 
-  return await axios.get(`/rooms11/${searchedInfo}`);
+  return await axios.get(`/rooms/${searchedInfo}`);
 };
