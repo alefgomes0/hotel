@@ -52,7 +52,14 @@ const getPlaceholderText = (fieldName: keyof TContactInformationSchema) => {
       placeholderText += fieldName[i].toUpperCase()
     }
 
+    if (fieldName[i] === fieldName[i].toUpperCase()) {
+      placeholderText += ` ${fieldName[i]}`
+    } else if (fieldName[i] !== fieldName[i].toUpperCase() && i !== 0) {
+      placeholderText += fieldName[i]
+    }
   }
+
+  return placeholderText;
 }
 
-export { filterSuiteById, getInputType, getGuestInfo, getSuitesType };
+export { filterSuiteById, getInputType, getGuestInfo, getPlaceholderText, getSuitesType };
