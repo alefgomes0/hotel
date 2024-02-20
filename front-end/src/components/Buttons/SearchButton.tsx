@@ -12,6 +12,6 @@ export const SearchButton = ({ isDisabled }: SearchButtonProps) => {
       title="Check Rates"
     >
       CHECK RATES
-    </button>
+</button>
   );
 };
