@@ -1,3 +1,4 @@
+import { TContactInformationSchema } from "@/types/TContactInformationSchema";
 import { numOfGuestsProps } from "../types/numOfGuestsProps";
 import { RoomProps } from "../types/RoomProps";
 
@@ -20,13 +21,27 @@ const getGuestInfo = (guestData: numOfGuestsProps[]) => {
   return totalGuests;
 };
 
-const getSuitesType = (guestData: numOfGuestsProps[], selectedSuiteIndex: number[]) => {
+const getSuitesType = (
+  guestData: numOfGuestsProps[],
+  selectedSuiteIndex: number[]
+) => {
   const suiteTypes = [];
-  for (let i = 0;  i < selectedSuiteIndex.length; i++) {
-    suiteTypes.push(guestData[i].selectedRoom.name)
+  for (let i = 0; i < selectedSuiteIndex.length; i++) {
+    suiteTypes.push(guestData[i].selectedRoom.name);
   }
   return suiteTypes;
-}
+};
 
+const getInputType = (fieldName: keyof TContactInformationSchema) => {
+  const loweredFieldName = fieldName.toLocaleLowerCase();
 
-export {filterSuiteById, getGuestInfo, getSuitesType };
+  if (loweredFieldName === "email") {
+    return "email";
+  } else if (loweredFieldName === "phone") {
+    return "phone";
+  } else {
+    return "text";
+  }
+};
+
+export { filterSuiteById, getInputType, getGuestInfo, getSuitesType };
