@@ -2,6 +2,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { TContactInformationSchema } from "@/types/TContactInformationSchema";
+import { useState } from "react";
 
 type InputProps<T extends keyof TContactInformationSchema> = {
   fieldName: T;
@@ -10,11 +11,14 @@ type InputProps<T extends keyof TContactInformationSchema> = {
 };
 
 export const Input = ({ fieldName, register, errorMessage }: InputProps<keyof TContactInformationSchema>) => {
+  const [animateLabel, setAnimateLabel] = useState(false);
+
   return (
-    <div className="relative">
+    <div className="relative" onFocus={() => setAnimateLabel(true)} onBlur={() => setAnimateLabel(false)}>
       <label
-        className="absolute top-0 left-0 opacity-0 focus:opacity-1"
+        className={`absolute top-0 left-0 ${animateLabel ? "animate-label-up" : "animate-label-down"}`}
         htmlFor={fieldName}
+        style={{ animationFillMode: "forwards" }}
       >
         First Name
       </label>
