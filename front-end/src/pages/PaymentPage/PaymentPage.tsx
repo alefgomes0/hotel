@@ -20,7 +20,7 @@ export const PaymentPage = () => {
       {isLoading && <PaymentFormSkeleton />}
       {isSuccess && (
         <Elements stripe={stripe} options={options}>
-          <section className="grid z-[20] border-[7px] border-gray-50">
+          <section className="grid  border-[7px] border-gray-50">
             <div className="border-[2px] border-gray-200 p-4">
               <h4 className="text-2xl font-thin mb-6">PAYMENT INFORMATION</h4>
               <PaymentForm />

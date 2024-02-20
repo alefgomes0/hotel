@@ -9,7 +9,7 @@ export const AddAnotherSuite = ({ addNewRoom }: AddAnotherSuite) => {
     <div className="flex items-center gap-x-2" onClick={(e: React.MouseEvent) => {
       e.stopPropagation();
       addNewRoom();
-    }}>
+    }} title="Add another suite" aria-label="add another suite">
       <button
         className="flex items-center justify-center w-8 h-8 rounded-full border-[1px] border-gray-400 pl-.5 hover:scale-[1.08] translate-transform"
         type="button"

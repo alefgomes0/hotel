@@ -6,14 +6,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
 export const ContactInformation = () => {
   const {
     control,
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
-    watch
+    formState: { errors, isSubmitting },
   } = useForm<TContactInformationSchema>({
     defaultValues: {
       firstName: "",
@@ -35,78 +33,14 @@ export const ContactInformation = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-2 grid-rows-[1fr_auto] gap-y-1"
+      className="grid grid-cols-2 grid-rows-[1fr_auto] gap-8"
     >
       <Input control={control} errorMessage={errors.firstName?.message} fieldName="firstName" register={register} />
-      <div className="flex flex-col">
-        <label htmlFor="lastName" className="pb-1.5">
-          Last Name
-        </label>
-        <input
-          {...register("lastName")}
-          type="text"
-          placeholder="Doe"
-          id="lastName"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
-            errors.lastName ? "border-red-400" : "border-transparent"
-          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
-        />
-        <p className="text-red-500 pt-1.5 text-xs pb-3">
-          {errors.lastName?.message}
-        </p>
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="email" className="pb-1.5">
-          Email
-        </label>
-        <input
-          {...register("email")}
-          type="email"
-          placeholder="johndoe@email.com"
-          id="email"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
-            errors.email ? "border-red-400" : "border-transparent"
-          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
-        />
-        <p className="text-red-500 pt-1.5 text-xs pb-3">
-          {errors.email?.message}
-        </p>
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="address" className="pb-1.5">
-          Address
-        </label>
-        <input
-          {...register("address")}
-          type="text"
-          placeholder="123, Actual Street"
-          id="address"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
-            errors.address ? "border-red-400" : "border-transparent"
-          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
-        />
-        <p className="text-red-500 pt-1.5 text-xs pb-3">
-          {errors.address?.message}
-        </p>
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="phone" className="pb-1.5">
-          Phone
-        </label>
-        <input
-          {...register("phone", { valueAsNumber: true })}
-          type="phone"
-          placeholder="432213-3213"
-          id="phone"
-          className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
-            errors.phone ? "border-red-400" : "border-transparent"
-          } rounded-sm shadow-[0_1px_1px_0_rgba(0,0,0,0.1)_inset]`}
-        />
-        <p className="text-red-500 pt-1.5 text-xs pb-3">
-          {errors.phone?.message}
-        </p>
-      </div>
-      <div className="row-start-4 row-end-5 mt-4">
+      <Input control={control} errorMessage={errors.lastName?.message} fieldName="lastName" register={register}/>
+      <Input control={control} errorMessage={errors.email?.message} fieldName="email" register={register}/>
+      <Input control={control} errorMessage={errors.address?.message} fieldName="address" register={register}/>
+      <Input control={control} errorMessage={errors.phone?.message} fieldName="phone" register={register}/>
+      <div className="row-start-4 row-end-5 mt-1">
         <ProceedToPayment isSubmitting={isSubmitting} />
       </div>
     </form>
