@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+
 export const ContactInformation = () => {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isSubmitting, touchedFields },
-    getFieldState,
+    watch
   } = useForm<TContactInformationSchema>({
     defaultValues: {
       firstName: "",
@@ -53,7 +55,7 @@ export const ContactInformation = () => {
             {errors.firstName?.message}
           </p>
         </div> */}
-        <Input fieldName="firstName" register={register} errorMessage={errors.firstName?.message}/>
+        <Input control={control} errorMessage={errors.firstName?.message} fieldName="firstName" register={register} />
       </div>
       <div className="flex flex-col">
         <label htmlFor="lastName" className="pb-1.5">

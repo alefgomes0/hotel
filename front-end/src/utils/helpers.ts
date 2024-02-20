@@ -44,4 +44,15 @@ const getInputType = (fieldName: keyof TContactInformationSchema) => {
   }
 };
 
+const getPlaceholderText = (fieldName: keyof TContactInformationSchema) => {
+  let placeholderText = "";
+
+  for (let i = 0; i < fieldName.length; i++) {
+    if (i === 0) {
+      placeholderText += fieldName[i].toUpperCase()
+    }
+
+  }
+}
+
 export { filterSuiteById, getInputType, getGuestInfo, getSuitesType };
