@@ -1,10 +1,10 @@
 import { ContactInformationSchema } from "@/schemas/ContactInformationSchema";
-import { TContactInformationSchema } from "@/types/TContactInformationSchema";
+import { Input } from "../primitives/Input";
 import { ProceedToPayment } from "../Buttons/ProceedToPayment";
+import { TContactInformationSchema } from "@/types/TContactInformationSchema";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 
 export const ContactInformation = () => {
   const {
@@ -36,7 +36,7 @@ export const ContactInformation = () => {
       className="grid grid-cols-2 grid-rows-[1fr_auto] gap-y-1"
     >
       <div className="flex flex-col">
-        <div className="relative">
+        {/* <div className="relative">
           <label className="absolute top-0 left-0 opacity-0 focus:opacity-1" htmlFor="firstName">
             First Name
           </label>
@@ -52,7 +52,8 @@ export const ContactInformation = () => {
           <p className="text-red-500 pt-1.5 text-xs ">
             {errors.firstName?.message}
           </p>
-        </div>
+        </div> */}
+        <Input fieldName="firstName" register={register} errorMessage={errors.firstName?.message}/>
       </div>
       <div className="flex flex-col">
         <label htmlFor="lastName" className="pb-1.5">
