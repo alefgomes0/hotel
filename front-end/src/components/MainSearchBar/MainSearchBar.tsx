@@ -23,7 +23,7 @@ export const MainSearchBar = () => {
 
   return (
     <form
-      className="flex items-center h-14 items-center rounded-sm text-base text-gray-600"
+      className="flex flex-col lg:flex-row items-start lg:items-center gap-[2px] lg:gap-0 w-full h-14 rounded-sm text-base text-gray-600"
       onSubmit={handleOnSubmit}
     >
       <div className="relative">
@@ -132,7 +132,7 @@ export const MainSearchBar = () => {
         />
       </div>
       <GuestPickerWrapper />
-      <div className="relative">
+      <div className="relative w-full">
         <label
           className="absolute top-0 left-0 opacity-0"
           htmlFor="voucher"

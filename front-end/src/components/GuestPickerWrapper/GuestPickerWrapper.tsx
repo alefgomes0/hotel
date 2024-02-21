@@ -31,8 +31,9 @@ export const GuestPickerWrapper = () => {
       ref={refs.setReference}
       {...getReferenceProps()}
       onClick={() => setIsOpen(!isOpen)}
-      className="flex items-center cursor-pointer text-gray-600 bg-white text-sm w-64 h-full text-gray-600 pl-4 border-r-2 border-gray-200"
+      className="flex items-center cursor-pointer text-gray-600 bg-white text-sm w-full h-24 lg:h-full text-gray-600 pl-4 border-r-2 border-gray-200"
       aria-label="pick number of guests"
+      title="pick number of guests"
     >
       <p className="opacity-[65%]">
         {numOfSuites} {numOfSuites === 1 ? "Suite" : "Suites"},{" "}

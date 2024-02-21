@@ -10,15 +10,15 @@ export const LandingPage = () => {
   ];
 
   return (
-    <main className="relative">
+    <main className="relative flex flex-col lg:flex-none">
       <Carousel
         imagesPath={imagesURLS}
         leftController={<LPCarouselArrow width={48} height={48} />}
         rightController={<LPCarouselArrow width={48} height={48} />}
         sizeOptions={{ height: "h-[calc(100svh-90px)]" }}
       />
-      <div className="absolute bottom-[10%] left-0 pl-10">
-        <p className="text-5xl text-white pb-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
+      <div className="h-screen lg:h-max lg:absolute lg:bottom-[15%] lg:bottom-[10%] lg:left-0 pt-10 lg:pt-0 pl-10 pr-10 lg:pr-0 bg-gray-700 lg:bg-transparent">
+        <p className="text-3xl lg:text-5xl text-gray-50 lg:text-white pb-10 lg:drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]">
           Explore a world of possibilities
         </p>
         <MainSearchBar />
