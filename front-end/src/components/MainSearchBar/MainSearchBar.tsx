@@ -23,10 +23,10 @@ export const MainSearchBar = () => {
 
   return (
     <form
-      className="flex flex-col lg:flex-row items-start lg:items-center gap-[2px] lg:gap-0 w-full h-14 rounded-sm text-base text-gray-600"
+      className="flex flex-wrap gap-[2px] lg:gap-0 h-14 rounded-sm text-base text-gray-600"
       onSubmit={handleOnSubmit}
     >
-      <div className="relative">
+      <div className="relative w-full lg:w-max">
         <label
           className="absolute top-0 left-0 opacity-0"
           htmlFor="check-in"
@@ -75,11 +75,11 @@ export const MainSearchBar = () => {
           id="check-in"
           name="check-in"
           title="Check-in"
-          className="flex items-center h-14 border-r-2 border-gray-200 outline-none placeholder:text-lg placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
+          className="w-full grow flex items-center h-14 border-r-2 border-gray-200 outline-none placeholder:text-lg placeholder:text-gray-600 placeholder:opacity-[65%] rounded-sm"
           onInputClick={() => setOpenCalendarOne(!openCalendarOne)}
         />
       </div>
-      <div className="relative">
+      <div className="relative w-full lg:w-max">
         <label
           className="absolute top-0 left-0 opacity-0"
           htmlFor="check-out"
@@ -123,16 +123,16 @@ export const MainSearchBar = () => {
           onClickOutside={() => setOpenCalendarTwo(false)}
           onInputClick={() => setOpenCalendarTwo(!openCalendarTwo)}
           dateFormat="dd-MM-yyyy"
-          minDate={addDays(new Date(), 1) && addDays(checkIn as Date, 1)}
+          minDate={addDays(new Date(), 1)}
           openToDate={checkIn ? checkIn : undefined}
           placeholderText="Check out"
           name="check-out"
           title="Check-out"
-          className="h-14 border-r-2 border-gray-200 px-4 outline-none placeholder:text-lg placeholder:text-gray-600 placeholder:opacity-[65%]"
+          className="w-full h-14 border-r-2 border-gray-200 px-4 outline-none placeholder:text-lg placeholder:text-gray-600 placeholder:opacity-[65%]"
         />
       </div>
       <GuestPickerWrapper />
-      <div className="relative w-full">
+      <div className="relative w-full lg:w-max">
         <label
           className="absolute top-0 left-0 opacity-0"
           htmlFor="voucher"
@@ -140,7 +140,7 @@ export const MainSearchBar = () => {
         <input
           type="text"
           placeholder="Voucher/Coupon"
-          className="w-40 h-14 outline-none pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
+          className="w-full h-14 outline-none pl-4 placeholder:text-gray-600 placeholder:opacity-[65%]"
           title="Voucher/Coupon"
           id="voucher"
           aria-label="voucher/coupon"
