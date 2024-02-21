@@ -33,14 +33,14 @@ export const ContactInformation = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-2 grid-rows-[1fr_auto] gap-8"
+      className="flex flex-col lg:grid lg:grid-cols-2 lg:grid-rows-[1fr_auto] gap-8"
     >
       <Input control={control} errorMessage={errors.firstName?.message} fieldName="firstName" register={register} />
       <Input control={control} errorMessage={errors.lastName?.message} fieldName="lastName" register={register}/>
       <Input control={control} errorMessage={errors.email?.message} fieldName="email" register={register}/>
       <Input control={control} errorMessage={errors.address?.message} fieldName="address" register={register}/>
       <Input control={control} errorMessage={errors.phone?.message} fieldName="phone" register={register}/>
-      <div className="row-start-4 row-end-5 mt-1">
+      <div className="self-end justify-self-start mt-1">
         <ProceedToPayment isSubmitting={isSubmitting} />
       </div>
     </form>

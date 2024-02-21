@@ -3,7 +3,7 @@ import { PhoneIcon } from "@/components/svg/PhoneIcon";
 
 export const SearchResultsHeader = () => {
   return (
-    <article className="flex flex-col gap-y-8 bg-gray-200 px-8 py-3 rounded-sm text-gray-600">
+    <article className="flex flex-col gap-y-8 bg-gray-200 px-8 py-3 mb-8 rounded-sm text-gray-600">
       <h4 className="font-semibold text-3xl text-gray-700">Grandeur Hotel</h4>
       <div className="flex items-center gap-x-12">
         <div className="flex items-center gap-x-1.5">

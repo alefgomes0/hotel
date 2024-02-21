@@ -21,7 +21,7 @@ export const SearchResults = () => {
 
   return (
     <main className="grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-32 pt-12">
-      <section className=" ">
+      <section>
         <SearchResultsHeader />
         {numOfGuests.length > 1 && (
           <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
