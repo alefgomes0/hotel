@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { RoomProps } from "@/types/RoomProps";
 import { SuiteDetails } from "../SuiteDetails/SuiteDetails";
-import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
 
 type SuiteCardProps = {
   room: RoomProps;
@@ -31,7 +30,7 @@ export const SuiteCard = ({
 
   return (
     <div
-      className="grid grid-rows-1 grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]"
+      className="grid grid-rows-1 grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-subtle"
       key={index}
     >
       <div>

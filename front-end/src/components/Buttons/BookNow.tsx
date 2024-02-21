@@ -11,7 +11,7 @@ export const BookNow = ({ pricePerDay, selectRoom }: BookNowProps) => {
 
   return (
     <button
-      className="flex flex-col gap-y-.5 items-center justify-center w-max h-max bg-teal-700 hover:bg-teal-600 transition-colors text-gray-100 text-bold px-12 py-2.5 rounded-sm shadow-[0_2px_2px_0_rgba(0,0,0,0.2)]"
+      className="flex flex-col gap-y-.5 items-center justify-center w-max h-max bg-teal-700 hover:bg-teal-600 transition-colors text-gray-100 text-bold px-12 py-2.5 rounded-sm shadow-subtle"
       type="button"
       onClick={selectRoom}
     >

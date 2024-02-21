@@ -67,7 +67,7 @@ export const Carousel = ({
           sizeOptions?.height
         }  m-auto overflow-hidden`}
       >
-        <div className={`flex w-full h-full`}>
+        <div className={`flex w-full h-full aspect-[3/2] lg:aspect-auto `}>
           {imagesPath.map((imgURL, index) => {
             return (
               <img
