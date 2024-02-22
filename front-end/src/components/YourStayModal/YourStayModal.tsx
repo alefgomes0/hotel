@@ -1,19 +1,45 @@
+import { CloseIcon } from "../svg/CloseIcon";
+import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayHeader } from "../YourStayHeader/YourStayHeader";
 import { YourStaySuites } from "../YourStaySuites/YourStaySuites";
 import { YourStayTotal } from "../YourStayFooter/YourStayTotal";
-import { useGuestInfo } from "@/hooks/useGuestInfo";
+import { useState } from "react";
 
-export const YourStayModal = () => {
+type YourStayModalProps = {
+  isModalOpen: boolean;
+  closeModal: () => void;
+};
+
+export const YourStayModal = ({
+  isModalOpen,
+  closeModal,
+}: YourStayModalProps) => {
+  const [fadeOut, setFadeOut] = useState(false);
   const { numOfGuests } = useGuestInfo();
 
+  const handleOnClick = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      closeModal();
+    }, 200);
+  };
+
   return (
-    <article className="w-screen h-screen z-[20] flex flex-col justify-center text-gray-700 border-[1px] border-gray-400 gap-4 px-3 py-1.5">
-    <YourStayHeader />
-    {numOfGuests.map((suite, index) => {
-      return <YourStaySuites key={index} index={index} suite={suite} />;
-    })}
-    <div className="h-[1px] bg-gray-400"></div>
-    <YourStayTotal />
-  </article>
-  )
-}
+    <article
+      className={`fixed top-0 left-0 w-screen min-h-screen z-[999] flex flex-col  bg-gray-100 text-gray-700 border-[1px] border-gray-400 gap-4 px-3 py-1.5 ${
+        isModalOpen && "animate-fade-in"
+      } ${fadeOut && "animate-fade-out"}`}
+      style={{ animationFillMode: "forwards" }}
+    >
+      <YourStayHeader />
+      {numOfGuests.map((suite, index) => {
+        return <YourStaySuites key={index} index={index} suite={suite} />;
+      })}
+      <div className="h-[1px] bg-gray-400"></div>
+      <YourStayTotal />
+      <button className="fixed top-0 right-0 z-[21]" onClick={handleOnClick}>
+        <CloseIcon width={48} height={48} color="#1f2937" />
+      </button>
+    </article>
+  );
+};

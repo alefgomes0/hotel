@@ -30,7 +30,7 @@ export const SuiteCard = ({
 
   return (
     <div
-      className="grid grid-rows-2 lg:grid-rows-1 grid-cols-1 lg:grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-subtle"
+      className="grid grid-rows-[auto_1fr] lg:grid-rows-1 grid-cols-1 lg:grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-subtle"
       key={index}
     >
       <div>

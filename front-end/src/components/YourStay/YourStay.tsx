@@ -3,8 +3,11 @@ import { YourStayHeader } from "../YourStayHeader/YourStayHeader";
 import { YourStaySuites } from "../YourStaySuites/YourStaySuites";
 import { YourStayTotal } from "../YourStayFooter/YourStayTotal";
 import { ExpandIcon } from "../svg/ExpandIcon";
+import { useState } from "react";
+import { YourStayModal } from "../YourStayModal/YourStayModal";
 
 export const YourStay = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { numOfGuests } = useGuestInfo();
   const isMobile = window.innerWidth < 1024;
 
@@ -17,12 +20,21 @@ export const YourStay = () => {
       <div className="h-[1px] bg-gray-400"></div>
       <YourStayTotal />
       {isMobile && (
-        <div className="absolute top-0 right-0 flex items-center justify-items-end gap-x-1">
-          <p className="text-xs opacity-60">View details</p>
+        <div
+          className="absolute top-0 right-0 flex items-center justify-items-end gap-x-1 cursor-pointer"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <figcaption className="text-xs opacity-60">View details</figcaption>
           <button title="view stay details" aria-label="view stay details">
             <ExpandIcon width={32} height={32} />
           </button>
         </div>
+      )}
+      {isModalOpen && (
+        <YourStayModal
+          isModalOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+        />
       )}
     </article>
   );
