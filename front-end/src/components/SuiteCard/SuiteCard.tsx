@@ -30,15 +30,13 @@ export const SuiteCard = ({
 
   return (
     <div
-      className="grid grid-rows-1 grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-subtle"
+      className="grid grid-rows-2 lg:grid-rows-1 grid-cols-1 lg:grid-cols-[auto_1fr] border-[1px] border-gray-300 gap-x-12 rounded-sm p-4 text-gray-700 mb-12 shadow-subtle"
       key={index}
     >
       <div>
         <img
           src={`/images/${getPhotoPrefix(room)}`}
-          width={320}
-          height={192}
-          className="object-cover rounded-sm cursor-pointer"
+          className="lg:w-[320px] lg:h-[192px] aspect-[3/2]  object-cover rounded-sm cursor-pointer"
           onClick={() => setShowSuiteDetails(true)}
         />
       </div>
