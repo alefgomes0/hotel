@@ -11,13 +11,10 @@ export const YourStayMobile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { checkIn, checkOut, numOfGuests } = useGuestInfo();
   const stringifiedGuestInfo = stringifyGuestInfo(numOfGuests);
-  const moreThanOneSuite = numOfGuests.length > 1;
 
   return (
     <article
-      className={`relative grid auto-rows-auto grid-cols-1 ${
-        moreThanOneSuite ? "row-start-3 row-end-4" : "row-start-2 row-end-3"
-      } text-gray-700 gap-3 p-3 mb-4 border-[1px] border-gray-400 shadow-subtle`}
+      className={`relative grid auto-rows-auto grid-cols-1 row-start-1 row-end-2 text-gray-700 gap-3 p-3 mb-4 border-[1px] border-gray-400 shadow-subtle`}
     >
       <h6 className="text-xl font-medium">Your Stay</h6>
       <div className="flex items-center gap-x-2">

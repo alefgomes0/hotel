@@ -33,7 +33,7 @@ export const ContactInformation = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col lg:grid lg:grid-cols-2 lg:grid-rows-[1fr_auto] gap-8"
+      className="flex flex-col xl:grid xl:grid-cols-2 xl:grid-rows-[auto_1fr] shrink-1 gap-8"
     >
       <Input
         control={control}

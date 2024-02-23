@@ -5,6 +5,7 @@ import { PaymentForm } from "@/components/PaymentForm/PaymentForm";
 import { useFetchClientSecret } from "@/hooks/useFetchClientSecret";
 import { YourStay } from "@/components/YourStay/YourStay";
 import { PaymentFormSkeleton } from "@/components/Skeletons/PaymentFormSkeleton";
+import { YourStayWrapper } from "@/components/YourStayWrapper/YourStayWrapper";
 
 const publishableKey = await fetchPublishKey();
 const stripe = loadStripe(publishableKey);
@@ -16,7 +17,7 @@ export const PaymentPage = () => {
   };
 
   return (
-    <main className="relative grid grid-cols-[3fr_1fr] grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 text-gray-700 bg-gray-100 px-32 pt-12">
+    <main className="relative grid xl:grid-cols-[3fr_1fr] xl:grid-rows-[auto_1fr] min-h-[calc(100svh-90px)] gap-x-6 text-gray-700 bg-gray-100 px-4 xl:px-16 pt-12">
       {isLoading && <PaymentFormSkeleton />}
       {isSuccess && (
         <Elements stripe={stripe} options={options}>
@@ -26,7 +27,7 @@ export const PaymentPage = () => {
               <PaymentForm />
             </div>
           </section>
-          <YourStay />
+          <YourStayWrapper />
           <div className="w-full h-full absolute top-[0%] left-[0%] bg-[url(/images/bg-pattern.jpg)] z-[10] opacity-[12%] pointer-events-none"></div>
         </Elements>
       )}

@@ -8,9 +8,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SearchResults } from "./pages/SearchResults/SearchResults";
 import { NoMatch } from "./pages/NoMatch/NoMatch";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 const App = () => {
   const queryClient = new QueryClient();
+  useWindowSize();
 
   return (
     <QueryClientProvider client={queryClient}>
