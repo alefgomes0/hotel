@@ -14,10 +14,10 @@ export const YourStay = () => {
   const isMobile = window.innerWidth < 1024;
 
   return (
-    <div className="row-start-2row-end-3">
+    <>
       {isMobile && <YourStayMobile />}
       {!isMobile && <YourStayDesktop />}
-    </div>
+    </>
     // <article className="relative lg:sticky lg:top-[5%] row-start-1 row-end-2 col-start-1 col-end-2 lg:row-start-1 lg:row-end-3 lg:col-start-2 lg:col-end-3 self-start flex flex-col lg:w-[400px] justify-center text-gray-700 border-[1px] border-gray-400 gap-4 px-3 xl:px-6 py-1.5 xl:py-3 mb-4 lg:mb-0 shadow-subtle">
     //   <YourStayHeader />
     //   {numOfGuests.map((suite, index) => {

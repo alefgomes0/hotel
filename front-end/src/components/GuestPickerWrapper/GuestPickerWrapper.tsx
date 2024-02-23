@@ -5,8 +5,8 @@ import {
   useInteractions,
   offset,
 } from "@floating-ui/react";
-import { stringifyGuestInfo } from "../../utils/helpers.ts";
 import { GuestPickerModal } from "../GuestPickerModal/GuestPickerModal.tsx";
+import { stringifyGuestInfo } from "../../utils/helpers.ts";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
 
