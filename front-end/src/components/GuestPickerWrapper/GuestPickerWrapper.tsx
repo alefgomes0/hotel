@@ -5,7 +5,7 @@ import {
   useInteractions,
   offset,
 } from "@floating-ui/react";
-import { getGuestInfo, stringifyGuestInfo } from "../../utils/helpers.ts";
+import { stringifyGuestInfo } from "../../utils/helpers.ts";
 import { GuestPickerModal } from "../GuestPickerModal/GuestPickerModal.tsx";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
@@ -23,8 +23,6 @@ export const GuestPickerWrapper = () => {
   const dismiss = useDismiss(context);
   const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
   const { numOfGuests } = useGuestInfo();
-  const numOfSuites = numOfGuests.length;
-  const totalGuests = getGuestInfo(numOfGuests);
   const stringifiedGuestInfo = stringifyGuestInfo(numOfGuests)
 
   return (
