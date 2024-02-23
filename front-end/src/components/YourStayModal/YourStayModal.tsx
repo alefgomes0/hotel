@@ -16,6 +16,9 @@ export const YourStayModal = ({
 }: YourStayModalProps) => {
   const [fadeOut, setFadeOut] = useState(false);
   const { numOfGuests } = useGuestInfo();
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   const handleOnClick = () => {
     setFadeOut(true);
@@ -27,8 +30,8 @@ export const YourStayModal = ({
   return (
     <article
       className={`fixed top-0 left-0 w-screen min-h-screen z-[999] flex flex-col  bg-gray-100 text-gray-700 border-[1px] border-gray-400 gap-4 px-3 py-1.5 ${
-        isModalOpen && "animate-fade-in"
-      } ${fadeOut && "animate-fade-out"}`}
+        isModalOpen && !prefersReducedMotion && "animate-slide-down"
+      } ${fadeOut && !prefersReducedMotion && "animate-slide-up"}`}
       style={{ animationFillMode: "forwards" }}
     >
       <YourStayHeader />

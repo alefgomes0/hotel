@@ -49,17 +49,34 @@ const getPlaceholderText = (fieldName: keyof TContactInformationSchema) => {
 
   for (let i = 0; i < fieldName.length; i++) {
     if (i === 0) {
-      placeholderText += fieldName[i].toUpperCase()
+      placeholderText += fieldName[i].toUpperCase();
     }
 
     if (fieldName[i] === fieldName[i].toUpperCase()) {
-      placeholderText += ` ${fieldName[i]}`
+      placeholderText += ` ${fieldName[i]}`;
     } else if (fieldName[i] !== fieldName[i].toUpperCase() && i !== 0) {
-      placeholderText += fieldName[i]
+      placeholderText += fieldName[i];
     }
   }
 
   return placeholderText;
-}
+};
 
-export { filterSuiteById, getInputType, getGuestInfo, getPlaceholderText, getSuitesType };
+const stringifyGuestInfo = (guestData: numOfGuestsProps[]) => {
+  const numOfSuites = guestData.length;
+  const totalGuests = getGuestInfo(guestData);
+  return `${numOfSuites} ${numOfSuites === 1 ? "suite" : "suites"}, ${
+    totalGuests.adult
+  } ${totalGuests.adult === 1 ? "adult" : "adults"}, ${totalGuests.children} ${
+    totalGuests.children === 1 ? "child" : "children"
+  }`;
+};
+
+export {
+  filterSuiteById,
+  getInputType,
+  getGuestInfo,
+  getPlaceholderText,
+  getSuitesType,
+  stringifyGuestInfo,
+};

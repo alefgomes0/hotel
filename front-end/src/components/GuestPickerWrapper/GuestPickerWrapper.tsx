@@ -5,7 +5,7 @@ import {
   useInteractions,
   offset,
 } from "@floating-ui/react";
-import { getGuestInfo } from "../../utils/helpers.ts";
+import { getGuestInfo, stringifyGuestInfo } from "../../utils/helpers.ts";
 import { GuestPickerModal } from "../GuestPickerModal/GuestPickerModal.tsx";
 import { useGuestInfo } from "../../hooks/useGuestInfo";
 import { useState } from "react";
@@ -25,6 +25,7 @@ export const GuestPickerWrapper = () => {
   const { numOfGuests } = useGuestInfo();
   const numOfSuites = numOfGuests.length;
   const totalGuests = getGuestInfo(numOfGuests);
+  const stringifiedGuestInfo = stringifyGuestInfo(numOfGuests)
 
   return (
     <div
@@ -36,10 +37,7 @@ export const GuestPickerWrapper = () => {
       title="pick number of guests"
     >
       <p className="opacity-[65%]">
-        {numOfSuites} {numOfSuites === 1 ? "Suite" : "Suites"},{" "}
-        {totalGuests.adult} {totalGuests.adult === 1 ? "Adult" : "Adults"},{" "}
-        {totalGuests.children}{" "}
-        {totalGuests.children === 1 ? "Child" : "Children"}
+        {stringifiedGuestInfo}
       </p>
       {isOpen && (
         <GuestPickerModal
