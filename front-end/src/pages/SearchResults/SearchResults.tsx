@@ -21,12 +21,14 @@ export const SearchResults = () => {
   const isMobile = window.innerWidth < 1024;
 
   return (
-    <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-auto gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-12">
-      {!isMobile && <SearchResultsHeader />}
+    <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-max gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-12">
+      <div>
+        {!isMobile && <SearchResultsHeader />}
+        {moreThanOneSuite && (
+          <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
+        )}
+      </div>
       <YourStayWrapper />
-      {moreThanOneSuite && (
-        <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
-      )}
       <section>
         {isLoading && (
           <>

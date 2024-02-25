@@ -9,7 +9,7 @@ export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
   const currentSuite = suiteIndex + 1;
 
   return (
-    <article className="relative w-full grid grid-rows-[auto_1fr] grid-cols-3  tems-center text-gray-600 mt-6 mb-6">
+    <article className="relative w-full h-[120px] grid grid-rows-[auto_1fr] grid-cols-3 tems-center text-gray-600 mt-6 mb-6">
       <h6 className="row-start-1 row-end-3 col-start-1 col-end-4 text-xl  mb-6 opacity-90">
         SELECT YOUR SUITE {currentSuite}
       </h6>
@@ -23,7 +23,7 @@ export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
                 {suite.children} {suite.children === 1 ? "child" : "children"}
               </p>
               <div
-                className={`absolute lg:w-32 h-[3px] ${
+                className={`absolute w-[100px] lg:w-32 h-[3px] ${
                   currentSuite === index + 1 ? "bg-gray-900" : ""
                 } rounded-sm`}
               ></div>

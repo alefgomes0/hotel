@@ -18,15 +18,15 @@ export const YourStayMobile = () => {
     >
       <h6 className="text-xl font-medium">Your Stay</h6>
       <div className="flex items-center gap-x-2">
-        <p className="text-sm opacity-80">
+        <p className="text-sm opacity-70">
           {checkIn && format(checkIn as Date, "eee,  MMMM dd, yyyy")}
         </p>
         <YourStayArrow width={18} height={18} />
-        <p className="text-sm opacity-80">
+        <p className="text-sm opacity-70">
           {checkOut && format(checkOut as Date, "eee,  MMMM dd, yyyy")}
         </p>
       </div>
-      <p className="">{stringifiedGuestInfo}</p>
+      <p className="text-sm opacity-[85%]">{stringifiedGuestInfo}</p>
       <YourStayTotal />
       <div
         className="absolute top-0 right-0 flex items-center justify-items-end gap-x-1 cursor-pointer"

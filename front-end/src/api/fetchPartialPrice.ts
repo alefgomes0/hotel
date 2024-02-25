@@ -1,11 +1,10 @@
 import axios from "./axios";
-import { TPartialAmount } from "@/types/PartialAmount";
 
 export const fetchPartialPrice = async (id: number, daysOfStay: number) => {
-  const data = JSON.stringify({
+  const stayData = JSON.stringify({
     id,
     daysOfStay
   })
   
-  return await axios.get<TPartialAmount | string>(`/calculate_price/partial/${data}`);
+  return await axios.get(`/calculate_price/partial/${stayData}`);
 };
