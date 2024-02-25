@@ -5,9 +5,9 @@ type ChooseRoomProps = {
 };
 
 export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
-  const { changeSelectedSuite, numOfGuests } = useGuestInfo();
+  const { selectedSuiteIndex, changeSelectedSuite, numOfGuests } = useGuestInfo();
   const currentSuite = suiteIndex + 1;
-  console.log(suiteIndex)
+  console.log(selectedSuiteIndex)
 
   return (
     <article className="relative w-full h-[120px] grid grid-rows-[auto_1fr] grid-cols-3 tems-center text-gray-600 mt-6 mb-6">

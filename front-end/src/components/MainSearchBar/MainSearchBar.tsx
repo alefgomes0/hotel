@@ -123,7 +123,7 @@ export const MainSearchBar = () => {
           onClickOutside={() => setOpenCalendarTwo(false)}
           onInputClick={() => setOpenCalendarTwo(!openCalendarTwo)}
           dateFormat="dd-MM-yyyy"
-          minDate={addDays(new Date(), 1)}
+          minDate={addDays(checkIn as Date, 1)}
           openToDate={checkIn ? checkIn : undefined}
           placeholderText="Check out"
           name="check-out"

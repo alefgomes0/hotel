@@ -66,7 +66,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
       return {
         current: currentIndex,
         selected: prevState.selected.filter(
-          (selectedIndex) => selectedIndex !== currentIndex
+          (selectedIndex) => selectedIndex !== currentIndex + 1
         ),
       };
     });
