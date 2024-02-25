@@ -22,7 +22,7 @@ type GuestInfoContextValues = {
     React.SetStateAction<SelectedSuiteIndexProps>
   >;
   daysOfStay: number;
-  deleteRoom: (index: number) => void;
+  deleteSelectedSuite: (suiteIndex: number) => void;
   numOfGuests: numOfGuestsProps[];
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
   getFieldValue: (field: SearchFieldValues, index: number) => number;
@@ -72,6 +72,13 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     });
   };
 
+  const deleteSelectedSuite = (suiteIndex: number) => {
+    setNumOfGuests((prevState) => {
+      return prevState.filter((_, index) => index !== suiteIndex);
+    });
+    changeSelectedSuite(suiteIndex);
+  };
+
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
@@ -93,12 +100,6 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         },
       },
     ]);
-  };
-
-  const deleteRoom = (index: number) => {
-    setNumOfGuests((guestInfo) => {
-      return guestInfo.filter((_, arrayIndex) => index !== arrayIndex);
-    });
   };
 
   const increaseQuantity = (
@@ -184,7 +185,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setCheckIn,
         checkOut,
         setCheckOut,
-        deleteRoom,
+        deleteSelectedSuite,
         numOfGuests,
         setNumOfGuests,
         selectedSuiteIndex,

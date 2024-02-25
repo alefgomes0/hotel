@@ -3,6 +3,7 @@ import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice";
 import { YourStaySuiteSkeleton } from "../Skeletons/YourStaySuiteSkeleton";
+import { DeleteIcon } from "lucide-react";
 
 type YourStaySuitesProps = {
   suite: numOfGuestsProps;
@@ -10,7 +11,7 @@ type YourStaySuitesProps = {
 };
 
 export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
-  const { daysOfStay } = useGuestInfo();
+  const { daysOfStay, deleteSelectedSuite } = useGuestInfo();
   const { data, error, isLoading, isSuccess } = useFetchPartialPrice(
     suite.selectedRoom.id as number,
     index
@@ -23,7 +24,14 @@ export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
       {isLoading && <YourStaySuiteSkeleton />}
       {isSuccess && suite.selectedRoom.name && (
         <div className="flex flex-col gap-y-3 border-t-[1px] border-gray-400 pt-3">
-          <p className="font-medium">SUITE {index + 1}</p>
+          <div className="flex items-center justify-between">
+            <p className="font-medium">SUITE {index + 1}</p>
+            <div className="flex flex-col">
+              <button onClick={() => deleteSelectedSuite(index)}>
+                <DeleteIcon />
+              </button>
+            </div>
+          </div>
           <div className="flex items-center justify-between" key={index}>
             <div>
               <p>{suite.selectedRoom.name} Suite</p>
