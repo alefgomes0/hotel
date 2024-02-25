@@ -11,13 +11,16 @@ type GuestInfoProviderProps = {
 
 type GuestInfoContextValues = {
   addNewRoom: () => void;
+  changeSelectedSuite: (currentIndex: number) => void;
   checkIn: null | Date;
   setCheckIn: React.Dispatch<React.SetStateAction<null | Date>>;
   checkOut: null | Date;
   handleSuiteSelection: (index: number, roomData: RoomProps) => void;
   setCheckOut: React.Dispatch<React.SetStateAction<null | Date>>;
   selectedSuiteIndex: { current: number; selected: number[] };
-  setSelectedSuiteIndex: React.Dispatch<React.SetStateAction<SelectedSuiteIndexProps>>;
+  setSelectedSuiteIndex: React.Dispatch<
+    React.SetStateAction<SelectedSuiteIndexProps>
+  >;
   daysOfStay: number;
   deleteRoom: (index: number) => void;
   numOfGuests: numOfGuestsProps[];
@@ -52,10 +55,22 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     },
   ]);
 
-  const [selectedSuiteIndex, setSelectedSuiteIndex] = useState<SelectedSuiteIndexProps>({
-    current: 0,
-    selected: [],
-  });
+  const [selectedSuiteIndex, setSelectedSuiteIndex] =
+    useState<SelectedSuiteIndexProps>({
+      current: 0,
+      selected: [],
+    });
+
+  const changeSelectedSuite = (currentIndex: number) => {
+    setSelectedSuiteIndex((prevState) => {
+      return {
+        current: currentIndex,
+        selected: prevState.selected.filter(
+          (selectedIndex) => selectedIndex !== currentIndex
+        ),
+      };
+    });
+  };
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
 
@@ -164,6 +179,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     <GuestInfoContext.Provider
       value={{
         addNewRoom,
+        changeSelectedSuite,
         checkIn,
         setCheckIn,
         checkOut,

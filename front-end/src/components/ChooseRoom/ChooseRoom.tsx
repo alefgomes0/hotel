@@ -5,8 +5,9 @@ type ChooseRoomProps = {
 };
 
 export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
-  const { numOfGuests } = useGuestInfo();
+  const { changeSelectedSuite, numOfGuests } = useGuestInfo();
   const currentSuite = suiteIndex + 1;
+  console.log(suiteIndex)
 
   return (
     <article className="relative w-full h-[120px] grid grid-rows-[auto_1fr] grid-cols-3 tems-center text-gray-600 mt-6 mb-6">
@@ -16,18 +17,18 @@ export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
       <div className="flex items-center border-y-[1px] border-gray-300 col-start-1 col-end-4">
         {numOfGuests.map((suite, index) => {
           return (
-            <div key={index} className="px-4 pt-4 lg:w-48">
+            <button key={index} className="px-4 pt-4 lg:w-48 text-start cursor-pointer" onClick={() => changeSelectedSuite(index)}>
               <p className="text-xs ">SUITE {index + 1}</p>
               <p className="text-xs pb-4">
                 {suite.adult} {suite.adult === 1 ? "adult" : "adults"},{" "}
                 {suite.children} {suite.children === 1 ? "child" : "children"}
               </p>
               <div
-                className={`absolute w-[100px] lg:w-32 h-[3px] ${
-                  currentSuite === index + 1 ? "bg-gray-900" : ""
-                } rounded-sm`}
+                className={`absolute w-[100px] h-[3px] ${
+                  currentSuite === index + 1 ? "bg-gray-900" : "bg-transparent"
+                } transition duration-200 rounded-sm`}
               ></div>
-            </div>
+            </button>
           );
         })}
       </div>
