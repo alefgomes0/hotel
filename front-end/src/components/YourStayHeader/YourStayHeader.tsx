@@ -7,14 +7,14 @@ export const YourStayHeader = () => {
 
   return (
     <>
-      <h6 className="text-xl font-semibold tracking-wider">Your Stay</h6>
+      <h6 className="text-xl font-medium tracking-wider">Your Stay</h6>
       <div className="grid grid-rows-1 grid-cols-2">
         <div className="flex flex-col">
-          <p className="font-medium opacity-90">Check-in</p>
+          <p className="opacity-90">Check-in</p>
           <p className="text-xs opacity-70">After 2 p.m</p>
         </div>
         <div className="flex flex-col">
-          <p className="font-medium opacity-90">Check-out</p>
+          <p className="opacity-90">Check-out</p>
           <p className="text-xs opacity-70">Before 11 a.m</p>
         </div>
       </div>

@@ -42,7 +42,7 @@ export const SuiteCard = ({
       </div>
       <div className="flex flex-col gap-y-3">
         <h6
-          className="w-max font-semibold text-xl cursor-pointer hover:underline underline-offset-[6px]"
+          className="w-max font-medium text-xl cursor-pointer hover:underline underline-offset-[6px]"
           onClick={() => setShowSuiteDetails(true)}
         >
           {room.type.toUpperCase()} SUITE
