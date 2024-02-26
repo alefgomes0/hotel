@@ -7,24 +7,30 @@ import { useState } from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { RoomProps } from "@/types/RoomProps";
 import { SuiteDetails } from "../SuiteDetails/SuiteDetails";
+import { findNextSuite } from "@/utils/helpers";
 
 type SuiteCardProps = {
   room: RoomProps;
   index: number;
 };
 
-export const SuiteCard = ({
-  room,
-  index
-}: SuiteCardProps) => {
+export const SuiteCard = ({ room, index }: SuiteCardProps) => {
   const [showSuiteDetails, setShowSuiteDetails] = useState(false);
-  const { handleSuiteSelection, selectedSuiteIndex, setSelectedSuiteIndex } = useGuestInfo();
+  const {
+    handleSuiteSelection,
+    numOfGuests,
+    selectedSuiteIndex,
+    setSelectedSuiteIndex,
+  } = useGuestInfo();
 
   const handleButtonClick = () => {
     handleSuiteSelection(index, room);
+    const selectedSuites = selectedSuiteIndex.selected.concat(
+      selectedSuiteIndex.current
+    );
     setSelectedSuiteIndex({
-      current: selectedSuiteIndex.current + 1,
-      selected: selectedSuiteIndex.selected.concat(selectedSuiteIndex.current),
+      current: findNextSuite(numOfGuests.length, selectedSuites),
+      selected: selectedSuites,
     });
   };
 
