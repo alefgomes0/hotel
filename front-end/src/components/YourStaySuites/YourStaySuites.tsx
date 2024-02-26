@@ -10,16 +10,26 @@ import { YourStaySuiteSkeleton } from "../Skeletons/YourStaySuiteSkeleton";
 type YourStaySuitesProps = {
   suite: numOfGuestsProps;
   index: number;
+  closeModal?: () => void;
 };
 
-export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
+export const YourStaySuites = ({
+  closeModal,
+  index,
+  suite,
+}: YourStaySuitesProps) => {
   const { changeSelectedSuite, daysOfStay, deleteSelectedSuite } =
     useGuestInfo();
   const { data, error, isLoading, isSuccess } = useFetchPartialPrice(
     suite.selectedRoom.id as number,
     index
   );
-  console.log(data);
+  const handleEditClick = () => {
+    if (closeModal) {
+      closeModal();
+    }
+    changeSelectedSuite(index);
+  };
   const searchResultsPage = useLocation().pathname.includes("availability");
 
   return (
@@ -34,7 +44,7 @@ export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
               <div className="flex items-center gap-x-4">
                 <button
                   className="flex items-center gap-x-1"
-                  onClick={() => changeSelectedSuite(index)}
+                  onClick={handleEditClick}
                   title="edit this suite"
                   aria-label="edit suite"
                 >
