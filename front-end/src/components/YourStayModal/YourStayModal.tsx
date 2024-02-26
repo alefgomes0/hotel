@@ -40,7 +40,7 @@ export const YourStayModal = ({
       })}
       <div className="h-[1px] bg-gray-400"></div>
       <YourStayTotal />
-      <button className="fixed top-0 right-0 z-[21]" onClick={handleOnClick}>
+      <button className="fixed top-0 right-[2%] z-[21]" onClick={handleOnClick}>
         <CloseIcon width={48} height={48} color="#1f2937" />
       </button>
     </article>
