@@ -9,13 +9,14 @@ const filterSuiteById = (suiteArray: RoomProps[], searchedId: number) => {
 const findNextSuite = (
   totalNumOfSuites: number,
   selectedSuites: number[]
-): number | undefined => {
+): number => {
   const arrayIndexes = getArrayIndexes(totalNumOfSuites);
   for (let i of arrayIndexes) {
     if (!selectedSuites.includes(i)) {
       return i;
     }
   }
+  return 0;
 };
 
 const getArrayIndexes = (length: number): number[] => {

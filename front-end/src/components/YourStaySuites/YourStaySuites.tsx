@@ -1,10 +1,11 @@
+import { EditIcon } from "../svg/EditIcon";
+import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import React from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
-import { numOfGuestsProps } from "@/types/numOfGuestsProps";
 import { useFetchPartialPrice } from "@/hooks/useFetchPartialPrice";
-import { YourStaySuiteSkeleton } from "../Skeletons/YourStaySuiteSkeleton";
+import { useLocation } from "react-router-dom";
 import { TrashIcon } from "../svg/TrashIcon";
-import { EditIcon } from "../svg/EditIcon";
+import { YourStaySuiteSkeleton } from "../Skeletons/YourStaySuiteSkeleton";
 
 type YourStaySuitesProps = {
   suite: numOfGuestsProps;
@@ -12,12 +13,14 @@ type YourStaySuitesProps = {
 };
 
 export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
-  const { changeSelectedSuite, daysOfStay, deleteSelectedSuite } = useGuestInfo();
+  const { changeSelectedSuite, daysOfStay, deleteSelectedSuite } =
+    useGuestInfo();
   const { data, error, isLoading, isSuccess } = useFetchPartialPrice(
     suite.selectedRoom.id as number,
     index
   );
   console.log(data);
+  const searchResultsPage = useLocation().pathname.includes("availability");
 
   return (
     <React.Fragment key={index}>
@@ -26,27 +29,29 @@ export const YourStaySuites = ({ suite, index }: YourStaySuitesProps) => {
       {isSuccess && suite.selectedRoom.name && (
         <div className="flex flex-col gap-y-3 border-t-[1px] border-gray-400 pt-3">
           <div className="flex items-center justify-between">
-            <p className="font-medium">SUITE {index + 1}</p>
-            <div className="flex gap-x-4">
-            <button
-                className="flex items-center gap-x-1"
-                onClick={() => changeSelectedSuite(index)}
-                title="edit this suite"
-                aria-label="edit suite"
-              >
-                <EditIcon width={18} height={18} />
-                <p className="text-xs opacity-80">Edit</p>
-              </button>
-              <button
-                className="flex items-center gap-x-1"
-                onClick={() => deleteSelectedSuite(index)}
-                title="remove this suite"
-                aria-label="remove suite"
-              >
-                <TrashIcon width={20} height={20} />
-                <p className="text-xs opacity-80">Delete</p>
-              </button>
-            </div>
+            <p className="font-medium opacity-80">SUITE {index + 1}</p>
+            {searchResultsPage && (
+              <div className="flex items-center gap-x-4">
+                <button
+                  className="flex items-center gap-x-1"
+                  onClick={() => changeSelectedSuite(index)}
+                  title="edit this suite"
+                  aria-label="edit suite"
+                >
+                  <EditIcon width={18} height={18} />
+                  <p className="text-xs opacity-80">Edit</p>
+                </button>
+                <button
+                  className="flex items-center gap-x-1"
+                  onClick={() => deleteSelectedSuite(index)}
+                  title="remove this suite"
+                  aria-label="remove suite"
+                >
+                  <TrashIcon width={20} height={20} />
+                  <p className="text-xs opacity-80">Delete</p>
+                </button>
+              </div>
+            )}
           </div>
           <div className="flex items-center justify-between" key={index}>
             <div>
