@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 export const useFetchTotalPrice = () => {
   const { numOfGuests, daysOfStay, selectedSuiteIndex } = useGuestInfo();
   const suitesType = getSuitesType(numOfGuests, selectedSuiteIndex.selected);
+  console.log(suitesType)
   const stayData = JSON.stringify({
     suitesType,
     daysOfStay,

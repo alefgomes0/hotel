@@ -24,15 +24,17 @@ export const SuiteCard = ({ room, index }: SuiteCardProps) => {
   } = useGuestInfo();
 
   const handleButtonClick = () => {
-    handleSuiteSelection(index, room);
     const selectedSuites = selectedSuiteIndex.selected.concat(
       selectedSuiteIndex.current
     );
+    handleSuiteSelection(index, room);
     setSelectedSuiteIndex({
       current: findNextSuite(numOfGuests.length, selectedSuites),
       selected: selectedSuites,
     });
   };
+
+  console.log(selectedSuiteIndex)
 
   return (
     <div

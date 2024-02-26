@@ -43,7 +43,7 @@ const getSuitesType = (
   selectedSuiteIndex: number[]
 ) => {
   const suiteTypes = [];
-  for (let i = 0; i < selectedSuiteIndex.length; i++) {
+  for (let i of selectedSuiteIndex) {
     suiteTypes.push(guestData[i].selectedRoom.name);
   }
   return suiteTypes;
