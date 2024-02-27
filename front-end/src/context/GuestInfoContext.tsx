@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
-import React, { createContext, useState } from "react";
+import React, { createContext, useRef, useState } from "react";
 import { RoomProps } from "@/types/RoomProps";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
@@ -22,7 +22,7 @@ type GuestInfoContextValues = {
     React.SetStateAction<SelectedSuiteIndexProps>
   >;
   daysOfStay: number;
-  deleteRoom: (index: number) => void;
+  deleteSelectedSuite: (suiteIndex: number) => void;
   numOfGuests: numOfGuestsProps[];
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
   getFieldValue: (field: SearchFieldValues, index: number) => number;
@@ -36,6 +36,7 @@ type GuestInfoContextValues = {
     index: number,
     event: React.MouseEvent
   ) => void;
+  hasUserReturned: React.MutableRefObject<boolean>;
 };
 
 const GuestInfoContext = createContext({} as GuestInfoContextValues);
@@ -72,6 +73,13 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     });
   };
 
+  const deleteSelectedSuite = (suiteIndex: number) => {
+    setNumOfGuests((prevState) => {
+      return prevState.filter((_, index) => index !== suiteIndex);
+    });
+    changeSelectedSuite(suiteIndex);
+  };
+
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);
 
   const getFieldValue = (field: "adult" | "children", index: number) => {
@@ -93,12 +101,6 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         },
       },
     ]);
-  };
-
-  const deleteRoom = (index: number) => {
-    setNumOfGuests((guestInfo) => {
-      return guestInfo.filter((_, arrayIndex) => index !== arrayIndex);
-    });
   };
 
   const increaseQuantity = (
@@ -175,6 +177,8 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     });
   };
 
+  let hasUserReturned = useRef(false);
+
   return (
     <GuestInfoContext.Provider
       value={{
@@ -184,7 +188,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setCheckIn,
         checkOut,
         setCheckOut,
-        deleteRoom,
+        deleteSelectedSuite,
         numOfGuests,
         setNumOfGuests,
         selectedSuiteIndex,
@@ -194,6 +198,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,
+        hasUserReturned,
       }}
     >
       {children}

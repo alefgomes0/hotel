@@ -7,26 +7,34 @@ import { useState } from "react";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { RoomProps } from "@/types/RoomProps";
 import { SuiteDetails } from "../SuiteDetails/SuiteDetails";
+import { findNextSuite } from "@/utils/helpers";
 
 type SuiteCardProps = {
   room: RoomProps;
   index: number;
 };
 
-export const SuiteCard = ({
-  room,
-  index
-}: SuiteCardProps) => {
+export const SuiteCard = ({ room, index }: SuiteCardProps) => {
   const [showSuiteDetails, setShowSuiteDetails] = useState(false);
-  const { handleSuiteSelection, selectedSuiteIndex, setSelectedSuiteIndex } = useGuestInfo();
+  const {
+    handleSuiteSelection,
+    numOfGuests,
+    selectedSuiteIndex,
+    setSelectedSuiteIndex,
+  } = useGuestInfo();
 
   const handleButtonClick = () => {
+    const selectedSuites = selectedSuiteIndex.selected.concat(
+      selectedSuiteIndex.current
+    );
     handleSuiteSelection(index, room);
     setSelectedSuiteIndex({
-      current: selectedSuiteIndex.current + 1,
-      selected: selectedSuiteIndex.selected.concat(selectedSuiteIndex.current),
+      current: findNextSuite(numOfGuests.length, selectedSuites),
+      selected: selectedSuites,
     });
   };
+
+  console.log(selectedSuiteIndex)
 
   return (
     <div
@@ -70,7 +78,7 @@ export const SuiteCard = ({
           Veja detalhes
         </p>
         <div className="h-[1px] bg-gray-400 mt-4"></div>
-        <div className="self-end">
+        <div className="lg:self-end">
           <p className="text-gray-500 mb-3">
             <span className="text-xl font-semibold text-gray-700">
               ${room.price_per_day}

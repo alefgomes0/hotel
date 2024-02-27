@@ -6,6 +6,23 @@ const filterSuiteById = (suiteArray: RoomProps[], searchedId: number) => {
   return suiteArray.find((suite) => suite.id === searchedId);
 };
 
+const findNextSuite = (
+  totalNumOfSuites: number,
+  selectedSuites: number[]
+): number => {
+  const arrayIndexes = getArrayIndexes(totalNumOfSuites);
+  for (let i of arrayIndexes) {
+    if (!selectedSuites.includes(i)) {
+      return i;
+    }
+  }
+  return 0;
+};
+
+const getArrayIndexes = (length: number): number[] => {
+  return Array.from({ length }, (_, index) => index);
+};
+
 const getGuestInfo = (guestData: numOfGuestsProps[]) => {
   let totalGuests = {
     adult: 0,
@@ -26,7 +43,7 @@ const getSuitesType = (
   selectedSuiteIndex: number[]
 ) => {
   const suiteTypes = [];
-  for (let i = 0; i < selectedSuiteIndex.length; i++) {
+  for (let i of selectedSuiteIndex) {
     suiteTypes.push(guestData[i].selectedRoom.name);
   }
   return suiteTypes;
@@ -74,6 +91,8 @@ const stringifyGuestInfo = (guestData: numOfGuestsProps[]) => {
 
 export {
   filterSuiteById,
+  findNextSuite,
+  getArrayIndexes,
   getInputType,
   getGuestInfo,
   getPlaceholderText,

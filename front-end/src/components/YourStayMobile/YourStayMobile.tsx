@@ -14,7 +14,7 @@ export const YourStayMobile = () => {
 
   return (
     <article
-      className={`relative grid auto-rows-auto grid-cols-1 row-start-1 row-end-2 text-gray-700 gap-3 p-3 mb-4 border-[1px] border-gray-400 shadow-subtle`}
+      className={`relative grid auto-rows-auto grid-cols-1 row-start-2 row-end-3 text-gray-700 gap-3 p-3 mt-4 mb-8 border-[1px] border-gray-400 shadow-subtle`}
     >
       <h6 className="text-xl font-medium">Your Stay</h6>
       <div className="flex items-center gap-x-2">
@@ -27,6 +27,7 @@ export const YourStayMobile = () => {
         </p>
       </div>
       <p className="text-sm opacity-[85%]">{stringifiedGuestInfo}</p>
+      <div className="h-[1px] bg-gray-400"></div>
       <YourStayTotal />
       <div
         className="absolute top-0 right-0 flex items-center justify-items-end gap-x-1 cursor-pointer"

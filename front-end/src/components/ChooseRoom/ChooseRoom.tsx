@@ -25,8 +25,8 @@ export const ChooseRoom = ({ suiteIndex }: ChooseRoomProps) => {
               </p>
               <div
                 className={`absolute w-[100px] h-[3px] ${
-                  currentSuite === index + 1 ? "bg-gray-900" : "bg-transparent"
-                } transition duration-200 rounded-sm`}
+                  currentSuite === index + 1 ? "bg-gray-800" : "bg-transparent"
+                } transition duration-[900] rounded-sm`}
               ></div>
             </button>
           );
