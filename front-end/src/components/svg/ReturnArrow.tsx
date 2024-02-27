@@ -11,7 +11,7 @@ export const ReturnArrow = ({ width, height }: IconProps) => {
       <path
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
+        strokeWidth="2"
         d="m9 19l-5-5l5-5m9-5v10H5"
       />
     </svg>

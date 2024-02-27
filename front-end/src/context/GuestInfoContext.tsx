@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
 import { numOfGuestsProps } from "@/types/numOfGuestsProps";
-import React, { createContext, useState } from "react";
+import React, { createContext, useRef, useState } from "react";
 import { RoomProps } from "@/types/RoomProps";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
@@ -36,6 +36,7 @@ type GuestInfoContextValues = {
     index: number,
     event: React.MouseEvent
   ) => void;
+  hasUserReturned: React.MutableRefObject<boolean>;
 };
 
 const GuestInfoContext = createContext({} as GuestInfoContextValues);
@@ -176,6 +177,8 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     });
   };
 
+  let hasUserReturned = useRef(false);
+
   return (
     <GuestInfoContext.Provider
       value={{
@@ -195,6 +198,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         getFieldValue,
         increaseQuantity,
         decreaseQuantity,
+        hasUserReturned,
       }}
     >
       {children}

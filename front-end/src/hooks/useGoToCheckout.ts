@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useGuestInfo } from "./useGuestInfo";
 import { useNavigate } from "react-router-dom";
 
-export const useGoToCheckout = (selectedRoomsLenght: number) => {
-  const { numOfGuests } = useGuestInfo();
+export const useGoToCheckout = (selectedRoomsLenght: number ) => {
+  const { hasUserReturned, numOfGuests } = useGuestInfo();
   const navigate = useNavigate();
   useEffect(() => {
-    if (numOfGuests.length !== selectedRoomsLenght) return;
+    console.log(hasUserReturned.current)
+    if (numOfGuests.length !== selectedRoomsLenght || hasUserReturned.current ) return;
+    hasUserReturned.current = true;
     navigate("/checkout/contact");
   }, [selectedRoomsLenght]);
 };

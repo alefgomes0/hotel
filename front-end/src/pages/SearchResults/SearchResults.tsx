@@ -16,7 +16,7 @@ export const SearchResults = () => {
   useFillGuestContext(location.search);
   const { numOfGuests, selectedSuiteIndex } = useGuestInfo();
   const { data, error, isError, isLoading, isSuccess } =
-  useFetchAvailableRooms();
+    useFetchAvailableRooms();
   useGoToCheckout(selectedSuiteIndex.selected.length);
   const moreThanOneSuite = numOfGuests.length > 1;
 

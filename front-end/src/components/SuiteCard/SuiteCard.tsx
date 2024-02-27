@@ -78,7 +78,7 @@ export const SuiteCard = ({ room, index }: SuiteCardProps) => {
           Veja detalhes
         </p>
         <div className="h-[1px] bg-gray-400 mt-4"></div>
-        <div className="self-end">
+        <div className="lg:self-end">
           <p className="text-gray-500 mb-3">
             <span className="text-xl font-semibold text-gray-700">
               ${room.price_per_day}
