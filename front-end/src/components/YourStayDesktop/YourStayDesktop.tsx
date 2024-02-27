@@ -1,7 +1,7 @@
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayHeader } from "../YourStayHeader/YourStayHeader";
 import { YourStaySuites } from "../YourStaySuites/YourStaySuites";
-import { YourStayTotal } from "../YourStayFooter/YourStayTotal";
+import { YourStayTotal } from "../YourStayTotal/YourStayTotal";
 
 export const YourStayDesktop = () => {
   const { numOfGuests } = useGuestInfo();

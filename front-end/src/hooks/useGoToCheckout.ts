@@ -6,7 +6,6 @@ export const useGoToCheckout = (selectedRoomsLenght: number ) => {
   const { hasUserReturned, numOfGuests } = useGuestInfo();
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(hasUserReturned.current)
     if (numOfGuests.length !== selectedRoomsLenght || hasUserReturned.current ) return;
     hasUserReturned.current = true;
     navigate("/checkout/contact");

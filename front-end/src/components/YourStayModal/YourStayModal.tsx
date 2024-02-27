@@ -2,8 +2,8 @@ import { CloseIcon } from "../svg/CloseIcon";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { YourStayHeader } from "../YourStayHeader/YourStayHeader";
 import { YourStaySuites } from "../YourStaySuites/YourStaySuites";
-import { YourStayTotal } from "../YourStayFooter/YourStayTotal";
 import { useState } from "react";
+import { YourStayTotal } from "../YourStayTotal/YourStayTotal";
 
 type YourStayModalProps = {
   isModalOpen: boolean;

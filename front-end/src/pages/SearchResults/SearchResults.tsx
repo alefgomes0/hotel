@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
 import { YourStayWrapper } from "@/components/YourStayWrapper/YourStayWrapper";
+import { useGoToHomepage } from "@/hooks/useGoToHomepage";
 
 export const SearchResults = () => {
   const isMobile = window.innerWidth < 1024;
@@ -18,15 +19,13 @@ export const SearchResults = () => {
   const { data, error, isError, isLoading, isSuccess } =
     useFetchAvailableRooms();
   useGoToCheckout(selectedSuiteIndex.selected.length);
-  const moreThanOneSuite = numOfGuests.length > 1;
+  useGoToHomepage();
 
   return (
     <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-auto gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8">
       <div>
         {!isMobile && <SearchResultsHeader />}
-        {moreThanOneSuite && (
-          <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
-        )}
+        <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
       </div>
       <YourStayWrapper />
       <section>

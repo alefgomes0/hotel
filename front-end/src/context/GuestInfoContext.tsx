@@ -77,7 +77,8 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     setNumOfGuests((prevState) => {
       return prevState.filter((_, index) => index !== suiteIndex);
     });
-    changeSelectedSuite(suiteIndex);
+    const previousSuiteIndex = suiteIndex - 1 > 0 ? suiteIndex - 1 : 0;
+    changeSelectedSuite(previousSuiteIndex);
   };
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);

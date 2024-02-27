@@ -40,10 +40,11 @@ const getGuestInfo = (guestData: numOfGuestsProps[]) => {
 
 const getSuitesType = (
   guestData: numOfGuestsProps[],
-  selectedSuiteIndex: number[]
+  selectedSuiteIndex: number[] 
 ) => {
   const suiteTypes = [];
   for (let i of selectedSuiteIndex) {
+    if (guestData[i] === undefined) return 0; 
     suiteTypes.push(guestData[i].selectedRoom.name);
   }
   return suiteTypes;
