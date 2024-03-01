@@ -29,7 +29,7 @@ export const YourStayModal = ({
 
   return (
     <article
-      className={`fixed top-0 left-0 w-screen min-h-screen z-[999] flex flex-col  bg-gray-100 text-gray-700 border-[1px] border-gray-400 gap-4 px-8 py-1.5 ${
+      className={`fixed top-0 left-0 w-screen min-h-screen z-[19] flex flex-col bg-gray-100 text-gray-700 border-[1px] border-gray-400 gap-4 px-8 py-1.5 ${
         isModalOpen && !prefersReducedMotion && "animate-slide-down"
       } ${fadeOut && !prefersReducedMotion && "animate-slide-up"}`}
       style={{ animationFillMode: "forwards" }}
