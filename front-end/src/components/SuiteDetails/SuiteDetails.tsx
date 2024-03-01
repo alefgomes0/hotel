@@ -28,7 +28,7 @@ export const SuiteDetails = ({
   const { refs, floatingStyles } = useFloating({
     strategy: "fixed",
     placement: "right-start",
-    middleware: [offset(20)],
+    middleware: [offset(10)],
   });
 
   useHandleClickOutside(showSuiteDetails, closeRoomDetails, wrapperRef);
@@ -53,7 +53,7 @@ export const SuiteDetails = ({
           <CloseIcon width={48} height={48} />
         </button>
           <section
-            className="overflow-x-hidden z-[22] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] grid grid-cols-1 w-[600px] max-h-[650px]  text-gray-700 bg-gray-100 rounded-sm "
+            className="overflow-x-hidden z-[22] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] grid grid-cols-1 w-[300px] sm:w-[600px] lg:w-[600px] max-h-[500px] sm:max-h-[650px] lg:max-h-[650px] text-gray-700 bg-gray-100 rounded-sm "
             ref={refs.setReference}
           >
             <Carousel
