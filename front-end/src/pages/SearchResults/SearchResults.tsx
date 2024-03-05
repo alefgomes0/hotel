@@ -6,6 +6,7 @@ import { useFetchAvailableRooms } from "../../hooks/useFetchAvailableRooms";
 import { useFillGuestContext } from "@/hooks/useFillGuestContext";
 import { useGuestInfo } from "@/hooks/useGuestInfo";
 import { useLocation } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { SuitesDisplayer } from "@/components/SuitesDisplayer/SuitesDisplayer";
 import { useGoToCheckout } from "@/hooks/useGoToCheckout";
 import { YourStayWrapper } from "@/components/YourStayWrapper/YourStayWrapper";
@@ -20,7 +21,7 @@ export const SearchResults = () => {
     useFetchAvailableRooms();
   useGoToCheckout(selectedSuiteIndex.selected.length);
   useGoToHomepage(numOfGuests.length === 0);
-  console.log(numOfGuests)
+  useQueryClient().setQueryData(["check-rates"], (oldData) => console.log(oldData))
 
   return (
     <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-auto gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8">
@@ -48,7 +49,7 @@ export const SearchResults = () => {
               if (index === selectedSuiteIndex.current) {
                 return (
                   <SuitesDisplayer
-                    roomData={data?.data.suites[index + 1]}
+                    roomData={data?.data.suites[index]}
                     arrayIndex={index}
                     key={index}
                   />

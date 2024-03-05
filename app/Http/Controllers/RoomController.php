@@ -52,11 +52,7 @@ class RoomController extends Controller
         $groupedThirdRoom = $thirdRoomOpts == '' ? '' : $thirdRoomOpts->groupBy('type');
 
         return response()->json([
-            'suites' => [
-                '1' => $groupedFirstRoom,
-                '2' => $groupedSecondRoom,
-                '3' => $groupedThirdRoom
-            ]
+            'suites' => [$groupedFirstRoom, $groupedSecondRoom, $groupedThirdRoom]
         ], 200);
     }
 }

@@ -4,6 +4,8 @@ import React, { createContext, useRef, useState } from "react";
 import { RoomProps } from "@/types/RoomProps";
 import { SearchFieldValues } from "../types/SearchFieldValues";
 import { SelectedSuiteIndexProps } from "@/types/SuiteIndexProps";
+import { useQueryClient } from "@tanstack/react-query";
+import { CachedAvailableRooms } from "@/types/CachedAvailableRooms";
 
 type GuestInfoProviderProps = {
   children: React.ReactNode;
@@ -68,7 +70,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
       return {
         current: currentIndex,
         selected: prevState.selected.filter(
-          (selectedIndex) => selectedIndex !== currentIndex + 1
+          (selectedIndex) => selectedIndex !== currentIndex
         ),
       };
     });
@@ -80,12 +82,23 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
     });
   };
 
+  const queryClient = useQueryClient();
+
   const deleteSelectedSuite = (suiteIndex: number) => {
     setNumOfGuests((prevState) => {
       return prevState.filter((_, index) => index !== suiteIndex);
     });
     const previousSuiteIndex = suiteIndex - 1 > 0 ? suiteIndex - 1 : 0;
     changeSelectedSuite(previousSuiteIndex);
+    queryClient.setQueryData(
+      ["check-rates"],
+      (oldData: CachedAvailableRooms) => {
+        const suites = oldData.data.suites.filter(
+          (_, index) => index !== suiteIndex
+        );
+        return { ...oldData, data: { suites } };
+      }
+    );
   };
 
   const daysOfStay = differenceInDays(checkOut as Date, checkIn as Date);

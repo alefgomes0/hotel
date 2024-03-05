@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 export const useFetchAvailableRooms = () => {
   const { checkIn, checkOut, numOfGuests } = useGuestInfo();
   return useQuery({
-    queryKey: ["reserva"],
+    queryKey: ["check-rates"],
     queryFn: () => fetchAvailableRooms(checkIn, checkOut, numOfGuests),
     enabled: !!checkIn && !!checkOut && !!numOfGuests,
   });
