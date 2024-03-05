@@ -22,6 +22,7 @@ type GuestInfoContextValues = {
     React.SetStateAction<SelectedSuiteIndexProps>
   >;
   daysOfStay: number;
+  deleteRoom: (suiteIndex: number) => void;
   deleteSelectedSuite: (suiteIndex: number) => void;
   numOfGuests: numOfGuestsProps[];
   setNumOfGuests: React.Dispatch<React.SetStateAction<numOfGuestsProps[]>>;
@@ -70,6 +71,12 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
           (selectedIndex) => selectedIndex !== currentIndex + 1
         ),
       };
+    });
+  };
+
+  const deleteRoom = (suiteIndex: number) => {
+    setNumOfGuests((prevState) => {
+      return prevState.filter((_, index) => index !== suiteIndex);
     });
   };
 
@@ -189,6 +196,7 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         setCheckIn,
         checkOut,
         setCheckOut,
+        deleteRoom,
         deleteSelectedSuite,
         numOfGuests,
         setNumOfGuests,

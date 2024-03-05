@@ -6,7 +6,7 @@ type GuestPickerCardProps = {
   arrayIndex: number;
 };
 
-export const GuestPickerCard = ({ arrayIndex }: GuestPickerProps) => {
+export const GuestPickerCard = ({ arrayIndex }: GuestPickerCardProps) => {
   const { deleteRoom, numOfGuests } = useGuestInfo();
   const numberOfSuite = arrayIndex + 1;
 
