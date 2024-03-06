@@ -32,26 +32,28 @@ export const Input = ({
   };
 
   return (
-    <div
-      className="relative"
-      onFocus={() => setAnimateLabel(true)}
-      onBlur={handleOnBlur}
-    >
+    <div className="relative" onFocus={() => setAnimateLabel(true)}>
       <label
-        className={`absolute top-0 left-0 ${
+        className={`absolute top-0 left-0 opacity-0 ${
           animateLabel ? "animate-label-up" : "animate-label-down"
         } text-sm`}
         htmlFor={fieldName}
         style={{ animationFillMode: "forwards" }}
+        onBlur={() => "animate-label-down"}
       >
         {placeholderText}
       </label>
       <input
         {...register(fieldName, { valueAsNumber: fieldName === "phone" })}
+        onBlur={handleOnBlur}
         type={inputType}
-        placeholder={animateLabel ? (
-          fieldName === "phone" ? undefined : ""
-        ) : placeholderText}
+        placeholder={
+          animateLabel
+            ? fieldName === "phone"
+              ? undefined
+              : ""
+            : placeholderText
+        }
         id={fieldName}
         className={`w-[300px] h-10 pl-2 py-6 bg-gray-100 border-2 focus:border-gray-700 transition-colors duration-200 outline-none ${
           errorMessage ? "border-red-400" : "border-transparent"
