@@ -4,6 +4,5 @@ export type numOfGuestsProps = {
   selectedRoom: {
     id: number | null;
     name: string;
-    pricePerDay: number;
   };
 };

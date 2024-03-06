@@ -54,7 +54,6 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
       selectedRoom: {
         id: null,
         name: "",
-        pricePerDay: 0,
       },
     },
   ]);
@@ -118,7 +117,6 @@ const GuestInfoProvider = ({ children }: GuestInfoProviderProps) => {
         selectedRoom: {
           id: null,
           name: "",
-          pricePerDay: 0,
         },
       },
     ]);

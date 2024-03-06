@@ -1,6 +1,7 @@
 import { Carousel } from "@/components/Carousel/Carousel";
 import { MainSearchBar } from "@/components/MainSearchBar/MainSearchBar";
 import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
+import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
 
 export const LandingPage = () => {
   const imagesURLS = [
@@ -8,6 +9,7 @@ export const LandingPage = () => {
     "/images/lp-1.jpg",
     "/images/lp-2.jpg",
   ];
+  useClearSelectedSuites();
 
   return (
     <main className="relative flex flex-col lg:flex-none">
