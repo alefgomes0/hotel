@@ -25,7 +25,7 @@ export const SearchResults = () => {
   useGoToHomepage(numOfGuests.length === 0);
 
   return (
-    <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr]  gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8">
+    <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-min gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8">
       <div className="h-max">
         {!isMobile && <SearchResultsHeader />}
         <ChooseRoom suiteIndex={selectedSuiteIndex.current} />

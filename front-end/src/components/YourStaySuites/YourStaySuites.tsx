@@ -20,13 +20,18 @@ export const YourStaySuites = ({
   index,
   suite,
 }: YourStaySuitesProps) => {
-  const { changeSelectedSuite, daysOfStay, deleteSelectedSuite } =
-    useGuestInfo();
+  const {
+    changeSelectedSuite,
+    daysOfStay,
+    deleteSelectedSuite,
+    selectedSuiteIndex,
+  } = useGuestInfo();
   const { data, error, isLoading, isSuccess } = useFetchPartialPrice(
     suite.selectedRoom.id as number,
     index
   );
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const isCurrentSuiteSelected = selectedSuiteIndex.selected.includes(index);
 
   const handleEditClick = () => {
     if (closeModal) {
@@ -89,11 +94,15 @@ export const YourStaySuites = ({
                   {daysOfStay} {daysOfStay === 1 ? "night" : "nights"}
                 </p>
               </div>
-              <p className="font-medium">${data?.data.partialAmount}</p>
+              <p className="font-medium">
+                ${isCurrentSuiteSelected ? data?.data.partialAmount : ""}
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <p className="opacity-90">Taxes and Fees</p>
-              <p className="font-medium">${data?.data.taxes}</p>
+              <p className="font-medium">
+                ${isCurrentSuiteSelected ? data?.data.taxes : ""}
+              </p>
             </div>
           </div>
         </>

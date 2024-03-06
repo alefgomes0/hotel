@@ -3,7 +3,7 @@ import { useGuestInfo } from "./useGuestInfo";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const useClearSelectedSuites = () => {
-  const { setNumOfGuests, setSelectedSuiteIndex } = useGuestInfo();
+  const { setNumOfGuests, setSelectedSuiteIndex, hasUserReturned } = useGuestInfo();
   const queryClient = useQueryClient();
   useEffect(() => {
     setSelectedSuiteIndex({
@@ -20,6 +20,7 @@ export const useClearSelectedSuites = () => {
         },
       },
     ]);
+    hasUserReturned.current = false;
     queryClient.clear();
   }, []);
 };
