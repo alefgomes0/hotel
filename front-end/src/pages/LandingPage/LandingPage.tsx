@@ -1,6 +1,7 @@
 import { Carousel } from "@/components/Carousel/Carousel";
 import { Idk } from "@/components/Idk/Idk";
 import { MainSearchBar } from "@/components/MainSearchBar/MainSearchBar";
+import { PlacesScroll } from "@/components/PlacesScroll/PlacesScroll";
 import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
 import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
 
@@ -34,7 +35,8 @@ export const LandingPage = () => {
           <MainSearchBar />
         </div>
       </div>
-      <Idk />
+      <PlacesScroll />
+      <div className="h-screen bg-red-400"></div>
     </main>
   );
 };

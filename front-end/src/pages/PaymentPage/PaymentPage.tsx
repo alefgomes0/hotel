@@ -22,7 +22,6 @@ export const PaymentPage = () => {
     clientSecret: data?.data.client_secret.client_secret,
     appearance
   };
-
   const { selectedSuiteIndex } = useGuestInfo();
   const navigate = useNavigate();
   useGoToHomepage(selectedSuiteIndex.selected.length === 0);
