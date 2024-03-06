@@ -1,6 +1,6 @@
 import { Control, UseFormRegister, useWatch } from "react-hook-form";
 import { TContactInformationSchema } from "@/types/TContactInformationSchema";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { getInputType, getPlaceholderText } from "@/utils/helpers";
 
 type InputProps<T extends keyof TContactInformationSchema> = {
@@ -19,6 +19,7 @@ export const Input = ({
   const [animateLabel, setAnimateLabel] = useState(false);
   const inputType = getInputType(fieldName);
   const placeholderText = getPlaceholderText(fieldName);
+  const isInputDirty = useRef<boolean>(false);
 
   const fieldValue = useWatch({
     control,
@@ -27,6 +28,7 @@ export const Input = ({
   });
 
   const handleOnBlur = () => {
+    isInputDirty.current = true;
     if (fieldValue || errorMessage) return;
     setAnimateLabel(false);
   };
@@ -35,11 +37,12 @@ export const Input = ({
     <div className="relative" onFocus={() => setAnimateLabel(true)}>
       <label
         className={`absolute top-0 left-0 opacity-0 ${
-          animateLabel ? "animate-label-up" : "animate-label-down"
+          animateLabel
+            ? "animate-label-up"
+            : `${isInputDirty.current && "animate-label-down"}`
         } text-sm`}
         htmlFor={fieldName}
         style={{ animationFillMode: "forwards" }}
-        onBlur={() => "animate-label-down"}
       >
         {placeholderText}
       </label>
