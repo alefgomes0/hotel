@@ -1,13 +1,17 @@
 import { YourStayMobile } from "../YourStayMobile/YourStayMobile";
 import { YourStayDesktop } from "../YourStayDesktop/YourStayDesktop";
 
-export const YourStayWrapper = () => {
+type YourStayWrapperProps = {
+  darkBackground?: boolean;
+};
+
+export const YourStayWrapper = ({ darkBackground }: YourStayWrapperProps) => {
   const isMobile = window.innerWidth < 1024;
 
   return (
     <>
-      {isMobile && <YourStayMobile />}
-      {!isMobile && <YourStayDesktop />}
+      {isMobile && <YourStayMobile darkBackground={darkBackground} />}
+      {!isMobile && <YourStayDesktop darkBackground={darkBackground} />}
     </>
   );
 };
