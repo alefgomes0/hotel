@@ -5,11 +5,12 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const useGoToHomepage = (redirectCondition: boolean) => {
   const queryClient = useQueryClient();
-  const { numOfGuests, setNumOfGuests } = useGuestInfo();
+  const { hasUserReturned, numOfGuests, setNumOfGuests } = useGuestInfo();
   const navigate = useNavigate();
   useEffect(() => {
     if (!redirectCondition) return;
     queryClient.clear();
+    navigate("/");
     setNumOfGuests([
       {
         adult: 1,
@@ -21,6 +22,6 @@ export const useGoToHomepage = (redirectCondition: boolean) => {
         },
       },
     ]);
-    navigate("/");
+    hasUserReturned.current = false;
   }, [numOfGuests]);
 };
