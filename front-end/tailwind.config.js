@@ -54,6 +54,10 @@ module.exports = {
         "slide-up": {
           "0%": { transform: "translateY(0%)" },
           "100%": { transform: "translateY(-100%)" }
+        },
+        "button-slide-up": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0%)" }
         }
       },
       animation: {
@@ -64,7 +68,8 @@ module.exports = {
         "label-down": "label-down 0.3s ease",
         "label-up": "label-up 0.3s ease",
         "slide-down": "slide-down 0.3s ease",
-        "slide-up": "slide-up 0.3s ease"
+        "slide-up": "slide-up 0.3s ease",
+        "button-slide-up": "button-slide-up 0.3s ease"
       },
     },
   },

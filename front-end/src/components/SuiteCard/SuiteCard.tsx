@@ -55,10 +55,10 @@ export const SuiteCard = ({ room, index }: SuiteCardProps) => {
         >
           {room.type.toUpperCase()} SUITE
         </h6>
-        <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-sm opacity-60">
+        <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-sm opacity-80">
           {room.occupants} {room.occupants > 1 ? "adultos" : "adulto"}
         </span>
-        <p className="text-sm opacity-90 pt-1">{room.short_description}</p>
+        <p className="text-sm pt-1">{room.short_description}</p>
         <span className="flex items-center gap-x-2 pt-2">
           <CoffeeIcon width={16} height={16} />
           <p className="text-sm">Café da manhã incluso</p>

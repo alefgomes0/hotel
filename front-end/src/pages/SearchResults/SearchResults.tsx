@@ -25,15 +25,23 @@ export const SearchResults = () => {
   useGoToHomepage(numOfGuests.length === 0);
 
   return (
-    <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-min gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8">
+    <main className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] auto-rows-auto gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8">
       <div className="h-max">
         {!isMobile && <SearchResultsHeader />}
         <ChooseRoom suiteIndex={selectedSuiteIndex.current} />
       </div>
       <div className="static lg:sticky lg:top-[5%]">
         <YourStayWrapper />
-        {canGoToCheckout && <GoToCheckout />}
+        {!isMobile && canGoToCheckout && <GoToCheckout hasMargin />}
       </div>
+      {isMobile && canGoToCheckout && (
+        <div
+          className="fixed flex items-center justify-items-center justify-center bottom-0 left-0 w-full bg-neutral-300 h-min py-4 translate-y-full animate-button-slide-up z-[20]"
+          style={{ animationFillMode: "forwards" }}
+        >
+          <GoToCheckout />
+        </div>
+      )}
       <section>
         {isLoading && (
           <>
