@@ -100,7 +100,7 @@ export const Card = ({
         {users.map((user, idx: number) => (
           <motion.div
             key={`user-${idx}`}
-            className="bg-white rounded-sm cursor-pointer relative"
+            className="bg-gray-200 text-gray-700 rounded-sm cursor-pointer relative"
             style={{ translateY: translate }}
             whileHover={{
               boxShadow:

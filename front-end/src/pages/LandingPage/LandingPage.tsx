@@ -1,16 +1,12 @@
 import { Carousel } from "@/components/Carousel/Carousel";
-import { Idk } from "@/components/Idk/Idk";
+import { carouselImagesURL } from "@/imageData/carouselImages";
 import { MainSearchBar } from "@/components/MainSearchBar/MainSearchBar";
 import { PlacesScroll } from "@/components/PlacesScroll/PlacesScroll";
 import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
 import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
 
 export const LandingPage = () => {
-  const imagesURLS = [
-    "/images/lp-0.jpg",
-    "/images/lp-1.jpg",
-    "/images/lp-2.jpg",
-  ];
+
   const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
 
   useClearSelectedSuites();
@@ -19,7 +15,7 @@ export const LandingPage = () => {
     <main className="flex flex-col lg:flex-none">
       <div className="relative">
         <Carousel
-          imagesPath={imagesURLS}
+          imagesPath={carouselImagesURL}
           leftController={
             <LPCarouselArrow width={controllerSize} height={controllerSize} />
           }
