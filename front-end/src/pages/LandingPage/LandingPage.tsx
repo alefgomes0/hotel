@@ -4,9 +4,9 @@ import { MainSearchBar } from "@/components/MainSearchBar/MainSearchBar";
 import { PlacesScroll } from "@/components/PlacesScroll/PlacesScroll";
 import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
 import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
+import { Parallax } from "@/components/Parallax/Parallax";
 
 export const LandingPage = () => {
-
   const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
 
   useClearSelectedSuites();
@@ -32,7 +32,7 @@ export const LandingPage = () => {
         </div>
       </div>
       <PlacesScroll />
-      <div className="h-screen bg-red-400"></div>
+      <Parallax />
     </main>
   );
 };

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+
 .react-datepicker-wrapper {
   width: 100%;
 }
