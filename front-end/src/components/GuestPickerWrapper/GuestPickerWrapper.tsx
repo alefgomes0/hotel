@@ -34,7 +34,7 @@ export const GuestPickerWrapper = () => {
       aria-label="pick number of guests"
       title="pick number of guests"
     >
-      <p className="opacity-[65%]">
+      <p className="text-sm opacity-70">
         {stringifiedGuestInfo}
       </p>
       {isOpen && (

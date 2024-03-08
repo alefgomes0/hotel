@@ -17,7 +17,7 @@ function Image({ id }: { id: number }) {
   const y = useParallax(scrollYProgress, 300);
 
   return (
-    <section
+    <div
       className="h-screen flex items-center justify-center relative snap-center teste"
       style={{ perspective: "500px" }}
     >
@@ -35,15 +35,15 @@ function Image({ id }: { id: number }) {
         className="absolute text-4xl font-semibold m-0 tracking-[-3px] leading-[1.2]"
         style={{ y }}
       >{`#00${id}`}</motion.h2>
-    </section>
+    </div>
   );
 }
 
 export function Parallax() {
-  const parallaxWrapper = useRef<HTMLDivElement>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
+  const parallaxWrapper = useRef<HTMLElement>(null);
 
-  const { scrollYProgress } = useScroll({ container: parallaxWrapper, target: targetRef });
+  const { scrollYProgress } = useScroll({ container: parallaxWrapper });
+  console.log(scrollYProgress)
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -51,7 +51,7 @@ export function Parallax() {
   });
 
   return (
-    <div ref={parallaxWrapper}>
+    <section ref={parallaxWrapper}>
       {[1, 2, 3, 4, 5].map((image) => (
         <Image id={image} key={image}/>
       ))}
@@ -59,7 +59,6 @@ export function Parallax() {
         className="fixed left-0 right-0 h-[5px] bottom-[100px] bg-red-500"
         style={{ scaleX }}
       />
-      <div ref={targetRef}></div>
-    </div>
+    </section>
   );
 }
