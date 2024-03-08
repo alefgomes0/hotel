@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { ParallaxImage } from "../ParallaxImage/ParallaxImage";
 import { useHandleParallax } from "@/hooks/useHandleParallax";
 import { useRef } from "react";
+import { parallaxImages } from "@/imageData/parallaxImages";
 
 export const Parallax = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -30,31 +31,45 @@ export const Parallax = () => {
     progressBar,
   });
 
-  const imagesArray = [1, 2, 3, 4, 5];
+  const getImageRef = (index: number) => {
+    if (index === 0) {
+      return firstImage;
+    } else if (index === parallaxImages.length - 1) {
+      return lastImage;
+    } else return null;
+  };
 
   return (
     <section
       ref={wrapperRef}
-      className="relative grid-grid-cols-1 grid-rows-[auto_1fr] snap-y snap-mandatory snap-always h-screen overflow-scroll pointer-events-none bg-green-400"
+      className="relative grid-grid-cols-1 grid-rows-[auto_1fr] snap-y snap-mandatory snap-always h-screen overflow-scroll pointer-events-none bg-gray-200"
     >
-      {imagesArray.map((image, index) => {
-        if (index === 0) {
-          return <ParallaxImage id={image} key={image} imageRef={firstImage} />;
-        } else if (index === imagesArray.length - 1) {
-          return <ParallaxImage id={image} key={image} imageRef={lastImage} />;
-        } else {
-          return <ParallaxImage id={image} key={image} imageRef={lastImage} />;
-        }
+      {parallaxImages.map((image, index) => {
+        return (
+          <ParallaxImage
+            url={image.url}
+            alt={image.alt}
+            header={image.header}
+            body={image.body}
+            key={image.url}
+            imageRef={getImageRef(index)}
+          />
+        );
       })}
       <div
         className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px]"
         ref={progressBar}
         style={{ animationFillMode: "forwards" }}
       >
-        <p className="text-3xl text-center drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)] text-gray-700">
-          Eveniet nesciunt, iste eligendi!
-        </p>
-        <motion.div className=" h-[5px] bg-gray-700" style={{ scaleX }} />
+        <div className="bg-gray-900 px-3 py-1 w-max self-center text-center rounded-sm">
+          <p className="text-3xl text-center text-gray-100">
+            Eveniet nesciunt, iste eligendi
+          </p>
+        </div>
+        <motion.div
+          className=" h-[5px] bg-white drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)]"
+          style={{ scaleX }}
+        />
       </div>
     </section>
   );
