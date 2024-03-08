@@ -82,7 +82,7 @@ const getPlaceholderText = (fieldName: keyof TContactInformationSchema) => {
 
 const manageScrollBehavior = (
   imageDiv: React.RefObject<HTMLDivElement | null>,
-  wrapperRef: React.RefObject<HTMLDivElement | null>
+  wrapperRef: React.RefObject<HTMLDivElement | null>,
 ) => {
   const clickEvent = new MouseEvent("click", {
     bubbles: false,

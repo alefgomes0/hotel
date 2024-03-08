@@ -9,6 +9,7 @@ type useHandleParallaxProps = {
   isFirstImageVisible: boolean;
   isLastImageVisible: boolean;
   scrollYProgress: MotionValue<number>;
+  progressBar: React.RefObject<HTMLDivElement>;
 };
 
 export const useHandleParallax = ({
@@ -18,6 +19,7 @@ export const useHandleParallax = ({
   isFirstImageVisible,
   isLastImageVisible,
   scrollYProgress,
+  progressBar,
 }: useHandleParallaxProps) => {
   useEffect(() => {
     const handleShowOverflow = () => {
@@ -25,8 +27,12 @@ export const useHandleParallax = ({
 
       if (isFirstImageVisible && scrollYProgress.current === 0) {
         manageScrollBehavior(firstImage, wrapperRef);
+        progressBar.current?.classList.add("animate-fade-in");
+        progressBar.current?.classList.remove("animate-fade-out");
       } else if (isLastImageVisible && scrollYProgress.current === 1) {
         manageScrollBehavior(lastImage, wrapperRef);
+        progressBar.current?.classList.add("animate-fade-in");
+        progressBar.current?.classList.remove("animate-fade-out");
       }
     };
 
@@ -35,12 +41,16 @@ export const useHandleParallax = ({
 
       if (!isFirstImageVisible && scrollYProgress.current === 0) {
         wrapperRef.current.style.pointerEvents = "none";
+        progressBar.current?.classList.add("animate-fade-out");
+        progressBar.current?.classList.remove("animate-fade-in");
       } else if (isFirstImageVisible) {
         wrapperRef.current.style.pointerEvents = "auto";
       }
 
       if (!isLastImageVisible && scrollYProgress.current === 1) {
         wrapperRef.current.style.pointerEvents = "none";
+        progressBar.current?.classList.add("animate-fade-out");
+        progressBar.current?.classList.remove("animate-fade-in");
       } else if (isLastImageVisible) {
         wrapperRef.current.style.pointerEvents = "auto";
       }
