@@ -12,7 +12,7 @@ export const LandingPage = () => {
   useClearSelectedSuites();
 
   return (
-    <main className="flex flex-col lg:flex-none">
+    <main className="flex flex-col lg:flex-none font-body">
       <div className="relative">
         <Carousel
           imagesPath={carouselImagesURL}

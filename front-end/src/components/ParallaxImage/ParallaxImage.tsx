@@ -30,7 +30,11 @@ export const ParallaxImage = ({
       ref={imageRef}
       style={{ perspective: "500px" }}
     >
-      <img src={url} alt={alt} className="w-full h-full overflow-hidden aspect-[8/10] object-cover object-center" />
+      <img
+        src={url}
+        alt={alt}
+        className="w-full h-full overflow-hidden aspect-[8/10] object-cover object-center"
+      />
       <div className="text-gray-700 justify-self-center">
         <h6 className="text-3xl font-medium mb-3">{header.toUpperCase()}</h6>
         <p className="text-sm w-[600px] leading-6">{body}</p>

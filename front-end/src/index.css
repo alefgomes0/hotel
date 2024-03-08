@@ -2,11 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Merriweather";
+  src: url("/fonts/merriweather-black-webfont.woff2") format("woff2"),
+    url("/fonts/merriweather-black-webfont.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/fonts/merriweather-bold-webfont.woff2") format("woff2"),
+    url("/fonts/merriweather-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/fonts/merriweather-light-webfont.woff2") format("woff2"),
+    url("/fonts/merriweather-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/fonts/merriweather-regular-webfont.woff2") format("woff2"),
+    url("/fonts/merriweather-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 *,
 *::before,
 *::after {
   -webkit-font-smoothing: antialiased;
+  font-family: "Merriweather, Georgia, ui-serif, Georgia, Cambria, Times New Roman, Times, serif";
 }
+
 
 .react-datepicker-wrapper {
   width: 100%;
