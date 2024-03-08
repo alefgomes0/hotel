@@ -27,7 +27,7 @@ export const Parallax = () => {
     isFirstImageVisible,
     isLastImageVisible,
     scrollYProgress,
-    progressBar
+    progressBar,
   });
 
   const imagesArray = [1, 2, 3, 4, 5];
@@ -35,7 +35,7 @@ export const Parallax = () => {
   return (
     <section
       ref={wrapperRef}
-      className="relative snap-y snap-mandatory snap-always h-screen overflow-scroll pointer-events-none"
+      className="relative grid-grid-cols-1 grid-rows-[auto_1fr] snap-y snap-mandatory snap-always h-screen overflow-scroll pointer-events-none bg-green-400"
     >
       {imagesArray.map((image, index) => {
         if (index === 0) {
@@ -46,11 +46,16 @@ export const Parallax = () => {
           return <ParallaxImage id={image} key={image} imageRef={lastImage} />;
         }
       })}
-      <motion.div
-        className="fixed left-0 right-0 top-[50px] h-[5px] bg-white"
+      <div
+        className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px]"
         ref={progressBar}
-        style={{ scaleX, animationFillMode: "forwards" }}
-      />
+        style={{ animationFillMode: "forwards" }}
+      >
+        <p className="text-3xl text-center drop-shadow-[0_3px_5px_rgba(0,0,0,0.7)] text-gray-700">
+          Eveniet nesciunt, iste eligendi!
+        </p>
+        <motion.div className=" h-[5px] bg-gray-700" style={{ scaleX }} />
+      </div>
     </section>
   );
 };

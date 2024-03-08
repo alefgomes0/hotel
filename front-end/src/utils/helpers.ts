@@ -99,7 +99,7 @@ const manageScrollBehavior = (
   setTimeout(() => {
     clearInterval(hideBodyScroll);
     document.body.style.overflow = "scroll";
-  }, 500);
+  }, 750);
 };
 
 const stringifyGuestInfo = (guestData: numOfGuestsProps[]) => {
