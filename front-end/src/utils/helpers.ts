@@ -40,11 +40,11 @@ const getGuestInfo = (guestData: numOfGuestsProps[]) => {
 
 const getSuitesType = (
   guestData: numOfGuestsProps[],
-  selectedSuiteIndex: number[] 
+  selectedSuiteIndex: number[]
 ) => {
   const suiteTypes = [];
   for (let i of selectedSuiteIndex) {
-    if (guestData[i] === undefined) return 0; 
+    if (guestData[i] === undefined) return 0;
     suiteTypes.push(guestData[i].selectedRoom.name);
   }
   return suiteTypes;
@@ -80,6 +80,28 @@ const getPlaceholderText = (fieldName: keyof TContactInformationSchema) => {
   return placeholderText;
 };
 
+const manageScrollBehavior = (
+  imageDiv: React.RefObject<HTMLDivElement | null>,
+  wrapperRef: React.RefObject<HTMLDivElement | null>
+) => {
+  const clickEvent = new MouseEvent("click", {
+    bubbles: false,
+    cancelable: true,
+  });
+
+  imageDiv.current?.scrollIntoView({ behavior: "instant" });
+  const hideBodyScroll = setInterval(() => {
+    if (!wrapperRef.current) return;
+    document.body.style.overflow = "hidden";
+    imageDiv.current?.dispatchEvent(clickEvent);
+    imageDiv.current?.focus();
+  }, 50);
+  setTimeout(() => {
+    clearInterval(hideBodyScroll);
+    document.body.style.overflow = "scroll";
+  }, 500);
+};
+
 const stringifyGuestInfo = (guestData: numOfGuestsProps[]) => {
   const numOfSuites = guestData.length;
   const totalGuests = getGuestInfo(guestData);
@@ -98,5 +120,6 @@ export {
   getGuestInfo,
   getPlaceholderText,
   getSuitesType,
+  manageScrollBehavior,
   stringifyGuestInfo,
 };

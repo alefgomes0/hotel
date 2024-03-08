@@ -5,7 +5,6 @@ import { PlacesScroll } from "@/components/PlacesScroll/PlacesScroll";
 import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
 import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
 import { Parallax } from "@/components/Parallax/Parallax";
-import Idk from "@/components/Idk/Idk";
 
 export const LandingPage = () => {
   const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
@@ -32,7 +31,7 @@ export const LandingPage = () => {
           <MainSearchBar />
         </div>
       </div>
-      <Idk />
+      <Parallax />
       <div className="h-screen bg-blue-400"></div>
       {/* <PlacesScroll /> */}
     </main>
