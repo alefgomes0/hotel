@@ -57,7 +57,7 @@ export const Parallax = () => {
         );
       })}
       <div
-        className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px]"
+        className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px] transition-opacity duration-300"
         ref={progressBar}
         style={{ animationFillMode: "forwards" }}
       >
