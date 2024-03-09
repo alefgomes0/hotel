@@ -11,17 +11,17 @@ export const StreetMap = () => {
   const longitude = -74.0087755;
 
   return (
-    <Map
-      initialViewState={{
-        latitude,
-        longitude,
-        zoom: 13,
-      }}
-      style={{ width: "100%", height: "50vh" }}
-      mapStyle={`https://api.maptiler.com/maps/openstreetmap/style.json?key=${MAPTILER_KEY}`}
-    >
-      <NavigationControl position="top-right" />
-      <Marker latitude={latitude} longitude={longitude} color="#0f766e" />
-    </Map>
+      <Map
+        initialViewState={{
+          latitude,
+          longitude,
+          zoom: 12,
+        }}
+        style={{ width: 800, height: 500 }}
+        mapStyle={`https://api.maptiler.com/maps/openstreetmap/style.json?key=${MAPTILER_KEY}`}
+      >
+        <NavigationControl position="top-right" />
+        <Marker latitude={latitude} longitude={longitude} color="#0f766e" />
+      </Map>
   );
 };

@@ -6,6 +6,7 @@ import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
 import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
 import { Parallax } from "@/components/Parallax/Parallax";
 import { StreetMap } from "@/components/StreetMap/StreetMap";
+import { Location } from "@/components/Location/Location";
 
 export const LandingPage = () => {
   const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
@@ -13,7 +14,7 @@ export const LandingPage = () => {
   useClearSelectedSuites();
 
   return (
-    <main className="flex flex-col lg:flex-none font-body">
+    <main className="flex flex-col lg:flex-none text-gray-700">
       <div className="relative">
         <Carousel
           imagesPath={carouselImagesURL}
@@ -35,7 +36,7 @@ export const LandingPage = () => {
       {/* <Parallax />
       <div className="h-screen bg-blue-400"></div>
       <PlacesScroll /> */}
-      <StreetMap />
+      <Location />
     </main>
   );
 };
