@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Room;
+use App\Http\Controllers\MaptilerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\PriceController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\PriceController;
 |
 */
 
+Route::get('/api/maptiler', [MaptilerController::class, 'show']);
 Route::get('/rooms/{searchInfo}', [RoomController::class, 'show']);
 Route::get('/config', [StripePaymentController::class, 'config']);
 Route::get('/create_intent/{suites_info}', [StripePaymentController::class, 'createIntent']);

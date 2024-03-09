@@ -36,8 +36,8 @@ export const ParallaxImage = ({
         className="w-full h-full overflow-hidden aspect-[8/10] object-cover object-center"
       />
       <div className="text-gray-700 justify-self-center">
-        <h6 className="text-3xl font-medium mb-3">{header.toUpperCase()}</h6>
-        <p className="text-sm w-[600px] leading-6">{body}</p>
+        <h6 className="text-3xl font-medium mb-5">{header.toUpperCase()}</h6>
+        <p className="text-sm w-[450px] leading-6 opacity-90">{body}</p>
       </div>
       {/* <motion.h2 style={{ y }}>{`#00${id}`}</motion.h2> */}
     </div>
