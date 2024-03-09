@@ -109,11 +109,11 @@ export const Card = ({
           >
             <img
               src={user.image}
-              className="rounded-tr-sm  rounded-tl-sm text-sm "
+              className="rounded-tr-sm rounded-tl-sm text-sm "
               alt="thumbnail"
             />
-            <div className="p-4 text-center">
-              <h1 className="font-semibold text-sm ">{user.name}</h1>
+            <div className="p-4 ">
+              <h1 className="text-sm font-[Merriweather] tracking-normal">{user.name}</h1>
             </div>
           </motion.div>
         ))}

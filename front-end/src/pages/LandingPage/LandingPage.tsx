@@ -33,9 +33,8 @@ export const LandingPage = () => {
           <MainSearchBar />
         </div>
       </div>
-      {/* <Parallax />
-      <div className="h-screen bg-blue-400"></div>
-      <PlacesScroll /> */}
+      <Parallax />
+      <PlacesScroll />
       <Location />
     </main>
   );

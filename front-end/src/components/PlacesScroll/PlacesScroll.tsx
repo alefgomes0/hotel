@@ -3,14 +3,14 @@ import { scrollerImages } from "@/imageData/scrollerImages";
 
 export const PlacesScroll = () => {
   return (
-    <div className="flex flex-col overflow-hidden bg-gray-100">
+    <div className="flex flex-col overflow-hidden bg-gray-100 font-[Merriweather] ">
       <ContainerScroll
         users={scrollerImages}
         titleComponent={
           <>
-            <h1 className="text-4xl font-medium text-gray-800">
+            <h1 className="text-4xl text-gray-800 font-[Merriweather] tracking-wide">
               Experience New York <br />
-              <span className="text-4xl md:text-[6rem] font-semibold mt-1 leading-none">
+              <span className="text-4xl md:text-[6rem] mt-1 leading-none">
                 like never before
               </span>
             </h1>
