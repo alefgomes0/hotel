@@ -82,24 +82,35 @@ const getPlaceholderText = (fieldName: keyof TContactInformationSchema) => {
 
 const manageScrollBehavior = (
   imageDiv: React.RefObject<HTMLDivElement | null>,
-  wrapperRef: React.RefObject<HTMLDivElement | null>,
+  wrapperRef: React.RefObject<HTMLDivElement | null>
 ) => {
   const clickEvent = new MouseEvent("click", {
     bubbles: false,
     cancelable: true,
   });
-
-  imageDiv.current?.scrollIntoView({ behavior: "instant" });
+  const scrollbarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
+    imageDiv.current?.scrollIntoView({
+      behavior: "instant",
+  
+    });
   const hideBodyScroll = setInterval(() => {
     if (!wrapperRef.current) return;
-    document.body.style.overflow = "hidden";
+
+    imageDiv.current?.scrollIntoView({
+      behavior: "smooth",
+  
+    });
+    document.body.style.overflowY = "hidden";
     imageDiv.current?.dispatchEvent(clickEvent);
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
     imageDiv.current?.focus();
   }, 50);
   setTimeout(() => {
     clearInterval(hideBodyScroll);
-    document.body.style.overflow = "scroll";
-  }, 750);
+    document.body.style.paddingRight = "0px";
+    document.body.style.overflowY = "scroll";
+  }, 250);
 };
 
 const stringifyGuestInfo = (guestData: numOfGuestsProps[]) => {

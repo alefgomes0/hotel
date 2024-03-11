@@ -41,7 +41,7 @@ export const Parallax = () => {
   return (
     <section
       ref={wrapperRef}
-      className="relative grid-grid-cols-1 grid-rows-[auto_1fr] snap-y snap-mandatory snap-always h-screen overflow-scroll pointer-events-none bg-gray-200"
+      className="example relative grid-grid-cols-1 grid-rows-[auto_1fr] snap-y snap-mandatory snap-always h-screen overflow-Y-scroll pointer-events-none bg-gray-200"
     >
       {parallaxImages.map((image, index) => {
         return (
@@ -57,7 +57,7 @@ export const Parallax = () => {
         );
       })}
       <div
-        className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px] transition-opacity duration-300"
+        className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px] transition-opacity duration-300 pointer-events-none"
         ref={progressBar}
         style={{ animationFillMode: "forwards" }}
       >

@@ -5,7 +5,6 @@ import { PlacesScroll } from "@/components/PlacesScroll/PlacesScroll";
 import { LPCarouselArrow } from "@/components/svg/LPCarouselArrow";
 import { useClearSelectedSuites } from "@/hooks/useClearSelectedSuites";
 import { Parallax } from "@/components/Parallax/Parallax";
-import { StreetMap } from "@/components/StreetMap/StreetMap";
 import { Location } from "@/components/Location/Location";
 
 export const LandingPage = () => {

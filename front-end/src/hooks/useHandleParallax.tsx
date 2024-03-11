@@ -27,10 +27,12 @@ export const useHandleParallax = ({
 
       if (isFirstImageVisible && scrollYProgress.current === 0) {
         manageScrollBehavior(firstImage, wrapperRef);
+        wrapperRef.current.style.overflowY = "scroll";
         progressBar.current?.classList.add("animate-fade-in");
         progressBar.current?.classList.remove("animate-fade-out");
       } else if (isLastImageVisible && scrollYProgress.current === 1) {
         manageScrollBehavior(lastImage, wrapperRef);
+        wrapperRef.current.style.overflowY = "hidden";
         progressBar.current?.classList.add("animate-fade-in");
         progressBar.current?.classList.remove("animate-fade-out");
       }
@@ -41,18 +43,24 @@ export const useHandleParallax = ({
 
       if (!isFirstImageVisible && scrollYProgress.current === 0) {
         wrapperRef.current.style.pointerEvents = "none";
+        wrapperRef.current.style.overflowY = "hidden";
+
         progressBar.current?.classList.add("animate-fade-out");
         progressBar.current?.classList.remove("animate-fade-in");
       } else if (isFirstImageVisible) {
         wrapperRef.current.style.pointerEvents = "auto";
+        wrapperRef.current.style.overflowY = "scroll";
       }
 
       if (!isLastImageVisible && scrollYProgress.current === 1) {
         wrapperRef.current.style.pointerEvents = "none";
+        wrapperRef.current.style.overflowY = "hidden";
+
         progressBar.current?.classList.add("animate-fade-out");
         progressBar.current?.classList.remove("animate-fade-in");
       } else if (isLastImageVisible) {
         wrapperRef.current.style.pointerEvents = "auto";
+        wrapperRef.current.style.overflowY = "scroll";
       }
     };
 

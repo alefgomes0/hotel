@@ -9,7 +9,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SearchResults } from "./pages/SearchResults/SearchResults";
 import { NoMatch } from "./pages/NoMatch/NoMatch";
 import { useWindowSize } from "./hooks/useWindowSize";
-import { NavigateToTop } from "./components/NavigateToTop/NavigateToTop";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -28,7 +27,6 @@ const App = () => {
             <Route path="/*" element={<NoMatch />} />
           </Routes>
         </BrowserRouter>
-        <NavigateToTop />
       </GuestInfoProvider>
       <ReactQueryDevtools buttonPosition="bottom-left"/>
     </QueryClientProvider>
