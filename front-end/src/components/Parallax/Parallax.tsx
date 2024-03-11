@@ -1,4 +1,3 @@
-import "./styles.css";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { ParallaxImage } from "../ParallaxImage/ParallaxImage";
 import { useHandleParallax } from "@/hooks/useHandleParallax";
@@ -53,6 +52,7 @@ export const Parallax = () => {
             body={image.body}
             key={image.url}
             imageRef={getImageRef(index)}
+            showCTA={index + 1 === parallaxImages.length ? true : false}
           />
         );
       })}

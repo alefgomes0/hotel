@@ -1,6 +1,4 @@
-import { useRef } from "react";
-import { motion, MotionValue, useTransform, useScroll } from "framer-motion";
-import { string } from "zod";
+import { LandingPageCTA } from "../Buttons/LandingPageCTA";
 
 type ParallaxImage = {
   url: string;
@@ -8,6 +6,7 @@ type ParallaxImage = {
   header: string;
   body: string;
   imageRef?: React.MutableRefObject<null | HTMLDivElement> | null;
+  showCTA?: boolean;
 };
 
 export const ParallaxImage = ({
@@ -16,14 +15,8 @@ export const ParallaxImage = ({
   header,
   body,
   imageRef,
+  showCTA,
 }: ParallaxImage) => {
-  const useParallax = (value: MotionValue<number>, distance: number) => {
-    return useTransform(value, [0, 1], [-distance, distance]);
-  };
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
-
   return (
     <div
       className="grid grid-rows-1 grid-cols-2 items-center justify-center h-screen snap-always snap-center"
@@ -35,11 +28,11 @@ export const ParallaxImage = ({
         alt={alt}
         className="w-full h-full overflow-hidden aspect-[8/10] object-cover object-center"
       />
-      <div className="text-gray-700 justify-self-center">
-        <h6 className="text-3xl font-medium mb-5">{header.toUpperCase()}</h6>
-        <p className="text-sm w-[450px] leading-6 opacity-90">{body}</p>
+      <div className="w-max text-gray-700 justify-self-center">
+        <h6 className="text-3xl mb-5">{header.toUpperCase()}</h6>
+        <p className="text-sm w-[450px] leading-6 opacity-[85%]">{body}</p>
+        {showCTA && <LandingPageCTA />}
       </div>
-      {/* <motion.h2 style={{ y }}>{`#00${id}`}</motion.h2> */}
     </div>
   );
 };
