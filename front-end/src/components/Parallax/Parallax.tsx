@@ -4,6 +4,7 @@ import { useHandleParallax } from "@/hooks/useHandleParallax";
 import { useRef } from "react";
 import { parallaxImages } from "@/imageData/parallaxImages";
 import { LPCarouselArrow } from "../svg/LPCarouselArrow";
+import { useHandleImageSlide } from "@/hooks/useHandleImageSlide";
 
 export const Parallax = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -12,7 +13,6 @@ export const Parallax = () => {
   });
   const firstImage = useRef<HTMLDivElement>(null);
   const lastImage = useRef<HTMLDivElement>(null);
-  const currentImage = useRef(null);
   const isFirstImageVisible = useInView(firstImage, { amount: 0.95 });
   const isLastImageVisible = useInView(lastImage, { amount: 0.95 });
   const scaleX = useSpring(scrollYProgress, {
@@ -58,13 +58,14 @@ export const Parallax = () => {
     });
   };
 
-  console.log(wrapperRef.current?.scrollTop, wrapperRef.current?.scrollHeight);
-
   const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
-  const isAtTop = (wrapperRef.current?.scrollTop as number) < 50;
+  const OFFSET = 50;
+  const isAtTop = (wrapperRef.current?.scrollTop as number) < OFFSET;
   const isAtBottom =
-    wrapperRef.current?.scrollTop + wrapperRef.current?.clientHeight + 50 >=
-    wrapperRef.current?.scrollHeight;
+    wrapperRef.current?.scrollTop! +
+      wrapperRef.current?.clientHeight! +
+      OFFSET >=
+    wrapperRef.current?.scrollHeight!;
 
   return (
     <section

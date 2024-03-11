@@ -1,3 +1,4 @@
+import { useHandleImageSlide } from "@/hooks/useHandleImageSlide";
 import { useEffect, useState } from "react";
 
 type CarouselProps = {
@@ -34,21 +35,12 @@ export const Carousel = ({
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight") {
-        handleRightClick();
-      } else if (event.key === "ArrowLeft") {
-        handleLeftClick();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [imageIndex]);
+  useHandleImageSlide({
+    direction: "horizontal",
+    showNextImage: handleRightClick,
+    showPreviousImage: handleLeftClick,
+    dependencies: [imageIndex],
+  });
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
