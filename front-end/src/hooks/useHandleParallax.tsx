@@ -9,7 +9,6 @@ type useHandleParallaxProps = {
   isFirstImageVisible: boolean;
   isLastImageVisible: boolean;
   scrollYProgress: MotionValue<number>;
-  progressBar: React.RefObject<HTMLDivElement>;
 };
 
 export const useHandleParallax = ({
@@ -19,7 +18,6 @@ export const useHandleParallax = ({
   isFirstImageVisible,
   isLastImageVisible,
   scrollYProgress,
-  progressBar,
 }: useHandleParallaxProps) => {
   useEffect(() => {
     const handleShowOverflow = () => {
@@ -28,13 +26,9 @@ export const useHandleParallax = ({
       if (isFirstImageVisible && scrollYProgress.current === 0) {
         manageScrollBehavior(firstImage, wrapperRef);
         wrapperRef.current.style.overflowY = "scroll";
-        progressBar.current?.classList.add("animate-fade-in");
-        progressBar.current?.classList.remove("animate-fade-out");
       } else if (isLastImageVisible && scrollYProgress.current === 1) {
         manageScrollBehavior(lastImage, wrapperRef);
         wrapperRef.current.style.overflowY = "hidden";
-        progressBar.current?.classList.add("animate-fade-in");
-        progressBar.current?.classList.remove("animate-fade-out");
       }
     };
 
@@ -45,8 +39,6 @@ export const useHandleParallax = ({
         wrapperRef.current.style.pointerEvents = "none";
         wrapperRef.current.style.overflowY = "hidden";
 
-        progressBar.current?.classList.add("animate-fade-out");
-        progressBar.current?.classList.remove("animate-fade-in");
       } else if (isFirstImageVisible) {
         wrapperRef.current.style.pointerEvents = "auto";
         wrapperRef.current.style.overflowY = "scroll";
@@ -56,8 +48,6 @@ export const useHandleParallax = ({
         wrapperRef.current.style.pointerEvents = "none";
         wrapperRef.current.style.overflowY = "hidden";
 
-        progressBar.current?.classList.add("animate-fade-out");
-        progressBar.current?.classList.remove("animate-fade-in");
       } else if (isLastImageVisible) {
         wrapperRef.current.style.pointerEvents = "auto";
         wrapperRef.current.style.overflowY = "scroll";

@@ -15,8 +15,8 @@ export const EmailIcon = ({ width, height }: IconProps) => {
         />
         <path
           stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           d="m3 5l9 9l9-9"
         />
       </g>

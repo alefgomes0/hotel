@@ -3,6 +3,7 @@ import { ParallaxImage } from "../ParallaxImage/ParallaxImage";
 import { useHandleParallax } from "@/hooks/useHandleParallax";
 import { useRef } from "react";
 import { parallaxImages } from "@/imageData/parallaxImages";
+import { LPCarouselArrow } from "../svg/LPCarouselArrow";
 
 export const Parallax = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -11,7 +12,7 @@ export const Parallax = () => {
   });
   const firstImage = useRef<HTMLDivElement>(null);
   const lastImage = useRef<HTMLDivElement>(null);
-  const progressBar = useRef<HTMLDivElement>(null);
+  const currentImage = useRef(null);
   const isFirstImageVisible = useInView(firstImage, { amount: 0.95 });
   const isLastImageVisible = useInView(lastImage, { amount: 0.95 });
   const scaleX = useSpring(scrollYProgress, {
@@ -27,7 +28,6 @@ export const Parallax = () => {
     isFirstImageVisible,
     isLastImageVisible,
     scrollYProgress,
-    progressBar,
   });
 
   const getImageRef = (index: number) => {
@@ -38,29 +38,46 @@ export const Parallax = () => {
     } else return null;
   };
 
+  const handleUpClick = () => {
+    if (!wrapperRef.current) return;
+    const newScrollPosition =
+      wrapperRef.current?.scrollTop - window.innerHeight;
+    wrapperRef.current.scrollTo({
+      top: newScrollPosition,
+      behavior: "smooth",
+    });
+  };
+
+  const handleDownClick = () => {
+    if (!wrapperRef.current) return;
+    const newScrollPosition =
+      wrapperRef.current?.scrollTop + window.innerHeight;
+    wrapperRef.current?.scrollTo({
+      top: newScrollPosition,
+      behavior: "smooth",
+    });
+  };
+
+  console.log(wrapperRef.current?.scrollTop, wrapperRef.current?.scrollHeight);
+
+  const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
+  const isAtTop = (wrapperRef.current?.scrollTop as number) < 50;
+  const isAtBottom =
+    wrapperRef.current?.scrollTop + wrapperRef.current?.clientHeight + 50 >=
+    wrapperRef.current?.scrollHeight;
+
   return (
     <section
-      ref={wrapperRef}
-      className="example relative grid-grid-cols-1 grid-rows-[auto_1fr] snap-y snap-mandatory snap-always h-screen overflow-Y-scroll pointer-events-none bg-gray-200"
+      className="relative grid-grid-cols-1 grid-rows-[auto_1fr] h-screen  pointer-events-none bg-gray-200"
+      aria-label="image carousel"
     >
-      {parallaxImages.map((image, index) => {
-        return (
-          <ParallaxImage
-            url={image.url}
-            alt={image.alt}
-            header={image.header}
-            body={image.body}
-            key={image.url}
-            imageRef={getImageRef(index)}
-            showCTA={index + 1 === parallaxImages.length ? true : false}
-          />
-        );
-      })}
-      <div
-        className="flex flex-col gap-y-2 fixed left-0 right-0 top-[50px] transition-opacity duration-300 pointer-events-none"
-        ref={progressBar}
-        style={{ animationFillMode: "forwards" }}
+      <a
+        href="#after-image-slider-controls"
+        className="absolute w-[1px] h-[1px] p-0 margin-[-1px] overflow-hidden border-0 focus:top-0 focus:left-0 focus:border-[1px] focus:bg-white focus:p-0 focus:w-auto focus:h=auto focus:m-0 focus:text-black focus:z-[100]"
       >
+        Skip Image Slider Controls
+      </a>
+      <div className="flex flex-col gap-y-2 absolute left-0 right-0 top-[50px] pointer-events-none">
         <div className="bg-gray-900 px-3 py-1 w-max self-center text-center rounded-sm">
           <p className="text-3xl text-center text-gray-100">
             Eveniet nesciunt, iste eligendi
@@ -71,6 +88,56 @@ export const Parallax = () => {
           style={{ scaleX }}
         />
       </div>
+      <div
+        className="z-[999] absolute top-[50%] translate-y-[-50%] right-[30px] flex flex-col gap-12 w-max h-max z-[30]"
+        aria-label="carousel controllers"
+      >
+        <button
+          className="focus:border-2 focus:border-gray-700 z-[40] pointer-events-auto rotate-90 disabled:opacity-30 transition-opacity duration-200"
+          onClick={handleUpClick}
+          title="show previous image"
+          aria-label="show previous image"
+          disabled={isAtTop}
+        >
+          <LPCarouselArrow
+            width={controllerSize}
+            height={controllerSize}
+            color="#374151"
+          />
+        </button>
+        <button
+          className="focus:border-2 focus:border-gray-700 z-[40] pointer-events-auto rotate-[-90deg] disabled:opacity-30 transition-opacity duration-200"
+          onClick={handleDownClick}
+          title="show next image"
+          aria-label="show next image"
+          disabled={isAtBottom}
+        >
+          <LPCarouselArrow
+            width={controllerSize}
+            height={controllerSize}
+            color="#374151"
+          />
+        </button>
+      </div>
+      <div
+        className="snap-wrapper z-5 h-full overflow-y-scroll snap-y snap-mandatory snap-always"
+        ref={wrapperRef}
+      >
+        {parallaxImages.map((image, index) => {
+          return (
+            <ParallaxImage
+              url={image.url}
+              alt={image.alt}
+              header={image.header}
+              body={image.body}
+              key={image.url}
+              imageRef={getImageRef(index)}
+              showCTA={index + 1 === parallaxImages.length ? true : false}
+            />
+          );
+        })}
+      </div>
+      <div id="after-image-slider-controls"></div>
     </section>
   );
 };

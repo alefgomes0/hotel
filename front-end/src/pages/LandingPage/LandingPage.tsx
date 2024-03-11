@@ -9,7 +9,6 @@ import { Location } from "@/components/Location/Location";
 
 export const LandingPage = () => {
   const controllerSize = window.innerWidth <= 1024 ? 24 : 48;
-
   useClearSelectedSuites();
 
   return (

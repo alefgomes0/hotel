@@ -3,7 +3,7 @@ import { scrollerImages } from "@/imageData/scrollerImages";
 
 export const PlacesScroll = () => {
   return (
-    <div className="flex flex-col overflow-hidden bg-gray-100 font-[Merriweather] ">
+    <section className="flex flex-col overflow-hidden bg-gray-100 font-[Merriweather] ">
       <ContainerScroll
         users={scrollerImages}
         titleComponent={
@@ -17,6 +17,6 @@ export const PlacesScroll = () => {
           </>
         }
       />
-    </div>
+    </section>
   );
 };
