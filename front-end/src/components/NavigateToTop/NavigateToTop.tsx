@@ -4,7 +4,7 @@ import { useHandleScroll } from "@/hooks/useHandleScroll";
 
 export const NavigateToTop = () => {
   const [showIcon, setShowIcon] = useState(false);
-  useHandleScroll(setShowIcon);
+  useHandleScroll({ setShowIcon });
 
   return (
     <button
