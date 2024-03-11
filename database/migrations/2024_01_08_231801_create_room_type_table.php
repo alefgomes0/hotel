@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('short_description');
             $table->text('full_description');
             $table->smallInteger('occupants');
+            $table->smallInteger('size');
             $table->timestamps();
         });
     }

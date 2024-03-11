@@ -5,4 +5,5 @@ export type RoomProps = {
   price_per_day: string;
   type: string;
   occupants: number;
+  size: number;
 };

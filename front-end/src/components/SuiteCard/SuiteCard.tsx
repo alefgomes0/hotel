@@ -50,14 +50,19 @@ export const SuiteCard = ({ room, index }: SuiteCardProps) => {
       </div>
       <div className="flex flex-col gap-y-3">
         <h6
-          className="w-max font-medium text-xl cursor-pointer hover:underline underline-offset-[6px]"
+          className="w-max text-xl cursor-pointer hover:underline underline-offset-[6px]"
           onClick={() => setShowSuiteDetails(true)}
         >
           {room.type.toUpperCase()} SUITE
         </h6>
-        <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-sm opacity-80">
-          {room.occupants} {room.occupants > 1 ? "adultos" : "adulto"}
-        </span>
+        <div className="flex items-center gap-x-5">
+          <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-sm opacity-80">
+            {room.occupants} {room.occupants > 1 ? "adults" : "adult"}
+          </span>
+          <span className="text-xs bg-gray-300 w-max px-3 py-1 rounded-sm opacity-80">
+            {room.size}m²
+          </span>
+        </div>
         <p className="text-sm pt-1">{room.short_description}</p>
         <span className="flex items-center gap-x-2 pt-2">
           <CoffeeIcon width={16} height={16} />
@@ -80,7 +85,7 @@ export const SuiteCard = ({ room, index }: SuiteCardProps) => {
         <div className="h-[1px] bg-gray-400 mt-4"></div>
         <div className="lg:self-end">
           <p className="text-gray-500 mb-3">
-            <span className="text-xl font-medium text-gray-700">
+            <span className="text-xl text-gray-700">
               ${room.price_per_day}
             </span>{" "}
             per night

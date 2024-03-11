@@ -23,6 +23,7 @@ export const SearchResults = () => {
     numOfGuests.length === selectedSuiteIndex.selected.length;
   useGoToCheckout(selectedSuiteIndex.selected.length);
   useGoToHomepage(numOfGuests.length === 0);
+  console.log(data);
 
   return (
     <main className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] auto-rows-auto gap-x-6 min-h-[calc(100svh-90px)] bg-gray-100 px-4 xl:px-16 pt-8 max-w-[2000px]">

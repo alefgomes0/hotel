@@ -32,7 +32,7 @@ class RoomController extends Controller
             if ($occupants == -1) return '';
             return DB::table('rooms')
             ->leftJoin('room_type', 'rooms.room_type_id', '=', 'room_type.id')
-            ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants')
+            ->select('rooms.id', 'room_type.type', 'room_type.short_description', 'room_type.full_description', 'room_type.price_per_day', 'room_type.occupants', 'room_type.size')
             ->whereNotIn('rooms.id', $unavailableRooms)
             ->where('room_type.occupants', '>=', $occupants)
             ->get();
