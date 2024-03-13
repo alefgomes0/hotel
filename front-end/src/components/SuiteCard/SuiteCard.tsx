@@ -66,15 +66,15 @@ export const SuiteCard = ({ room, index }: SuiteCardProps) => {
         <p className="text-sm pt-1">{room.short_description}</p>
         <span className="flex items-center gap-x-2 pt-2">
           <CoffeeIcon width={16} height={16} />
-          <p className="text-sm">Café da manhã incluso</p>
+          <p className="text-sm">Breakfast included</p>
         </span>
         <span className="flex items-center gap-x-2">
           <CheckmarkIcon width={16} height={16} />
-          <p className="text-sm">Melhor preço garantido</p>
+          <p className="text-sm">Best price guaranteed</p>
         </span>
         <span className="flex items-center gap-x-2">
           <ForbiddenIcon width={16} height={16} />
-          <p className="text-sm">Não reembolsável</p>
+          <p className="text-sm">Non refundable</p>
         </span>
         <p
           className="text-sm w-max cursor-pointer underline underline-offset-4 pt-1"

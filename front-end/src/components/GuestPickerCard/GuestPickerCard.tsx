@@ -15,7 +15,7 @@ export const GuestPickerCard = ({ arrayIndex }: GuestPickerCardProps) => {
       className="relative bg-gray-200 px-3 py-1.5"
       aria-label="guest info for this suite"
     >
-      <p className="text-xs opacity-70 pb-3">SUITE {numberOfSuite}</p>
+      <p className="text-xs opacity-70 pb-4">SUITE {numberOfSuite}</p>
       <div className="flex justify-between">
         <label aria-label="number of adults">
           {numOfGuests[arrayIndex].adult === 1 ? "Adult" : "Adults"}

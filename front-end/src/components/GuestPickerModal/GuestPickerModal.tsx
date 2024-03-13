@@ -23,7 +23,7 @@ export const GuestPickerModal = ({
       ref={modalRef}
       style={modalStyle}
       {...getFloatingProps()}
-      className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] min-h-[200px] z-[19] px-2 lg:px-8 py-3 bg-gray-100 rounded-sm font-semibold text-gray-700"
+      className="flex flex-col gap-6 bg-[#fafafa] w-[300px] lg:w-[500px] min-h-[200px] z-[19] px-2 lg:px-8 py-3 bg-gray-100 rounded-sm text-gray-700"
     >
       {numOfGuests.map((_, index) => (
         <GuestPickerCard arrayIndex={index} key={index} />

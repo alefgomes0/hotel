@@ -4,7 +4,7 @@ export const YourStayTotal = () => {
   const { data, error, isLoading } = useFetchTotalPrice();
   return (
     <>
-      <div className="flex items-center justify-between text-xl font-medium">
+      <div className="flex items-center justify-between text-xl font-bold opacity-[85%]">
         <p>Total:</p>
         {isLoading ? (
           <div className="w-16 h-6 bg-[#c7c7c7] animate-pulse"></div>

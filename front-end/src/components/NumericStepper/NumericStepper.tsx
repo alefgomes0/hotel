@@ -14,7 +14,7 @@ export const NumericStepper = ({ field, arrayIndex }: NumericStepperProps) => {
         onClick={(e: React.MouseEvent) =>
           decreaseQuantity(field, arrayIndex, e)
         }
-        className="flex justify-center text-center w-[24px] h-[24px] font-bold border-[1px] rounded-full border-neutral-500 hover:scale-[1.08] transition-transform"
+        className="flex justify-center text-center w-[24px] h-[24px] font-semibold border-[1px] rounded-full border-neutral-500 hover:scale-[1.08] transition-transform"
         title="decrease"
         aria-label="decrease"
       >
